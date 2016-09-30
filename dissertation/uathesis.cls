@@ -29,7 +29,7 @@
 \ProvidesClass{uathesis}[2005/08/09 University of Arizona Thesis Class]
 
 \RequirePackage{ifthen}
-\RequirePackage{cclicenses} % This is used to generate the Creative Commons
+%\RequirePackage{cclicenses} % This is used to generate the Creative Commons
 									 % icons.  cclicenses.sty should be present along
 									 % with this file.  If you don't plan on using a
 									 % CC license, you can remove this.
@@ -68,15 +68,15 @@
 \setboolean{CCBYSA}{false}
 \newboolean{CCBYND}
 \setboolean{CCBYND}{false}
-% as of Januare 2009, the UA license grants the University the 
-% non-exclusive right to display and distribute your dissertation 
+% as of Januare 2009, the UA license grants the University the
+% non-exclusive right to display and distribute your dissertation
 % as an open access work and include it in the Networked
 % Digital Library of Theses and Dissertations (http://www.ndltd.org/).
 % UMI/ProQuest includes it in Dissertations Abstracts and makes copies
 % available for sale.  Therefore the NC licences are not compatible and
 % are not included here. (from a correspondence with Dan Lee
-% Interim Team Leader for Undergraduate Services and Copyright Librarian 
-% University of Arizona Libraries leed@u.library.arizona.edu 
+% Interim Team Leader for Undergraduate Services and Copyright Librarian
+% University of Arizona Libraries leed@u.library.arizona.edu
 \DeclareOption{CC-BY}{%
 	\setboolean{CCBY}{true}
 }
@@ -101,7 +101,7 @@
 
 \DeclareOption{twoside}{%
 	\PassOptionsToClass{\CurrentOption}{book}%
-} 
+}
 
 \DeclareOption{openright}{%
 	\PassOptionsToClass{\CurrentOption}{book}%
@@ -134,13 +134,13 @@
 %% Page Style to put numbers at the top.
 \pagestyle{myheadings}
 
-%% Double spaced 
+%% Double spaced
 %% (in order to conserve paper, we'll actually make this less than 2)
 \renewcommand{\baselinestretch}{1.4}
 
 
 %% Set margins for the bulk of the dissertation (referred to as Body of Paper).
-%% There are only two pages that have different margins: the Title Page, 
+%% There are only two pages that have different margins: the Title Page,
 %% and the Statement by Author page.  Fortunately, their left and right
 %% margins are identical, and the top and bottom margins are greater, so
 %% we'll just throw in some extra vspace in those places.
@@ -154,9 +154,9 @@
 \setlength{\evensidemargin}{0in}	% = 1in because LaTeX adds 1in
 
 \setlength{\textheight}{8.4in}		% should be 8.5in, see below
-\setlength{\textwidth}{5.9in}		% should be 6in  but we're being 
+\setlength{\textwidth}{5.9in}		% should be 6in  but we're being
 									% conservative, just to be safe.
-			
+
 
 % Make sure that various key names are in all caps.
 \renewcommand{\partname}{PART}
@@ -168,7 +168,7 @@
 \renewcommand{\bibname}{REFERENCES}
 
 %%---------------------------- General Renewed Commands----------------
-%% 
+%%
 %% There are several key and subtle LaTeX commands that need to be
 %% altered in minor ways from the way they are defined in book.cls.
 %% This section 'renew's or redefines them for our use.  In all other
@@ -181,21 +181,21 @@
 
 % We are renewing the following two commands so that there are
 % appropriate dot leaders between the TOC item and that TOC item's
-% page number.  We replaced the \hfil line with a sequence of commands 
+% page number.  We replaced the \hfil line with a sequence of commands
 % taken from the latex.ltx file for \@dottedtocline (instead of just
 % using \dotfill which gave dots with a slightly different spacing).
 % Similarly, we left the page numbers bold, rather than making them
 % normalfont.
-% 
+%
 % The lines that were altered are still present below, but commented out.
 % Hopefully this will make it easier to integrate with future versions
 % of these commands in LaTeX.
 %
 % It appears that the formatters no longer want to allow any boldfacing
-% in TOC-related items, so \bfseries items have been commented out 
+% in TOC-related items, so \bfseries items have been commented out
 % below.
 %
-% Otherwise these two commands are identical to those in the 
+% Otherwise these two commands are identical to those in the
 % 2001/04/21 v1.4e book.cls.
 %
 \renewcommand*\l@part[2]{%
@@ -244,7 +244,7 @@
 % the TOC have the correct word (nothing|Chapter|Appendix) in front of
 % them.
 %
-% Otherwise this command is identical to \def\@chapter in the 
+% Otherwise this command is identical to \def\@chapter in the
 % 2001/04/21 v1.4e book.cls.
 \renewcommand\@chapter[2][\#2]{\ifnum \c@secnumdepth >\m@ne
 	   \if@mainmatter
@@ -273,7 +273,7 @@
 % level items in the TOC will have the correct word.  Similarly, font
 % size and bolding are removed to stay consistent with TOC.
 %
-% Otherwise this command is identical to \def\@part in the 
+% Otherwise this command is identical to \def\@part in the
 % 2004/02/16 v1.4f book.cls
 \renewcommand\@part[2][\#2]{%
     \ifnum \c@secnumdepth >-2\relax
@@ -305,7 +305,7 @@
 % These two aren't required, but help set these items off.
 %
 % It appears that the formatters no longer want to allow any boldfacing
-% in TOC-related items, to eh \bfseries items have been commented out 
+% in TOC-related items, to eh \bfseries items have been commented out
 % below.
 %
 % Otherwise this command is identical to \def\@makechapterhead and
@@ -345,7 +345,7 @@
   }}
 
 % We renewed the chapter command simply so that we could comment out the
-% pagestyle and put in the empty \markboth.  We want the page numbers (even 
+% pagestyle and put in the empty \markboth.  We want the page numbers (even
 % on the first page of a chapter) to be in the header.  Similarly, in the
 % TOC, LOT, and LOF (the only sections with page headers) we don't want
 % headers on the first page.
@@ -361,7 +361,7 @@
                     \secdef\@chapter\@schapter}
 
 
-% Same as above, but for the part command, otherwise identical to 
+% Same as above, but for the part command, otherwise identical to
 % \newcommand\part in the 2004/02/16 v1.4f book.cls
 \renewcommand\part{%
   \if@openright
@@ -380,7 +380,7 @@
   \null\vfil
   \secdef\@part\@spart}
 
-% The following two commands were renewed so that these items don't 
+% The following two commands were renewed so that these items don't
 % have a larger font size than everything else.  Not required, but it
 % makes things fit in since the chapter title can't be big.
 %
@@ -395,7 +395,7 @@
 % a commented out line that says "<-- makes section bold".  Uncomment
 % that, and comment out the line below it to get boldface sections,
 % if you want.
-% 
+%
 % Otherwise this command is identical to the \section and \subsection
 % newcommands in the 2001/04/21 v1.4e book.cls.
 \renewcommand{\section}{\@startsection {section}{1}{\z@}%
@@ -449,7 +449,7 @@
 	{\end@dblfloat}
 
 
-%% These commands give us values for strings that we will use 
+%% These commands give us values for strings that we will use
 %% more than once in the commands below.
 
 \newcommand{\completetitle}[1]{%
@@ -501,11 +501,11 @@ by
 
 \rule{2in}{1pt}\\
 \ifthenelse{ \boolean{Copyright} }	% This puts in the Copyright statement
-{Copyright \copyright\ \FullName\ #2}{}	
-% Creative Commons licenses	
-\ifthenelse{\boolean{CCBY}}{\by}{}		
-\ifthenelse{\boolean{CCBYSA}}{\bysa}{}		
-\ifthenelse{\boolean{CCBYND}}{\bynd}{}		
+{Copyright \copyright\ \FullName\ #2}{}
+% Creative Commons licenses
+\ifthenelse{\boolean{CCBY}}{\by}{}
+\ifthenelse{\boolean{CCBYSA}}{\bysa}{}
+\ifthenelse{\boolean{CCBYND}}{\bynd}{}
 
 \vspace{0.75in}
 
@@ -544,7 +544,7 @@ THE UNIVERSITY OF ARIZONA
 
 
 %%---------------------------- Approval Form --------------------------
-%% 
+%%
 %% This creates the Committee Approval form, the arguments are as
 %% follows:	#1	defense date
 %%			#2	Dissertation Director's name
@@ -558,7 +558,8 @@ THE UNIVERSITY OF ARIZONA
 
 {
 \renewcommand{\baselinestretch}{1}	% single spaced here
-\small\normalsize	
+\small\normalsize
+\renewcommand{\arraystretch}{1.2}
 
 \chapter*{THE UNIVERSITY OF ARIZONA\\GRADUATE COLLEGE}
 
@@ -606,13 +607,14 @@ and recommend that it be accepted as fulfilling the
 
 \vfill
 
-\noindent Final approval and acceptance of this \MakeLowercase{\ThesisType} is
-contingent upon the candidate's submission of the final copies of the
+\noindent Final approval and acceptance of this \MakeLowercase{\ThesisType}
+is contingent upon the candidate's submission of the final copies of the
 \MakeLowercase{\ThesisType} to the Graduate College.
+\\
 
-\noindent I hereby certify that I have read this \MakeLowercase{\ThesisType} prepared
-under my direction and recommend that it be accepted as fulfilling the 
-\MakeLowercase{\ThesisType} requirement.
+\noindent I hereby certify that I have read this \MakeLowercase{\ThesisType}
+prepared under my direction and recommend that it be accepted as fulfilling
+the \MakeLowercase{\ThesisType} requirement.
 
 \vfill
 
@@ -641,7 +643,7 @@ Dissertation Director: #2	&			\\
 \renewcommand{\baselinestretch}{1}	% single spaced here
 \small\normalsize					% size switch to make the spacing behave
 
-% The vspace in the chapter command below accounts for the extra 1in of 
+% The vspace in the chapter command below accounts for the extra 1in of
 % margin at the top needed for this page (total should be 2.5in).
 \chapter*{\vspace*{1in}STATEMENT BY AUTHOR}
 
@@ -655,34 +657,34 @@ available to borrowers under rules of the Library.
 
 \noindent Brief quotations from this \MakeLowercase{\ThesisType} are allowable
 without special permission, provided that accurate acknowledgment
-of source is made.  
+of source is made.
 \ifthenelse{ \boolean{Copyright} }
 {Requests for permission for extended quotation
 from or reproduction of this manuscript in whole or in part may be
 granted by the copyright holder.}
 {\ifthenelse{ \boolean{CCBY} }
-{This work is licensed under the Creative Commons Attribution 3.0 
-United States License. To view a copy of this license, visit 
+{This work is licensed under the Creative Commons Attribution 3.0
+United States License. To view a copy of this license, visit
 \href{http://creativecommons.org/licenses/by/3.0/us/}
-{http://creativecommons.org/licenses/by/3.0/us/} or send a letter to 
-Creative Commons, 171 Second Street, Suite 300, San Francisco, 
-California, 94105, USA.} 
+{http://creativecommons.org/licenses/by/3.0/us/} or send a letter to
+Creative Commons, 171 Second Street, Suite 300, San Francisco,
+California, 94105, USA.}
 {\ifthenelse{ \boolean{CCBYSA} }
-{This work is licensed under the Creative Commons Attribution-Share 
+{This work is licensed under the Creative Commons Attribution-Share
 Alike 3.0 United States License. To view a copy of this license, visit
 \href{http://creativecommons.org/licenses/by-sa/3.0/us/}
-{http://creativecommons.org/licenses/by-sa/3.0/us/} or send a letter to 
-Creative Commons, 171 Second Street, Suite 300, San Francisco, 
+{http://creativecommons.org/licenses/by-sa/3.0/us/} or send a letter to
+Creative Commons, 171 Second Street, Suite 300, San Francisco,
 California, 94105, USA.  }
 {\ifthenelse{ \boolean{CCBYND} }
-{This work is licensed under the Creative Commons Attribution-No 
-Derivative Works 3.0 United States License. To view a copy of this 
+{This work is licensed under the Creative Commons Attribution-No
+Derivative Works 3.0 United States License. To view a copy of this
 license, visit \href{http://creativecommons.org/licenses/by-nd/3.0/us/}
-{http://creativecommons.org/licenses/by-nd/3.0/us/} or send a letter to 
-Creative Commons, 171 Second Street, Suite 300, San Francisco, 
+{http://creativecommons.org/licenses/by-nd/3.0/us/} or send a letter to
+Creative Commons, 171 Second Street, Suite 300, San Francisco,
 California, 94105, USA.  }
-	{Requests for permission for extended quotation from or reproduction 
-   of this manuscript in whole or in part may be granted by the head of 
+	{Requests for permission for extended quotation from or reproduction
+   of this manuscript in whole or in part may be granted by the head of
    the major department or the Dean of the Graduate
 	College when in his or her judgment the proposed use of the
 	material is in the interests of scholarship.  In all other
@@ -748,7 +750,7 @@ Date
 %%---------------------------- Acknowledgements -----------------------
 %%
 %% This command includes the file that contains the acknowledgements.
-%% 
+%%
 %% \incacknowledgements
 %% Option is #1 = acknowledgements file name
 %%
@@ -849,7 +851,7 @@ The University of Arizona, #4
 
 
 %%---------------------------- Table of Contents ----------------------
-%% 
+%%
 %% The table of contents that the UofA wants is subtley different in a
 %% number of ways such that we need to redefine the \tableofcontents
 %% command provided by the basic LaTeX classes.  Many of the commands
@@ -889,10 +891,10 @@ The University of Arizona, #4
 
 
 %%---------------------------- List of Figures ------------------------
-%% 
+%%
 %% The U of A List of Figures requires a running header on subsequent
 %% pages that we must define here.  We also add this section to the TOC.
-%% This was modified from the definition for listoffigures from 
+%% This was modified from the definition for listoffigures from
 %% 2001/04/21 v1.4e book.cls.
 %%
 \renewcommand{\listoffigures}{%
@@ -922,10 +924,10 @@ The University of Arizona, #4
 }
 
 %%---------------------------- List of Tables -------------------------
-%% 
+%%
 %% The U of A List of Tables requires a running header on subsequent
 %% pages that we must define here.  We also add this section to the TOC.
-%% This was modified from the definition for listoffigures from 
+%% This was modified from the definition for listoffigures from
 %% 2001/04/21 v1.4e book.cls.
 %%
 \renewcommand{\listoftables}{%

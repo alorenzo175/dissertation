@@ -564,9 +564,8 @@ THE UNIVERSITY OF ARIZONA
 \chapter*{THE UNIVERSITY OF ARIZONA\\GRADUATE COLLEGE}
 
 As members of the Dissertation Committee, we certify that we have
-read the \MakeLowercase{\ThesisType} prepared by \FullName \\
-entitled \CompleteTitle \\
-and recommend that it be accepted as fulfilling the
+read the \MakeLowercase{\ThesisType} prepared by \FullName,
+titled {\CompleteTitle} and recommend that it be accepted as fulfilling the
 \MakeLowercase{\ThesisType} requirement for the Degree of \DegreeName.
 
 % Before the final oral defense you must obtain the Approval Pages
@@ -583,12 +582,7 @@ and recommend that it be accepted as fulfilling the
 \begin{flushleft}
 \begin{tabular*}{\textwidth}{p{4in}@{\extracolsep{\fill}}l}
 	& Date: #1	\\
-\cline{1-1}
-#3	& 			\\
-	&			\\
-	&			\\
-	& Date: #1	\\
-\cline{1-1}
+  \cline{1-1}
 #4	& 			\\
 	&			\\
 	&			\\
@@ -623,7 +617,12 @@ the \MakeLowercase{\ThesisType} requirement.
 \begin{tabular*}{\textwidth}{p{4in}@{\extracolsep{\fill}}l}
 							& Date: #1	\\
 \cline{1-1}
-Dissertation Director: #2	&			\\
+  Dissertation Director: #2	&			\\
+                                                        & \\
+                                                        & \\
+  							& Date: #1	\\
+\cline{1-1}
+Dissertation Director: #3	&			\\
 \end{tabular*}
 \end{flushleft}
 }
@@ -657,7 +656,7 @@ available to borrowers under rules of the Library.
 
 \noindent Brief quotations from this \MakeLowercase{\ThesisType} are allowable
 without special permission, provided that accurate acknowledgment
-of source is made.
+of the source is made.
 \ifthenelse{ \boolean{Copyright} }
 {Requests for permission for extended quotation
 from or reproduction of this manuscript in whole or in part may be

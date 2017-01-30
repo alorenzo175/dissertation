@@ -17,7 +17,7 @@
 % Creative Commons, I (DM) think the CC-BY-ND makes the most sense)  See
 % uathesis.cls for the reason why the non-commercial licenses are not
 % included.
-\documentclass[dissertation]{uathesis}
+\documentclass[dissertation,openany,generatedon]{uathesis}
 %\documentclass[dissertation,copyright]{uathesis}
 %\documentclass[dissertation,CC-BY]{uathesis}
 %\documentclass[dissertation,CC-BY-SA]{uathesis}
@@ -127,14 +127,18 @@
 \incabstract{abstract}
 
 % Include the various chapters
-%\include{introduction}
-%\include{conclusions}
-
+\include{introduction}
+\include{sensor_network}
+\include{error_analysis}
+\include{network_forecasts}
+\include{satellite_oi}
+\include{conclusions}
 
 % Include the various appendices
 \appendix
 \include{appendixaNF}
 \include{publications}
+
 
 
 % Switch the spacing to single-spaced for the references

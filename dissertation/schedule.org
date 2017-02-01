@@ -1,0 +1,15 @@
+* DISSERTATION
+  TODO ROUGH OUTLINEs
+  DEADLINE: <2017-03-01 Wed>
+** intro
+   DEADLINE: <2017-02-08 Wed>
+** network
+   DEADLINE: <2017-02-11 Sat>
+** errors
+   DEADLINE: <2017-02-14 Tue>
+** network forecasts
+   DEADLINE: <2017-02-18 Sat>
+** satellit oi
+   DEADLINE: <2017-02-06 Mon>
+** conclusions
+   DEADLINE: <2017-02-22 Wed>

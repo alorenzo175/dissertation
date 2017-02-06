@@ -69,9 +69,12 @@
 % The purpose of hyperref is to make the PDF created extensively
 % cross-referenced.
 \usepackage[pdftex,bookmarks,colorlinks=true,urlcolor=black,linkcolor=black,citecolor=black]{hyperref}
+\usepackage{cleveref}
+
 
 % Set up some values
-\completetitle{Data Driven Solar Power Forecasts}
+\completetitle{Design and uses of an irradiance monitoring network for
+  short-term irradiance forecasting}
 \fullname{Antonio Tomas Lorenzo}
 \degreename{Doctor of Philosophy}	% Title of your degree.
 
@@ -129,7 +132,6 @@
 % Include the various chapters
 \include{introduction}
 \include{sensor_network}
-\include{error_analysis}
 \include{network_forecasts}
 \include{satellite_oi}
 \include{conclusions}
@@ -147,9 +149,9 @@
 \small\normalsize						% switch size to make the value take
 
 % Create the References list
-\bibliographystyle{ieeetran}
 \addcontentsline{toc}{chapter}{REFERENCES}
-\bibliography{bibliography.bib}
+\bibliographystyle{ieeetran}
+\bibliography{bibliography}
 
 \renewcommand{\baselinestretch}{1.4}		% chaning the value
 \small\normalsize						% switch size to make the value take

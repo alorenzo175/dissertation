@@ -1,0 +1,31 @@
+Part,Quantity,Description
+Olinuxino\_i.MX223,1,Olinuxino imx223 micro
+TO92,1,LM61
+TO92,1,MCP1541
+MTSMC,1,MTSMC-H5-U
+C1V7,1,68 uF
+TEC 1776275-2,1,CONN\_2
+C1,2,4.7 uF
+C2,1,100 nF
+C1,1,10 nF
+C1,5,1uF
+C1,1,330pF
+C2,1,0.1uF
+C1,1,10uF
+D4,1,SR305
+L15-E,1,100 uH
+R1,1,50k
+R1,1,20k
+R1,1,680
+TO220-7,1,LM2676
+DIP-8\_\_300,1,MCP602
+DIP-14\_\_300,1,MCP3204
+FCI 61729-1011BLF,1,USB
+DIP-8\_\_300,1,MCP3201
+KLDX-0202-A-LT,1,CONN\_3
+3 pin header,1,3 pin header
+5 pin header,1,5 pin header
+9 pin header,1,9 pin header
+14 pin socket,1,14 pin socket
+8 pin socket,2,8 pin socket
+30 pin header,2,30 pin header

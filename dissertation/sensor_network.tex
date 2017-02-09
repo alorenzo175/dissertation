@@ -32,21 +32,41 @@ why chosen?
 
 \subsection{Photodiode Sensor}
 \label{sec:photodiode}
+A number of photodiodes were studied to determine a suitable,
+inexpesive replacement for a pyranometer.
+We tested a clear domed photodiode which we sanded to better diffuse
+light, a thin sheet of telfon glued on a photodiode to diffuse light,
+and a an unmodified, flat photodiode, among others.
+We found that the flat photodiode (Osram BPW34) provided a reasonable
+signal level and cosine response, shown in \cref{fig:pdshape}.
+This photodiode is sufficient to detech changes in the irradiance from
+a clear-sky, as a pyranometer would, which is the main way the network
+will be used.
 
-teflon diffuser
-scaled PD vs GHI, cosine rsponse
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{figs/pdvspy.pdf}
+\caption[Comparison of photodiode and pyranometer signals]{A
+  comparison of the signal from a photodiode and a calibrated
+  pyranometer. The photodiode does not exhibit a perfect cosine
+  response with a wider peak that decays too quickly. However, the
+  photodiode performs well for the main purpose of detecting changes
+  in irradiance. Note that the noise in the measurement of the
+  photodiode is about double the noise in the pyranometer measurement.}
+\label{fig:pdshape}
+\end{figure}
 
-\subsection{Sensor Circuit}
-
+\subsection{Hardware}
+\label{sec:senshardware}
 A custom printed circuit board was designed for the components that
 store and send sensor data to a central server every minute.
-The circuit diagram for this board is shown in \Cref{fig:circuit}.
-Design files for the circuit board can be found online \cite{sensorrepo}.
+The circuit diagram for this board is shown in \cref{fig:circuit}.
+Design files for the circuit board can be found online~\cite{sensorrepo}.
 
 \begin{sidewaysfigure}[p]
 \includegraphics[angle=-90,width=\textwidth]{figs/circuit.pdf}
 \caption[Custom sensor circuit diagram]{Circuit diagram for the
-  custom, remote irradiance sensors.}
+  custom, remote irradiance sensors. See \cref{sec:senshardware} for a
+  descirpiton of the components.}
 \label{fig:circuit}
 \end{sidewaysfigure}
 
@@ -76,7 +96,7 @@ the LM2676 step-down regulator.
 
 The sensor is designed to accept input from either a calibrated
 pyranometer (Apogee SP-212) or an inexpensive silicon photodiode
-(Osram BPW34) as discussed in \Cref{sec:photodiode}.
+(Osram BPW34) as discussed in \cref{sec:photodiode}.
 A trans-impedance amplifier (MCP602) with appropriate gain is used to
 convert the current from the photodiode into a measurable voltage.
 
@@ -90,11 +110,55 @@ values such as enclosure temperature (measured by an LM61) and battery
 voltage to be read on the OLinuXino GPIO pins for monitoring.
 A 4.096V voltage reference (MCP1541) is used by both ADCs.
 
-\subsection{Sensor Software}
+A fully assembled printed circuit board is shown in
+\cref{fig:sensor_board}.
+
+\begin{figure}[ht]
+\includegraphics[width=\textwidth]{figs/sensor_board.jpg}
+\caption[Assembled sensor circuit board]{A fully assembled printed
+  circuit board for a custom sensor. The red board is the OLinuXino
+  and the green board on the left is the cell modem with a flexible
+  antenna. Through hole components were chosen for easy soldering.}
+\label{fig:sensor_board}
+\end{figure}
+
+The circuit board is housed in a waterproof box with an air snorkel
+and cable nipples to maintain water resistance.
+A metal extrusion serves as a mast to mount the photodiode or
+pyranmeter.
+The solar panel and this mast are attached to the top of the
+waterproof box which can then be placed outside.
+A photo of the interior of the box with the circuit board and lead
+acid battery is shown in \cref{fig:sensor_int}.
+An entire completed sensor undergoing testing is shown in
+\cref{fig:sensor_outside}.
+
+\begin{figure}[ht]
+  \includegraphics[width=\textwidth]{figs/sensor_interior.jpg}
+\caption[Interior of the sensor enclosure]{A photo of the interior of
+  the sensor enclosure. The air vent and waterproof cable nipples are
+  visible on the right side of the box. The 6Ah 12V motorcycle battery
+  is shown near the bottom.}
+\label{fig:sensor_int}
+\end{figure}
+
+\begin{figure}[p]
+  \includegraphics[width=\textwidth]{figs/sensor_outside.jpg}
+\caption[A complete custom sensor]{A photo of a complete custom
+  irradiance sensor as it undergoes testing outside. The photodiode
+  sensor can be see mounted in the upper right of the image connected
+  via a coax cable to the circuitry inside the box.}
+\label{fig:sensor_outside}
+\end{figure}
+
+\subsection{Software}
 
 reverse SSH
 
 \subsection{Possible Improvements}
+A number of improvements can be made to the sensor design presented in
+this section.
+First, most sensor failures were a result of the enclosure choice.
 
 enclosure
 
@@ -148,7 +212,7 @@ effects on a given sensor in some way to produce an unbiased clear-sky
 index.
 
 \section{Network Deployment}
-
+map
 
 %%% Local Variables:
 %%% mode: latex

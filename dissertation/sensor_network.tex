@@ -158,18 +158,35 @@ reverse SSH
 \subsection{Possible Improvements}
 A number of improvements can be made to the sensor design presented in
 this section.
-First, most sensor failures were a result of the enclosure choice.
+First, most sensor failures were a result of the enclosure and
+mounting choice.
+Since the sensors were simply placed on the ground, they could be
+knocked over by animals or flooded during the monsoon season.
+To mitigate issues like this, we recommend that sensors be mounted on
+a stake.
+While this would complicate deployment somewhat, it would likely
+prevent sensor failure due to orientation issues (where the solar
+panel is not in the sun to power the device) and some water damage.
 
-enclosure
+In addition to a new enclosure and mounting desgin, a number of
+improvments in electronics have been made since the sensors were first
+developed.
+With the rise of the Internet of Things, there now exist numerous
+low-power computing devices that could replace the OLinuXino MICRO in
+our design.
+These new low-power devices now often come with an integrated lithium
+battery charge controller.
+Using lithium batteries instead of lead-acid will enable smaller,
+lighter sensors.
 
-new low power comps
-
-integrated charge controller
-
-lithium battery
-
-gps location + time
-
+Finally, improvments can be made to the connection to a wireless
+network.
+A number of M2M devices have been released that enable wireless
+connectivity in low-power, integrated devices.
+For example, MultiTech now manufactures a device that integrates a
+processor running Linux with the wireless network hardware.
+These devices may also include GPS receivers enabling precise location
+of sensor devices and more accurate time keeping.
 
 \section{Rooftop PV Systems as Sensors}
 

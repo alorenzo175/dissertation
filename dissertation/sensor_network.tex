@@ -30,16 +30,16 @@ The sensors as described cost around \$500 in raw materials when they
 were built in early 2014.
 This low cost allowed us to build and deploy many sensors to collect
 more data.
-The sensors were also desgined to communicate data back in real-time
+The sensors were also designed to communicate data back in real-time
 so that the network could be used to produce operational forecasts for
 TEP.
 
 \subsection{Photodiode Sensor}
 \label{sec:photodiode}
 A number of photodiodes were studied to determine a suitable,
-inexpesive replacement for a pyranometer to measure irradiance.
+inexpensive replacement for a pyranometer to measure irradiance.
 We tested a clear domed photodiode which we sanded to better diffuse
-light, a thin sheet of telfon glued on a photodiode to diffuse light,
+light, a thin sheet of Teflon glued on a photodiode to diffuse light,
 and a an unmodified, flat photodiode, among others.
 We found that the flat photodiode (Osram BPW34) provided a reasonable
 signal level and cosine response, shown in \cref{fig:pdshape}.
@@ -70,7 +70,7 @@ Design files for the circuit board can be found online~\cite{Lorenzo2017a}.
 \includegraphics[angle=-90,width=\textwidth]{figs/circuit.pdf}
 \caption[Custom sensor circuit diagram]{Circuit diagram for the
   custom, remote irradiance sensors. See \cref{sec:senshardware} for a
-  descirpiton of the components.}
+  description of the components.}
 \label{fig:circuit}
 \end{sidewaysfigure}
 
@@ -128,7 +128,7 @@ A fully assembled printed circuit board is shown in
 The circuit board is housed in a waterproof box with an air snorkel
 and cable nipples to maintain water resistance.
 A metal extrusion serves as a mast to mount the photodiode or
-pyranmeter.
+pyranometer.
 The solar panel and this mast are attached to the top of the
 waterproof box which can then be placed outside.
 A photo of the interior of the box with the circuit board and lead
@@ -169,7 +169,7 @@ Most scripts were written in Python which enabled fast prototyping.
 The main data collection script is started on boot and monitored via
 Supervisor to ensure it is restarted if it dies for some reason.
 This script pulls data from the connected ADCs at a configurable rate,
-timestamps it, and stores it in files.
+time-stamps it, and stores it in files.
 This data is then uploaded to our central servers every minute where
 it can be imported into a database.
 
@@ -184,7 +184,7 @@ knowledge of the sensor's IP address and avoiding firewall issues.
 
 \subsection{Possible Improvements}
 \label{sec:sensor_improvements}
-A number of improvements can nbe made to the sensor design presented in
+A number of improvements can be made to the sensor design presented in
 this section.
 First, most sensor failures were a result of the enclosure and
 mounting choice.
@@ -196,8 +196,8 @@ While this would complicate deployment somewhat, it would likely
 prevent sensor failure due to orientation issues (where the solar
 panel is not in the sun to power the device) and some water damage.
 
-In addition to a new enclosure and mounting desgin, a number of
-improvments in electronics have been made since the sensors were first
+In addition to a new enclosure and mounting design, a number of
+improvements in electronics have been made since the sensors were first
 developed.
 With the rise of the Internet of Things, there now exist numerous
 low-power computing devices that could replace the OLinuXino MICRO in
@@ -207,11 +207,11 @@ battery charge controller.
 Using lithium batteries instead of lead-acid will enable smaller,
 lighter sensors.
 
-Finally, improvments can be made to the connection to a wireless
+Finally, improvements can be made to the connection to a wireless
 network.
 A number of M2M devices have been released that enable wireless
 connectivity in low-power, integrated devices.
-For example, MultiTech now manufactures a device that integrates a
+For example, MULTITECH now manufactures a device that integrates a
 processor running Linux with the wireless network hardware.
 These devices may also include GPS receivers enabling precise location
 of sensor devices and more accurate time keeping.
@@ -262,7 +262,7 @@ index.
 \includegraphics[width=0.75\textwidth]{figs/map.pdf}
 \caption[Map of sensor locations]{Map of Tucson, AZ, indicating the
   locations of custom and rooftop PV sensors. The NREL MIDC star
-  refers to the calibrated and maintened irradiance sensor located at
+  refers to the calibrated and maintained irradiance sensor located at
   the University of Arizona.}
 \label{fig:map}
 \end{figure}
@@ -287,7 +287,7 @@ rooftop PV sensors.
 As described in \cref{app:pvsc40}, the primary goal of this
 configuration was to study forecasts for a number of PV power plants
 located around $32.1^\circ$ N and $110.8^\circ$ W.
-The sensors are aranged as they are based on the analysis done in
+The sensors are arranged as they are based on the analysis done in
 \cite{Lonij2013}, the fact that the primary cloud direction in
 non-monsoon season is from the southwest, and the limited number of
 sensors available.
@@ -301,9 +301,9 @@ High-quality 10 second irradiance data has been continuously gathered
 from the National Renewable Energy Laboratory (NREL) MIDC OASIS sensor
 hosted at the University of Arizona.
 This suite of sensors (including GHI and DNI measurements) is part of
-the NREL Solar Resource \& Meterological Assessment Project (SOLRMAP)
+the NREL Solar Resource \& Meteorological Assessment Project (SOLRMAP)
 and is regularly maintained \citep{Wilcox_Andreas_2010}.
-Data from this suite of sensors is publically available at
+Data from this suite of sensors is publicly available at
 \url{http://www.nrel.gov/midc/ua_oasis}.
 
 Data from select sensors in the network supporting

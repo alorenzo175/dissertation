@@ -1,29 +1,24 @@
 \chapter{IRRADIANCE MONITORING NETWORK}
 \label{chap:sens_net}
 
-This chapter describes the irradiance monitoring network that was
-deployed in Tucson, AZ, and is the basis for much of the forecasting
-work in this dissertation.
-First, we present some background on why we built the network.
-Next, we describe the design of the custom sensors that we deployed as
-part of the network.
-Then, we discuss how rooftop PV systems can be used as proxies for
-irradiance sensors.
-Finally, we present possible improvements one might consider for
-future networks.
-
-\section{Background}
-
-The initial application of an irradiance monitoring network is laid
-out in \cite{Lonij2013}.
 Using historical data from 80 residential rooftop PV systems, Lonij
 \etal produced intra-hour solar power forecasts that showed skill over
-persistence forecasts.
+persistence forecasts \citep{Lonij2013}.
 The local electric utility, Tucson Electric Power (TEP), was interested in
 receiving these short-term forecasts in real-time.
 To generate real-time forecasts, data from sensors need to be gathered
-in real-time, thus we set out building the irradiance monitoring
-network that would report values in near real-time.
+in real-time
+Thus we set out building the irradiance monitoring network described
+in this chapter that would report values in near real-time.
+To accomplish this goal, we designed custom irradiance sensors that
+are deployed remotely and report data in real-time via cell model as
+described in \cref{sec:custom_sensors}.
+We also partnered with a local rooftop PV installer to gather power
+data from PV systems to act as proxies for irradiance, described in
+\cref{sec:pv_sensors}.
+This irradiance monitoring network, that was deployed in Tucson, AZ, is
+the basis for much of the forecasting work in this dissertation.
+
 
 \section{Design of Custom Sensors}
 \label{sec:custom_sensors}
@@ -48,9 +43,9 @@ light, a thin sheet of telfon glued on a photodiode to diffuse light,
 and a an unmodified, flat photodiode, among others.
 We found that the flat photodiode (Osram BPW34) provided a reasonable
 signal level and cosine response, shown in \cref{fig:pdshape}.
-This photodiode is sufficient to detech changes in the irradiance from
-a clear-sky, as a pyranometer would, which is the main way the network
-will be used.
+This photodiode is sufficient to detect deviations in the irradiance from
+clear-sky conditions, as a pyranometer would, which is the main way
+the network is used.
 
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{figs/pdvspy.pdf}
@@ -69,7 +64,7 @@ will be used.
 A custom printed circuit board was designed for the components that
 store and send sensor data to a central server every minute.
 The circuit diagram for this board is shown in \cref{fig:circuit}.
-Design files for the circuit board can be found online~\cite{sensorrepo}.
+Design files for the circuit board can be found online~\cite{Lorenzo2017a}.
 
 \begin{sidewaysfigure}[p]
 \includegraphics[angle=-90,width=\textwidth]{figs/circuit.pdf}
@@ -245,7 +240,7 @@ forecast back to the utility.
 Since irradiance is the primary driver of PV output power, power data
 from rooftop PV systems can act as a proxy for irradiance.
 When analyzing both power and irradiance data, a units conversion is
-likely necessary.
+necessary.
 In our work, we choose to convert all irradiance proxy data to
 clear-sky index
 \begin{equation}
@@ -308,13 +303,13 @@ hosted at the University of Arizona.
 This suite of sensors (including GHI and DNI measurements) is part of
 the NREL Solar Resource \& Meterological Assessment Project (SOLRMAP)
 and is regularly maintained \citep{Wilcox_Andreas_2010}.
-Data is publically available at \url{http://www.nrel.gov/midc/ua_oasis}.
+Data from this suite of sensors is publically available at
+\url{http://www.nrel.gov/midc/ua_oasis}.
 
 Data from select sensors in the network supporting
 \cite{Lorenzo2015c,Lorenzo2017} is available online
 \citep{Lorenzo2015b,Lorenzo2016b}.
-Data directly from the NREL MIDC sensor hosted at the University of
-Arizona is also available \citep{Wilcox_Andreas_2010}.
+
 
 
 %%% Local Variables:

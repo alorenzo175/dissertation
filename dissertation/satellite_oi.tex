@@ -2,23 +2,59 @@
 \label{chap:satoi}
 
 references to other sections
-
 - application
 - basic background
 - results
-- extension kalman filter et
-
-PDF and CDF?
-
-provenance tracking?
 
 \section{Satellite to Irradiance Algorithms}
-\subsection{UASIBS}
+- high res requirements
+- GOES, time res
+
+\subsection{UASIBS Model}
+The University of Arizona Solar Irradiance Based on Satellite (UASIBS)
+model was developed at by Chang Ki Kim in 2015 \citep{Kim2016}.
+This model relies on the infrared images of the GOES-W satellite to
+find completely overcast areas based on a comparison of the brightness
+temperature difference (difference between 10.7 and 3.9 $\mu$m
+images) to a reference calculated over the past few weeks.
+If the infrared channels do not find an area to be overcast, the
+visible image is compared to a threshold image to determine if any of
+the 16 pixels in the 4km $\times$ 4km box have a cloud.
+Once pixels are classified as cloudy or clear, a look-up table is
+employed to find the atmospheric transmittance and GHI on the ground
+for each pixel.
+A number of look-up tables are generated from using Goddard Space
+Flight Center Radiative Transfer Model: one for clear sky
+accounting for aerosols, one for high level clouds, one for mid level
+clouds, one for low clouds, and one for cumulus clouds.
+
+While the cloud detection routine seems to function well, the look-up
+table approach to calculate transmittance is limited.
+First, a number of climatological averages, specific to Tucson, are
+used in the calculations of the look-up tables including AOD and
+ozone.
+Instead, near real-time analysis and forecasts of AOD and ozone are
+available from Monitoring atmospheric composition and climate (MACC)
+project \citep{Morcrette2009} and a ground truth measurement of AOD is
+available from the Tucson AERONET site \citep{Holben1998}.
+Another limitation is that only ten values of the solar zenith angle
+are used which introduces artificial steps noticable in the output
+GHI.
+With newer, fast radiative transfer codes, perhaps the look-up table
+approach can be replaced with a direct call to a radiative transfer
+code to avoid this issue.
 
 \subsection{Empirical Model}
 - based on suny
-
 - improvments to be made
+
+\subsection{Other Models}
+gsip
+nsrdb alg
+
+\subsection{Future Models}
+goes 16
+
 
 \section{Parameter Estimation}
 \label{sec:paramopt}

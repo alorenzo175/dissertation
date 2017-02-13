@@ -38,17 +38,16 @@
 \usepackage{setspace}
 \usepackage{rotating}
 \usepackage{csvsimple}
+\usepackage[caption=false,font=footnotesize]{subfig}
+\usepackage{fixltx2e}
+\usepackage{placeins}
+
+
 \renewcommand*\cftfigpresnum{Figure~}
 \setlength{\cftfignumwidth}{5.5em}
 \renewcommand\cftchapfont{\normalfont}
 \renewcommand\cftchappagefont{\normalfont}
 \renewcommand\cftchapleader{\cftdotfill{\cftsecdotsep}}
-
-\newcommand\alphaNa{\alpha_\textrm{Na}}
-\newcommand\alphaK{\alpha_\textrm{K}}
-\newcommand\alphaRb{\alpha_\textrm{Rb}}
-\newcommand\alphaCs{\alpha_\textrm{Cs}}
-\newcommand\lambdaZero{\lambda_\textrm{zero}}
 
 \newcommand*{\etal}{\emph{et al.}~}
 
@@ -135,6 +134,7 @@
 \include{sensor_network}
 \include{network_forecasts}
 \include{satellite_oi}
+\include{satellite_combo}
 \include{conclusions}
 
 % Switch the spacing to single-spaced for the references

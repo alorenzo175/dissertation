@@ -28,8 +28,7 @@ Flight Center Radiative Transfer Model: one for clear sky
 accounting for aerosols, one for high level clouds, one for mid level
 clouds, one for low clouds, and one for cumulus clouds.
 
-While the cloud detection routine seems to function well, the look-up
-table approach to calculate transmittance is limited.
+The look-up table approach to calculate transmittance is limited.
 First, a number of climatological averages, specific to Tucson, are
 used in the calculations of the look-up tables including AOD and
 ozone.
@@ -44,13 +43,87 @@ With newer, fast radiative transfer codes, perhaps the look-up table
 approach can be replaced with a direct call to a radiative transfer
 code to avoid this issue.
 
-\subsection{Empirical Model}
-- based on suny
-- improvments to be made
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{figs/uasibs_scatter.pdf}
+\caption[Scatterplot of predicted vs measured clear-sky index for
+UASIBS]{A scatterplot of the predicted vs measured clear-sky index for
+UASIBS before OI (blue) and after (orange). It is obvious there is
+some issue where UASIBS does not produce clear-sky indices between 0.6
+and 0.8. OI helps correct this somewhat. (Reproduced from
+\cite{Lorenzo2017})}
+\label{fig:uasibs_scatter}
+\end{figure}
+
+The cloud detection methodology may also have issues when classfying
+clouds to use one of the look-up tables.
+This is illustrated in Fig.\@ 4 of \cref{app:satoi} reproduced in
+\cref{fig:uasibs_scatter}.
+There is a distinct lack of images with clear-sky index between 0.6
+and 0.8 for UASIBS (blue $\times$s) that requires further
+investigation to determine if it is a problem with the look-up tables
+themselves or using the wrong look-up table.
+Removing the classification of cloud type and calculating the
+radiative transfer directly will likely solve this issue.
+
+\subsection{Semi-Empirical Model}
+The semi-empirical model used and described in \cref{app:satoi} is
+based on what is commonly know as the SUNY model developed by Perez
+\etal \citep{Perez2002}.
+This model was chosen because it is well known within the community
+and provides a good benchmark.
+The SUNY model was developed using ground truth sensors spread
+throught the US with few in arid climates and no sensor in Arizona.
+Notably, Perez \etal recognized the deficiency in arid areas with high
+ground albedos and proposed a method to correct this issue
+\citep{Perez2004}.
+The high ground albedo combined with the empirical coefficients
+developed for the US broadly likely lead to the overprediction of
+cloudy skies in \cref{fig:suny_scatter}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figs/suny_scatter.pdf}
+\caption[Scatterplot of predicted vs measured clear-sky index for the
+semi-empirical model]{A scatterplot of the predicted vs measured
+  clear-sky index for semi-empirical model before OI (blue) and after
+  (orange). The semi-empirical model tends to overpredict clouds as
+  shown in the clear-sky index scatterplot on the left. The splitting
+  for the GHI in the right image is likely due to a time of day
+  effect.  (Reproduced from \cite{Lorenzo2017})}
+\label{fig:suny_scatter}
+\end{figure}
+
+A new, more strict test of OI in southern Arizona would be to
+recalculate the empirical coefficients used in the semi-empirical
+model for the area.
+This would likely improve the background errors of the semi-empirical
+errors and may also improve the final errors after performing OI.
 
 \subsection{Other Models}
-gsip
-nsrdb alg
+There are numerous algorithms to convert satellite measured radiances
+to ground irradiance.
+A good overview of semi-empirical and physical methods can be found in
+\cite{Perez2013a,Miller2013}.
+
+One publicly available dataset is the GOES Surface and Insolation
+Products (GSIP).
+GSIP provides hourly irradiance estimates at a resolution of 1/8
+degree.
+OI is unlikely to perform well with this low spatial resolution
+({\raise.4ex \hbox{\texttildelow}}14km) where clouds are not well
+resolved and many sensors are contained in a single grid cell.
+
+The National Renewable Energy Laboratory (NREL) is developing a new
+algorithm called the Physical Solar Model (PSM) that has been used to update
+the National Solar Radiation Database (NSRDB).
+NSRDB provides 30 minute 4km $\times$ 4km data covering the US (and
+some other countries) from 1998 to 2015.
+One could explore how OI performs for an NSRDB background, but the low
+spatial resolution may prove limiting.
+Furthermore, the PSM algorithm is currently unpublished so it cannot
+be used to make operational nowcasts which is the ultimate goal of OI.
+
 
 \subsection{Future Models}
 goes 16
@@ -58,10 +131,11 @@ goes 16
 
 \section{Parameter Estimation}
 \label{sec:paramopt}
+
 Section 6 of \cref{app:satoi} discusses the tuning of OI for a
-specific location including the estimation of the parameters
-$k,\: l,\: d$ by minimizing the mean-squared error (MSE) of the
-analysis over sensors withheld from OI.
+specific location including the estimation of the parameters $k,\:
+l,\: d$ by minimizing the mean-squared error (MSE) of the analysis
+over sensors withheld from OI.
 To perform this minimization a grid search over the parameters was
 performed and the resulting MSE for each set of parameters is shown in
 \cref{fig:paramopt}.
@@ -69,9 +143,9 @@ This figure clearly shows distinct minima in parameter space for the
 UASIBS satllite to irradiance model which indicates that  OI is
 sensitive to the choice of parameters.
 On the other hand, the lack of distinct minima in parameter space for
-the empirical model indicates that a wide range of parameters would
+the semi-empirical model indicates that a wide range of parameters would
 give similar results after performing OI.
-If in the future the empirical model is chosen as the background model
+If in the future the semi-empirical model is chosen as the background model
 for an OI based routine, a more thorough investigation into why OI is
 insensitive to these parameters is warranted.
 
@@ -87,9 +161,9 @@ insensitive to these parameters is warranted.
   $k$, the rows distinguish between cloudiness and spatial
   correlation, the y-axis is $l$ and the x-axis is $d^{1/2}$. The top
   figure shows surfaces for the UASIBS model and the bottom is for the
-  empirical model. Note, that for all choices of $k$ and the
+  semi-empirical model. Note, that for all choices of $k$ and the
   correlation parameterization, the surfaces for the UASIBS model have
-  a clear minimum. The surfaces for the empirical model have less
+  a clear minimum. The surfaces for the semi-empirical model have less
   distinct minima indicating that optimal interpolation is not
   particularly sensitive to parameter choice for this model.}
 \label{fig:paramopt}
@@ -98,6 +172,8 @@ insensitive to these parameters is warranted.
 
 \section{Future Work}
 (mainly pertaining to OI, mabye little bit of kalman)
+
+layers
 
 new sat to irr algorithm
 

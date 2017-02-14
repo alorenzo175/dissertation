@@ -9,6 +9,7 @@ references to other sections
 \section{Satellite to Irradiance Algorithms}
 - high res requirements
 - GOES, time res
+- why geostationary
 
 \subsection{UASIBS Model}
 The University of Arizona Solar Irradiance Based on Satellite (UASIBS)
@@ -124,10 +125,44 @@ spatial resolution may prove limiting.
 Furthermore, the PSM algorithm is currently unpublished so it cannot
 be used to make operational nowcasts which is the ultimate goal of OI.
 
-
 \subsection{Future Models}
-goes 16
+With the launch of GOES-16 a number of groups are developing products
+and algorithms that make use of the new Advanced Baseline Imager
+(ABI).
+The new ABI will image the continental US every five minutes with 16
+spectral bands and resolutions as high as 0.5 km for the 0.64 $\mu$m
+visible band.
+Pictures of a comparison of the new GOES-16 and the current GOES-13
+visible images in \cref{fig:goes_comp} and of a detailed image over
+California in \cref{fig:goes_cal} show the impressive capabilities of
+the instrument.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figs/goes_comp.jpg}
+\caption[Comparison of visible images from the current and future
+GOES]{A comparison of visible images created from the visible channels
+of the new GOES-16 satellite and the previous generation
+GOES-13. GOES-13 has only a single visible channel while GOES-16 has
+three. Image courtesy of NOAA.}
+\label{fig:goes_comp}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{figs/goes_cal.jpg}
+\caption[An visible image of the western US from GOES-16]{A visible
+image of the western US from the new GOES-16 satellite. The improved
+resolution and spectral bands will improve satellite derived
+irradiance estimates compared to the current generation of
+satellite. Image courtesy of NOAA.}
+\label{fig:goes_cal}
+\end{figure}
+
+This higher spatial resolution will make it all the more important
+to minimize cloud location errors with respect to the ground sensors.
+It is possible that OI will show little gain over GHI estimates using
+these new ABI capabilities.
 
 \section{Parameter Estimation}
 \label{sec:paramopt}
@@ -169,7 +204,6 @@ insensitive to these parameters is warranted.
 \label{fig:paramopt}
 \end{figure}
 
-
 \section{Future Work}
 (mainly pertaining to OI, mabye little bit of kalman)
 
@@ -179,11 +213,6 @@ new sat to irr algorithm
 
 Here is some future work
 
-How does NSRDB do?
-
-GSIP?
-
-GOES-16
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "dissertation"

@@ -1,15 +1,29 @@
 \chapter{OPTIMAL INTERPOLATION TO IMPROVE SATELLITE NOWCASTS WITH DATA}
 \label{chap:satoi}
 
-references to other sections
-- application
-- basic background
-- results
+This chapter supplements the description of our work incorporating
+sensor network data with satellite irradiance estimates using optimal
+interpolation (OI) that is described in \cref{app:pvsc43} and
+\cref{app:satoi}.
+We describe the satellite image to ground irradiance algorithms we
+used for OI in more depth, show how the parameters for OI were chosen,
+and describe future work.
 
-\section{Satellite to Irradiance Algorithms}
-- high res requirements
-- GOES, time res
-- why geostationary
+\section{Satellite to Irradiance Algorithms for OI}
+In this section we will describe the satellite image to ground
+irradiance algorithms used in \cref{app:satoi} and discuss other
+algorithms.
+On factor that affects how well OI performs for a given background
+image generated from some satellite to irradiance algorithm is the
+spatial resolution.
+OI as presented in \cref{app:satoi} focuses on a relatively small,
+city scale area.
+This means that the background image must have sufficient density in
+this area for the deployed sensors to be of use in correcting the
+image.
+Furthermore, since our goal is to produce nowcasts, the algorithm
+should only rely on data present at the current time and take a
+reasonable amount of time to compute.
 
 \subsection{UASIBS Model}
 The University of Arizona Solar Irradiance Based on Satellite (UASIBS)
@@ -150,7 +164,7 @@ three. Image courtesy of NOAA.}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.7\textwidth]{figs/goes_cal.jpg}
+\includegraphics[width=0.65\textwidth]{figs/goes_cal.jpg}
 \caption[An visible image of the western US from GOES-16]{A visible
 image of the western US from the new GOES-16 satellite. The improved
 resolution and spectral bands will improve satellite derived
@@ -174,15 +188,6 @@ over sensors withheld from OI.
 To perform this minimization a grid search over the parameters was
 performed and the resulting MSE for each set of parameters is shown in
 \cref{fig:paramopt}.
-This figure clearly shows distinct minima in parameter space for the
-UASIBS satllite to irradiance model which indicates that  OI is
-sensitive to the choice of parameters.
-On the other hand, the lack of distinct minima in parameter space for
-the semi-empirical model indicates that a wide range of parameters would
-give similar results after performing OI.
-If in the future the semi-empirical model is chosen as the background model
-for an OI based routine, a more thorough investigation into why OI is
-insensitive to these parameters is warranted.
 
 \begin{figure}[p]
 \centering
@@ -204,14 +209,51 @@ insensitive to these parameters is warranted.
 \label{fig:paramopt}
 \end{figure}
 
+This figure clearly shows distinct minima in parameter space for the
+UASIBS satllite to irradiance model which indicates that  OI is
+sensitive to the choice of parameters.
+On the other hand, the lack of distinct minima in parameter space for
+the semi-empirical model indicates that a wide range of parameters would
+give similar results after performing OI.
+If in the future the semi-empirical model is chosen as the background model
+for an OI based routine, a more thorough investigation into why OI is
+insensitive to these parameters is warranted.
+
 \section{Future Work}
-(mainly pertaining to OI, mabye little bit of kalman)
+Much can be done to extend the work in \cref{app:satoi}.
+The first likely extension is to use these nowcasts of irradiance to
+produce a forecast as in \cref{app:network} where the OI analysis
+replaces the interpolated map and is advected by some cloud wind.
+This can then be extended further with a better advection scheme and
+a more complex wind field.
 
-layers
+One also could explore the valid range of OI, e.g.\@can information
+from sensors in Tucson be used to correct the background image over
+Phoenix 100 miles away?
+Perhaps other parameterizations will be necessary, such as a
+combination of cloudiness and spatial correlation, will be necessary
+for OI to perform well in this situation.
 
-new sat to irr algorithm
+Another topic one could explore is distinguishing between cloud layers
+when performing OI.
+Say for example that sensor 1 is covered by a low cloud while sensor 2
+is covered by a high cloud.
+It might be helpful to separate these layers so that sensor 1 provides
+information to correct the low clouds while sensor 2 provides
+information about the high clouds.
+In addition to possibly improving the OI result, knowledge of the
+cloud layers will also help with forecasting since each layer can and
+do move independently.
 
-Here is some future work
+A natural extension of OI with a forecast is the Kalman filter.
+The Kalman filter would essentially perform OI, move the image
+according to some cloud advection scheme, and repeat with new data.
+Since the satellite takes a new image at least every 30 minutes, there
+are two sources of data that the update step should incorporate: the
+sensor data available every 5 minutes and the new satellite image
+every 30 minutes.
+A forecasting system using such a Kalman filter is described in
+\cref{chap:satfx}.
 
 %%% Local Variables:
 %%% mode: latex

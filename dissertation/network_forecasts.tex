@@ -22,18 +22,57 @@ new methods in this area
 
 \section{Irradiance Forecast Error Metrics}
 \label{sec:error_metrics}
-regional comparisons
 
-time errors
+While studying and evaluating the forecasts described in
+\cref{app:network}, we learned how important it is to understand
+forecast error metrics and their limitations.
+Here we present an examples of possibly misleading error metrics to
+warn those evaluating forecasts to be careful.
 
-standard metrics
-mae vs rmse vs mbe
+We will evaluate each metric on forecasts of clear-sky index to remove
+the time of day weighting that is implicit when computing errors for
+GHI.
+First, we will define the error metrics to be discussed.
+The most common metrics are mean bias error (MBE), mean absolute error
+(MAE), and root mean squared error (RMSE) that are defined as
+\begin{equation}
+\mbox{MBE} = \frac{1}{N} \sum_{i=0}^N (f_i - o_i),
+\end{equation}
+\begin{equation}
+\mbox{MAE} = \frac{1}{N} \sum_{i=0}^N |f_i - o_i|,
+\end{equation}
+\begin{equation}
+\mbox{RMSE} = \sqrt{\frac{1}{N} \sum_{i=0}^N (f_i - o_i)^2},
+\end{equation}
+where $f_i$ is the forecast at time $i$ and $o_i$ is the observation
+of a sensor.
+MBE indicates the average bias of a forecast, and if it is not nearly
+zero, bias correction techniques may be applied to the forecast to
+reduce it further.
+MAE indicates the average magnitude of errors as does RMSE, but RMSE
+weights large errors more.
 
-other metrics
+Other metrics include Pearson's correlation coefficient, the standard
+deviation of the errors, and the standard deviation of the forecasts
+as compared to the standard deviation of the observations.
+A number of other possible useful metrics are defined
+in~\cite{Zhang2015}.
+We will also look at the ramp metrics defined in~\cite{Chu2015b}, the
+ramp detection index (RDI), false ramp index (FRI), and ramp
+magnitude forecast index (RMI).
 
-make PDFs?
+\subsection{Example Forecasts}
+Here we present forecasts for two days in Tucson, AZ, in 2014.
+The first day shown in \cref{fig:5minfx_day1} has thick but broken
+clouds.
+The second day shown in \cref{fig:5minfx_day2} has more scattered
+clouds.
+In each case, observations are averaged to five minutes, Forecast A is
+a five minute persistence forecast, Forecast B is a smoothing applied
+to the data, and Forecast C is a fraction of the clear-sky profile for
+that day.
 
-\begin{figure}[h]
+\begin{figure}[tbp]
 \centering
 \includegraphics[width=0.8\textwidth]{figs/error_fx_Day_1.pdf}
 \caption[Forecasts for a day with thick, broken clouds]{Five minute
@@ -45,8 +84,7 @@ make PDFs?
 \label{fig:5minfx_day1}
 \end{figure}
 
-
-\begin{figure}[h]
+\begin{figure}[tbp]
 \centering
 \includegraphics[width=0.8\textwidth]{figs/error_fx_Day_2.pdf}
 \caption[Forecasts for a day with scattered clouds]{Five minute
@@ -58,7 +96,23 @@ make PDFs?
 \label{fig:5minfx_day2}
 \end{figure}
 
-\begin{table}[h]
+Which forecast is best depends on how one plans to use the forecast.
+If one is concerned with quanities like average hourly production from
+a PV plant, perhaps the smoother Forecast B is best.
+If one is concerned with variability to, for example, schedule
+generation to back up solar power, Forecast A might be preferable.
+In most cases, Forecast A is considered the better forecast that
+better captures the nature of the observations.
+
+\Cref{table:fx_errs} shows the values of some standard error metrics
+for forecasts on each day.
+For Day 1, Forecast A is clearly the best forecast with the lowest
+MAE and RMSE, and the highest correlation to the observations.
+It also performs better at detecting ramp events.
+On Day 2, MAE and RMSE would suggest that Forecast B is the best.
+Furthermore, Forecast C has the same RMSE as Forecast A.
+
+\begin{table}[htbp]
 \centering
 \caption[Error metrics for example forecasts]{Error metrics (in units
 of clear-sky index) for the forecasts on Day 1 shown in
@@ -73,10 +127,29 @@ for a description of each metric.}
 \subfloat[Day 2\label{table:fx_errs_day2}]{\input{figs/Day_2_err_table}}
 \end{table}
 
+If given Forecast B or C on Day2, a user might consider it to be a
+forecast of a clear day, although with possibly more aerosols in the
+air reducing the irradiance slightly from the expected clear-sky
+profile.
+Forecast A is the only forecast to capture the variability that is
+also seen in the observations and is often most concerning to
+utilities.
+Thus, the metrics are somewhat misleading on Day 2.
 
 \subsection{Taylor Diagrams}
+The Taylor diagram is an execellent tool to summarize a number of
+metrics for many forecasts in a single figure \citep{Taylor2001}.
+\Cref{fig:taylor_day1,fig:taylor_day2} are the Taylor diagrams for the
+forecasts on Day 1 and Day 2, respectively.
+For any forecast, the radius indicates the standard deviation of the
+forecast and the angle is the correlation of the forecast with the
+observations.
+The gray contours indicate lines of constant centered RMSE, or RMSE
+once any bias has been removed from the forecast.
+A perfect forecast would lie on the x-axis (correlation = 1) and have
+the same standard deviation as the observations.
 
-\begin{figure}[h]
+\begin{figure}[p]
 \centering
 \includegraphics[width=0.8\textwidth]{figs/taylor_Day_1.pdf}
 \vspace{-3em}
@@ -88,7 +161,7 @@ for a description of each metric.}
 \label{fig:taylor_day1}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[p]
 \centering
 \includegraphics[width=0.8\textwidth]{figs/taylor_Day_2.pdf}
 \vspace{-3em}
@@ -102,6 +175,38 @@ for a description of each metric.}
 \label{fig:taylor_day2}
 \end{figure}
 
+\Cref{fig:taylor_day1} confirms our assessment that Forecast A is best
+on Day 1 since it has the lowest CRMSE, standard deviation equal to
+that of the observations, and the highest correlation to the
+observations.
+From \cref{fig:taylor_day2}, Forecast A is better than Forecast C
+since they have a similar CRMSE but Forecast A actually matches the
+variability observed in the observations.
+On the other hand, Forecast B has a lower CRMSE, but does not capture
+this variability.
+In this case, it depends on the use case to say whether Forecast A or
+Forecast B is best.
+
+\subsection{Suggestions}
+We have hopefully demonstrated why an understanding of the error
+metrics and careful application is important when evaluating
+forecasts.
+Evaluating forecasts on only a single or a couple of days may lead to
+conflicting results, so a longer time period with varied weather
+should be used when considering the overall performance of a forecast.
+Furthermore, a number of metrics should be calculated and compared to
+ understand the differences in forecasts, and the Taylor diagram
+provides a good summary of some metrics.
+Finally, an examination of the actual forecast as compared to
+observations is useful to gain an intuitive sense of the forecast.
+
+When comparing errors across studies, it is important to also consider
+the region that the forecast was made for.
+For example, the desert Southwest experiences fewer overcast days than
+locations in the Southeast.
+The Southwest also has a high number of clear days.
+A forecast with low errors in the Southeast may be better at
+forecasting overcast days with less skill on mostly clear days.
 
 \section{Future Work}
 velocity vectors

@@ -11,7 +11,7 @@
 \usepackage{bm}% bold math
 \usepackage{setspace}
 \usepackage{rotating}
-\usepackage{csvsimple}
+%\usepackage{csvsimple}
 \usepackage[caption=false,font=footnotesize]{subfig}
 \usepackage{fixltx2e}
 \usepackage{placeins}
@@ -46,20 +46,21 @@
 \date{Feb. 22, 2017}
 \maketitle
 
-\begin{abstract} Short-term irradiance forecasting is of great use to
-  electric utilities to understand the solar resource for solar power
-  plants and maintain a reliable grid. This dissertation studies new
-  methods to produce short-term forecasts that rely on an irradiance
-  monitoring network. As part of this forecasting effort, we designed
-  and deployed inexpensive irradiance sensors in Tucson, AZ. These
-  sensors, along with data from rooftop PV systems, are used to
-  produce irradiance forecasts for 1 min to 60 min in the future. For
-  longer time horizons (30 min to 4 h), forecasts produced from
-  satellite images are used. We have improved the irradiance estimates
-  of individual satellite images by combining the satellite estimate
-  and data from the sensor network. These improved satellite derived
-  nowcasts will be the basis of future work that will continuously
-  assimilate data into satellite derived forecasts.
+\begin{abstract}
+  Short-term solar irradiance forecasts help electric utilities add
+  more solar power plants while maintaining a reliable grid. This
+  dissertation studies new methods to produce short-term forecasts
+  that rely on an irradiance monitoring network. As part of this
+  forecasting effort, we designed and deployed inexpensive irradiance
+  sensors in Tucson, AZ. These sensors, along with data from rooftop
+  PV systems, are used to produce irradiance forecasts for 1 min to 60
+  min in the future. For longer time horizons (30 min to 4 h),
+  forecasts produced from satellite images are used. We have improved
+  the irradiance estimates of individual satellite images by combining
+  the satellite estimate and data from the sensor network. These
+  improved satellite derived nowcasts will be the basis of future work
+  that will continuously assimilate data into satellite derived
+  forecasts.
 \end{abstract}
 
 \section{Introduction}
@@ -86,7 +87,7 @@ many hours to many days in advance \citep{Perez2013}.
 
 The goal of this dissertation is to study, in depth, short-term
 forecasting techniques that rely on data from a sensor network.
-First, we describe the sensor network that we built in Tucson, AZ for
+First, we describe the sensor network that we built in Tucson, AZ, for
 this purpose.
 Then, we describe forecasts for 1 min to 1 h in advance using only
 data from this network \citep{Lorenzo2015c}.
@@ -94,8 +95,8 @@ We studied forecast errors in depth as part of this work to understand
 that simple error metrics may not be enough to determine which
 forecasting method is ``best.''
 For longer time horizon forecasts, which require estimates of
-irradiance over a larger area, satellite images are ideal starting
-points.
+irradiance over a larger area, irradiance derived from satellite
+images is an ideal starting point.
 One problem is that the initial satellite estimate, or nowcast, often
 has large errors when compared to ground measurements.
 Utilizing the network data and a method known as optimal interpolation

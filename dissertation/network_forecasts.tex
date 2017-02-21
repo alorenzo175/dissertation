@@ -1,14 +1,24 @@
 \chapter{IRRADIANCE NETWORK FORECASTS}
 \label{chap:network}
 
-Reference other sections
+With data from the irradiance monitoring network described in
+\cref{chap:sens_net}, we studied a technique to produce forecasts for
+one minute to one hour in advance based on the work of
+\cite{Lonij2013}.
+We call this forecast technique a network forecast.
+Preliminary work on this is described in \cref{app:pvsc40} and an in
+depth study of these types of forecasts is described in
+\cref{app:network}.
 
+The basic idea behind the network forecasts is that if a sensor
+records the irradiance at some point that sensor should have some
+predictive power of the irradiance for a sensor or PV power plant
+downstream.
+An illustration of this type of prediction is shown in
+\cref{fig:leading_sens} where the output of sensor 19 predicts the
+output of sensor 31 with an eight minute lead time.
 
-Background from vincent, how it's done, limitations, possible
-improvements
-
-\section{Basic Summary}
-\begin{figure}[h]
+\begin{figure}[bht]
 \includegraphics[width=\textwidth]{figs/leading_sens.pdf}
 \caption[Example of data from one sensor predicting the output of
 another]{An example of the output of sensor 19 (red) predicting what
@@ -16,9 +26,6 @@ another]{An example of the output of sensor 19 (red) predicting what
   minutes.}
 \label{fig:leading_sens}
 \end{figure}
-
-
-new methods in this area
 
 \section{Irradiance Forecast Error Metrics}
 \label{sec:error_metrics}
@@ -209,11 +216,18 @@ A forecast with low errors in the Southeast may be better at
 forecasting overcast days with less skill on mostly clear days.
 
 \section{Future Work}
-velocity vectors
+One limitation to the network forecast methodology that we studied is
+that only a single velocity vector was used to transport the predicted
+clear-sky index map.
+Future work could explore using a number of vectors based on clouds at
+different heights and a proper advection scheme.
+One might also explore which domains this type of forecast performs
+best in order to switch between forecast methodolgies for different
+domains.
+Future work that may overcome the issue of clear-sky index maps
+generated in \cref{app:network} not resembling reality by using
+satellite cloud estimates will be described in \cref{chap:satfx}.
 
-ensemble kalman filter
-
-domain specific prediction
 
 %%% Local Variables:
 %%% mode: latex

@@ -4,7 +4,7 @@
 \ProcessOptionsBeamer
 
 % favorite themes: AnnArbor, Frankfurt, Madrid, Luebeck
-\mode<presentation>{\usetheme{Luebeck}}
+\mode<presentation>{\usetheme{Madrid}}
 
 % Color modification
 % primary
@@ -128,8 +128,8 @@
 \begin{figure}[h]
   \includegraphics[width=.7\textwidth]{../dissertation/figs/timehorizon.pdf}
   \caption{Actual forecast errors as a result of my research. Solid lines
-    and points are those studied in this dissertation. Dashed are preliminary
-    or theoretical estimates.}
+    and points are those studied in this dissertation. Dotted lines are
+    preliminary estimates and dashed are purely theoretical estimates.}
 \end{figure}
 \end{frame}
 
@@ -183,12 +183,12 @@
 \end{column}
 \begin{column}{0.3\textwidth}
 \begin{figure}[h]
-  \includegraphics[height=.7\textheight]{figs/old_taylor.png}
+  \includegraphics[height=.6\textheight]{figs/old_taylor.png}
 \end{figure}
 \end{column}
 \begin{column}{0.3\textwidth}
 \begin{figure}[h]
-  \includegraphics[height=.5\textheight]{figs/old_taylor_cap.png}
+  \includegraphics[height=.4\textheight]{figs/old_taylor_cap.png}
 \end{figure}
 \end{column}
 \end{columns}
@@ -270,6 +270,15 @@ Posters
 \end{frame}
 
 \begin{frame}{Classes}
+\begin{minipage}[t]{.7\textwidth}
+Trajectory: AMO $\rightarrow$ Applied Science $\rightarrow$ AMO
+$\rightarrow$ Solar
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.2\textwidth}
+\flushright
+GPA: 4.0
+\end{minipage}
 \fontsize{8}{12}
 \begin{columns}
 \begin{column}{0.5 \textwidth}
@@ -300,6 +309,23 @@ Posters
 \end{itemize}
 \end{column}
 \end{columns}
+\end{frame}
+
+\begin{frame}{Other Lab Activities}
+\begin{itemize}
+\item Manage 140 TB of compressed forecast archives
+\item Manage scripts to import 2 or 10 second data from utilities and
+  the MySQL database that stores the data
+\item Manage the computer infrastructure to produce forecasts and do
+  research with 3 servers and 7 virtual machines
+\item Built a web API to enable APS to retrieve forecasts for the EIM,
+  soon will move to the cloud
+\item Designed software to quickly access time-series from the forecast
+  archives
+\item Designed the next generation forecast generation software that
+  uses less memory and is parallelized across machines
+\item Make sure everything is reliable with minimal intervention
+\end{itemize}
 \end{frame}
 
 \end{document}

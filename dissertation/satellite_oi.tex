@@ -139,6 +139,65 @@ spatial resolution may prove limiting.
 Furthermore, the PSM algorithm is currently unpublished so it cannot
 be used to make operational nowcasts which is the ultimate goal of OI.
 
+\section{Correlation Parameterization}
+\label{sec:corr_param}
+Section 4 of \cref{app:satoi} describes various correlation
+parameterizations we studied.
+The semi-empirical model is essentially a relationship between the
+cloudiness as measured by the satellite and the clearness observed on
+the ground.
+Therefore, one might expect that OI with the cloudiness correlation
+parameterization essentially modifies this cloudiness to clearness
+function.
+This is in fact the case as demonstrated in
+\cref{fig:cldclr_se_419,fig:cldclr_se_615}.
+These figures also show how the spatial and empirical correlation
+parameterizations tend to broaden the curve instead of changing it's
+shape.
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{figs/cld_to_clear_Semi-Empirical_2014-04-19.pdf}
+\caption[Clearness versus Cloudiness for SE model on 4/19]{An example
+  of the cloudiness (adjusted visible albedo) to clearness (clear-sky
+  index) functions for the three correlation parameterizations for
+  2014-04-19 at 11:30 local time. Cloudiness correlation tends to
+  reshape the curve whereas the other parameterizations broaden it.}
+\label{fig:cldclr_se_419}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{figs/cld_to_clear_Semi-Empirical_2014-06-15.pdf}
+\caption[Clearness versus Cloudiness for SE model on 6/15]{An example
+  of the cloudiness (adjusted visible albedo) to clearness (clear-sky
+  index) functions for the three correlation parameterizations for
+  2014-06-15 at 13:00 local time. Cloudiness correlation tends to
+  reshape the curve whereas the other parameterizations broaden it.}
+\label{fig:cldclr_se_615}
+\end{figure}
+
+An example of the same cloudiness to clearness graphs is shown in
+\cref{fig:cldclr_ua_615}.
+The UASIBS algorithm is more complex and not a simple function
+fo the adjusted visible albedo, but each correlation parameterization
+changes this cloudiness to clearness mapping in a different way.
+Also note the undesirable ``bullseye'' like pattern in the spatial
+correlation analysis image that does not correspond with reality.
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{figs/cld_to_clear_UASIBS_2014-06-15.pdf}
+\caption[Clearness versus Cloudiness for UASIBS on 6/15]{An example
+  of the cloudiness (adjusted visible albedo) to clearness (clear-sky
+  index) functions for the three correlation parameterizations for
+  2014-06-15 at 13:00 local time with the UASIBS model. Here the
+  clear-sky index is not a relatively simple function of the adjusted
+  visible albedo. However, the correlation parameterizations still
+  adjust the cloudiness to clearness mapping in different ways.}
+\label{fig:cldclr_ua_615}
+\end{figure}
+
 
 \section{Parameter Estimation}
 \label{sec:paramopt}
@@ -180,6 +239,41 @@ give similar results after performing OI.
 If in the future the semi-empirical model is chosen as the background model
 for an OI based routine, a more thorough investigation into why OI is
 insensitive to these parameters is warranted.
+
+
+\section{Image Position Errors}
+Section 5 of \cref{app:satoi} describes how errors in the satellite
+image position relative to the ground sensors is corrected by
+minimizing the MSE of the OI analysis.
+These location errors primarily effect OI with the cloudiness
+correlation parameterization.
+This correction is not perfect and does not always work as intended.
+An example of a failure of this method for the semi-empirical model is
+shown in \cref{fig:parallax_err}.
+
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{figs/cld_to_clear_Semi-Empirical_2014-06-11.pdf}
+\caption[An example of a failure of the geolocation correction]{
+  An example on 2014-06-11 at 15:00 where the geolocation correction
+  for the cloudiness correlation parameterization and the
+  semi-empirical model fails. The large, positive slope in the
+  cloudiness to clearness graph is indicative of this failure since it
+  does not make physical sense.}
+\label{fig:parallax_err}
+\end{figure}
+
+The cloudiness to clearness plots discussed in \cref{sec:corr_param}
+may provide a method to detect when these location errors occur.
+The large positive slope in the cloudiness to clearness plot
+essentially indicates that a higher reflectivity as seen by the
+satellite indicates fewer clouds.
+This of course is highly unlikely and is an indication that the MSE
+location correction was insufficient.
+A better method to correct for position errors may take into account
+both the slope of the adjusted visible albedo to clear-sky index
+mapping and the MSE of the OI analysis.
 
 \section{Future Work}
 Much can be done to extend the work in \cref{app:satoi}.

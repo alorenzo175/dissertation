@@ -1,9 +1,10 @@
-\chapter{FUTURE WORK WITH DATA ASSIMILATION AND MACHINE LEARNING}
+\chapter{FUTURE WORK}
 \label{chap:satfx}
 
 
 
 \section{Satellite Image Forecasts}
+\label{sec:satellite_fx}
 
 \Cref{chap:satoi} and \cref{app:satoi} present a way in which a
 nowcast of irradiance can be improved using data assimilation
@@ -40,7 +41,7 @@ maintained, calibrated, and report high resolution data.
 Other sites such as those in the RAWS network provide hourly
 irradiance values and may lack routine maintainence.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{figs/azmap.pdf}
 \vspace{-3em}
@@ -89,12 +90,73 @@ with 0.5 km resolution satellite estimates and 300 sensors from a 50
 member (or larger) ensemble is a computationally daunting task.
 Initial research into the local ensemble transform Kalman filter to
 reduce the computational demands is promissing \citep{Hunt2007}.
-Still, this problem will likely require use of a high performance
-computing cluster and specialized compute hardware such as GPUs or
-coprocessors.
+Still, producing these forecasts operationally will likely require use
+of a high performance computing cluster and specialized compute
+hardware such as GPUs or coprocessors.
+
+\section{Cloud Data Assimilation in WRF}
+
+Forecasts produced by the Weather Research and Forecasting (WRF)
+numerical weather model at the University of Arizona tend to lack
+clouds.
+Given the large area coverage that satellite images provide, it is
+natural to consider assimilating clouds from satellite images into the
+WRF model.
+This is a nontrivial task because the model does not produce clouds
+directly and the errors in cloud properties derived from satellite
+images can be difficult to estimate.
+Previous work has had some success by comparing the WRF cloud fields
+and satellite imagery to modify the water vapor variable in WRF
+\citep{Mathiesen2013}.
+This is a good starting point for future work, but ideally other
+properties of the cloud such as the ice and water content, depth,
+etc.\ would be accounted for.
+
+\section{Ensemble WRF Forecasting}
+
+An ensemble of WRF forecasts, similar to the ensemble of satellite
+forecasts discussed in \cref{sec:satellite_fx}, may produce better
+forecasts by spanning more of the solution space.
+This is regularly done at operation forecasting centers.
+Currently, UA-WRF is run about six times a day with different initial
+conditions based on the 0Z, 6Z, and 12Z GFS and NAM forecasts.
+This produces a multi-physics, time-lagged ensemble.
+Additional ensemble members can be produced by varying the various
+parameterizations in the model such as the microphysics and planetary
+boundary layer schemes.
+This will require study of model performance differences with
+different schemes to ensure ensemble members have a resonable spread
+to avoid wasting computation on members that always produce the same
+forecast.
 
 \section{Intelligent Forecast Fusion}
 
+As mentioned in \cref{chap:intro}, one eventual goal is to combine
+different types of forecasts taking into account their relative
+accuracies at different time horizons into one unified forecast.
+This unified forecast would predict future vales from one minute in
+the future out to seven days combining persistence, network,
+satellite, and numerical weather forecasts.
+The main challenges to acheiving this goal are deciding the time
+horizon where one forecast ends and another begins and ensuring the
+forecast is consistent over this transition.
+
+One technique to produce this fused forecast is compute a weighted sum
+of all the forecasts where the weights are dependent on the forecast
+horizon.
+Then the challenge becomes choosing the weights.
+Ideally, these weights would be based on the errors in the forecasts
+at different time horizons.
+The errors can be calculated using a year of past data and forecasts,
+but the errors will vary depending on the weather and season.
+One way to account for this may be to establish categories such as
+clear days, days with high thin clouds, etc.\ and compute errors for
+each category.
+Then, one just determines the category for the day and applies the
+weights based on the category.
+In some sense, this is an analog method.
+Another option may be to use machine learning techniques to determine
+the weights between forecasts.
 
 %%% Local Variables:
 %%% mode: latex

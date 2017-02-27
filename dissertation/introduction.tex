@@ -62,6 +62,15 @@ little bit about WRF
 
 \section{This Dissertation in Brief}
 
+\Cref{fig:bullshitplot} shows theoretical estimates of
+forecast errors as a function of forecast horizon created near the
+start of this dissertation work.
+This dissertation works to analyze forecasting methods and measure
+their relative errors as a function of forecast horizon in order to
+produce the best forecasts for solar power in the Southwest.
+\Cref{fig:newshitplot} shows the culmination of this work.
+The dashed lines will beg studied in future work.
+
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{figs/timehorizon.pdf}
 \caption[Irradiance forecast errors across forecast horizons]{A
@@ -76,13 +85,65 @@ little bit about WRF
   the best forecast at all horizons. The persistence and network
   forecasts will be discussed in \Cref{chap:network} and the satellite
   image points will be discussed in \Cref{chap:satoi}.}
-\label{fig:bullshitplot}
+\label{fig:newshitplot}
 \end{figure}
 
+The specific forecasting methods studied in this dissertation rely on
+a network of irradiance sensors.
+A network with sufficient density and time resolution did not exist in
+Tucson at the start of this dissertation work, so we set out to design
+inexpensive sensors and to deploy them.
+The design and deployment of the network is described in
+\cref{chap:sens_net}.
+For the period of April to July 2014, we collected data from about 50
+custom sensors and rooftop PV systems to use in subsequent studies.
+
+With this irradiance network data, the first forecasting methodology
+we implemented and analyzed relies only on data from the network.
+This forecast is labeled as network in \cref{fig:newshitplot}.
+On average this forecast shows a skill improvment of 20\% over a
+reference persistence forecast.
+The network forecast also nicely transitions from improving upon a
+clear-sky persistence forecast at very short forecast horizons and an
+area or time average persistence at longer horizons.
+
+While analyzing this network forecast, we also carefully analyzed
+various types of persistence forecasts to understand how the network
+forecast works.
+We found that smoother forecasts, or those with lower variance as
+compared to the observations, may seem to perform better than
+forecasts with higher variance when error metrics are considered in
+isolation.
+Using a Taylor diagram, we show that network forecasts transition from
+matching the observation's variance to essentially becoming an area
+average persistence forecast after about 20 minutes.
+
+With short-term forecasts covered by the network forecasts, we began
+studying forecasts derived from satellite images.
+A number of algorithms exist that convert images of the tops of clouds
+from geostationary satellites to images of irradiance on the ground.
+Naturally, this conversion from cloud top brightness to the amount of
+radiation that passes through clouds is error prone.
+We found that these satellite derived irradiance estimates from a
+current image (pink square on left axis of \cref{fit:newshitplot}),
+before any forecasting is involved, had errors nearly as large as
+always assuming a clear sky.
+It is unlikely that producing a forecast from such a nowcast would
+reduce errors, so satellite derived forecasts would quickly become
+worse than a clear-sky forecast, at least in terms of RMSE.
+Thus, in order to produce high quality forcasts from satellite derived
+irradiance images, we first improved the satellite derived irradiance
+nowcasts.
+
+Better satellite derived irradiance nowcasts were accomplised.
 
 
 
-%%% Local Variables:
+
+
+
+
+%%% Local Variables:ah
 %%% mode: latex
 %%% TeX-master: "dissertation"
 %%% End:

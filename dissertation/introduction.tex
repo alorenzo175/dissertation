@@ -16,10 +16,10 @@ As shown in \Cref{fig:solarinstall}, this growth has been steady since
 \label{fig:solarinstall}
 \end{figure}
 
-Solar irradiance is the fuel that drives all solar power plants.
+Sunlight is the fuel that drives all solar power plants.
 Unlike sources of fuel for conventional power generators like coal or
-natural gas, the solar resource is highly variable due to chaotic
-nature fo the weather.
+natural gas, the solar resource is highly variable due to the chaotic
+nature of the weather.
 This variability of the solar resource leads to uncertainty at the
 electric utility and increases management costs \citep{Joskow2011}.
 Forecasts help utilities manage the variability in a number of ways
@@ -28,10 +28,34 @@ battery storage \citep{Cormode2015}.
 Ultimately, better forecasts increase the amount of solar power that
 utilties add to the grid.
 
-This dissertation will explore solar irradiance forecasting techniques
+An example of the variability that a 28 MW power plant experiences due
+to clouds is shown in \cref{fig:variability_example}.
+The power plant start producing power near sunrise, and reaches it's
+peak power output of 28 MW in a few hours.
+However, clouds begin moving over the plant in the afternoon causing
+large fluctuations in the power.
+Ramps (change in power per time) as large as 25 MW occur in a span of
+5 minutes.
+This means the utility needs to be have generation standing by to
+provide the power then a cloud passes over the plant and turn off
+quickly when the power returns in order to always match the
+electricity load and generation.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=.9\textwidth]{figs/avalon_ramps.pdf}
+\caption[Variable power output of a 28 MW solar power plant]{
+Power output of a 28 MW power plant near Tucson, AZ on a variable
+day. Changes in power as large as 25 MW can occur in a span of only 5
+minutes. This variability stresses the grid, but can be handled with
+proper forecasting.}
+\label{fig:variability_example}
+\end{figure}
+
+This dissertation will explore solar forecasting techniques
 that incorporate data from a ground sensor network.
 First, the current state of solar power in the Southwest US and a
-brief overview of general irradiance forecasting methods will be
+brief overview of general solar forecasting methods will be
 discussed. Then, a brief overview of solar irradiance forecasting
 methods will be presented. Finally, a summary of the work in this
 dissertation will be proivded.
@@ -124,65 +148,153 @@ Other smart grid technologies such as energy storage and time of use
 rates will also play a critical role in maitaining the reliability of
 the future grid.
 
+The remainder of this dissertation will focus on the primary input to
+solar power plants: sunlight.
+We will specifically refer to solar irradiance or the amount of
+sunlight in a given area that can perform useful work.
+
 \section{Solar Irradiance Forecasting}
-nowcasting DG
+As mentioned above, the solar irradiance that reaches the Earth's
+surface is variable.
+The first obvious source of variability is the diurnal cycle due to
+the movement of the sun through the sky.
+The second major source of variability is due to clouds blocking light
+from the sun from reaching the surface of the Earth.
+Aerosol, dust particles, and water vapor in the atmosphere can also
+reduce sunlight, although they often only account for a small
+reduction unless there is a dust storm or dense smog.
 
-Why?
+There are three primary classification of the radiation that reaches
+the Earth's surface as shown in \cref{fig:irradiance_components}.
+The first is the radiation that comes in a straight path directly from
+the sun called direct irradiance.
+The direct irradiance that strikes the earth at a normal angle is
+called the direct normal irradiance (DNI).
+Light can also reach the surface by being scattered in the atmosphere
+by clouds or aerosols and is referred to as diffuse irradiance.
+The total diffuse irradiance that strikes a horizontal surface on the
+Earth is referred to as the diffuse horizontal irradiance (DHI).
+The sum of the direct and diffuse irradiance is referred to as the
+global irradiance, and the total direct and diffused irradiance on a
+horizontal surface is called the global horizontal irradiance (GHI).
 
-Variable solar power plant fig
-\begin{figure}[h]
-\includegraphics[width=\textwidth]{figs/avalon_ramps.pdf}
-\end{figure}
+The majority of solar power plants are non-concentrating systems that
+collect both direct and diffuse radiation, thus we will focus on
+techniques that forecast GHI.
+Furthermore, we are interested in producing forecasts that will,
+after being converted to solar power forecasts, be used to maintain
+grid reliability and for power market trading.
+Thus, we will focus on forecasts that forecast the irradiance now out
+to the irradiance a week from now.
 
-other techniques
+Forecasting techniques are often compared based on the range of
+forecast horizons where they outperform a reference forecast as shown
+in \cref{fig:fxhoriz}.
+This reference can be a persistence forecast that assumes the
+irradiance in the future will be the same as it is currently or a
+forecast based on climatology.
 
-little bit about WRF
-
-\begin{figure}[h]
-\subfloat{\includegraphics[width=0.5\textwidth]{figs/wrf_ghi.png}}
-\hspace{-.5em}
-\subfloat{\includegraphics[width=0.5\textwidth]{figs/wrf_wind.png}}
-\end{figure}
-
-
-\begin{figure}[h]
+\begin{figure}[tbh]
 \includegraphics[width=\textwidth]{figs/fxhoriz.pdf}
 \caption[Forecast horizon for various forecast types]{The optimal
   forecast horizons for various types of short-term forecasts. This
-  dissertation will focus on network and satellite forecasts.}
+  dissertation will focus on network and satellite forecasts. NWP
+  refers to numerical weather predictions.}
 \label{fig:fxhoriz}
 \end{figure}
+
+Cloud camera forecasts have been shown to outperform persistence
+forecasts at time horizons from 1? minute to 30 minutes \citep{}.
+These forecasts are produced using estimates of cloud location and
+thickness from a camera with a fisheye lens pointed at the sky.
+A number of active forecasts ....
+
+Statistical forecasts are those that rely on measured irradiance data.
+Many types of persistence forecasts fall into this category.
+Other techniques include ARIMA, ARMA, lasso, ANN, etc
+
+Network forecasts are a type of statistical forecast that will be
+studied in depth in this dissertation.
+These forecasts depend data from a network of irradiance sensors
+deployed over a large area, and they outperform the reference
+persistence forecast for time horizons from 1 minute to 2 hours in the
+future.
+These forecasts are discussed further in \cref{chap:network}.
+
+Satellite forecasts are forecasts that rely on estimates of irradiance
+produced from images taken by geostationary satellites.
+These estimates can be categorized into semi-empirical and physical models.
+Semi-empirical models rely on historical data from the satellite and
+ground sensors to find the function that translates from satellite
+image pixel to observed irradiance.
+Physical models try to use the satellite images to infer properties
+about the clouds which are then used in a radiative transfer model to
+predict the sunlight that reaches the surface.
+Improvements to these irradiance estimates using groud data and data
+assimilation will be explored in \cref{chap:satoi}.
+
+Forecasts that predict irradiance for time horizons greater than a few
+hours and up to about a week rely on numerical weather predictions
+(NWP).
+These are dynamic models of the atmosphere that must parameterize
+various processes.
+One benefit is that NWP forecasts cover a large area.
+We produce NWP forecasts using the Weather Research and Forecasting
+(WRF) \citep{wrf} at the University of Arizona with customized
+settings for the Southwest.
+Example wind speed and GHI outputs from the UA-WRF model are shown in
+\cref{fig:wrf}.
+\Cref{chap:future_work} has discussion of possible improvements for
+UA-WRF forecasts.
+
+\begin{figure}[h]
+\subfloat{\includegraphics[width=0.5\textwidth]{figs/wrf_wind.png}}
+\hspace{-.5em}
+\subfloat{\includegraphics[width=0.5\textwidth]{figs/wrf_ghi.png}}
+\caption[Wind speed and GHI output from UA-WRF]{Example wind speed
+  near the surface and GHI outputs from the WRF model run at the
+  University of Arizona.}
+\label{fig:wrf}
+\end{figure}
+
+There is also active research in hybrid forecasts that combine
+different forecasting techniques to improve forecasts across horizons.
+citations
 
 
 \section{This Dissertation in Brief}
 
-\Cref{fig:bullshitplot} shows theoretical estimates of
+\Cref{fig:bullshitplot} shows speculative estimates of
 forecast errors as a function of forecast horizon created near the
 start of this dissertation work.
 This dissertation works to analyze forecasting methods and measure
-their relative errors as a function of forecast horizon in order to
-produce the best forecasts for solar power in the Southwest.
+their errors as a function of forecast horizon in order to
+produce the best forecasts of solar irradiance in the Southwest.
 \Cref{fig:newshitplot} shows the culmination of this work.
-The dashed lines will beg studied in future work.
 
-\begin{figure}[h]
+\begin{figure}[tbp]
 \includegraphics[width=\textwidth]{figs/bullshit.pdf}
+\caption[Speculative errors for various forecasting
+techniques]{Speculative root mean squared errors (RMSE) for various
+  types of forecasts.}
+\label{fig:bullshitplot}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[tbp]
 \includegraphics[width=\textwidth]{figs/timehorizon.pdf}
 \caption[Irradiance forecast errors across forecast horizons]{A
   comparison of irradiance forecast root-mean squared errors (RMSE)
-  across many time horizons. The solid lines (and points) indicate
-  forecasts that will be studied in depth in this dissertation. Dashed
-  lines are based on prelimnary analysis, but have not been studied in
-  depth. Pers.\ refers to persistence, and UA-WRF refers to the
-  numerical weather models generated at the UA using the Weather
-  Research and Forecasting (WRF) model. The optimal grinding is a
-  theoretical combination of forecasts at diffferent time horizons for
-  the best forecast at all horizons. The persistence and network
-  forecasts will be discussed in \Cref{chap:network} and the satellite
-  image points will be discussed in \Cref{chap:satoi}.}
+  across many time horizons.  Pers.\ refers to persistence, and UA-WRF
+  refers to the numerical weather models generated at the UA using the
+  Weather Research and Forecasting (WRF) model. The intelligent fusion
+  is a theoretical combination of forecasts at diffferent time
+  horizons for the best forecast at all horizons.  The solid lines
+  (and points) indicate forecasts that will be studied in depth in
+  this dissertation. Dotted lines are based on prelimnary analysis,
+  but have not been studied in depth.  Dashed lines are forecasting
+  techniques that will be studied in future work.  The persistence and
+  network forecasts will be discussed in \Cref{chap:network} and the
+  satellite image points will be discussed in \Cref{chap:satoi}.}
 \label{fig:newshitplot}
 \end{figure}
 
@@ -190,49 +302,54 @@ The specific forecasting methods studied in this dissertation rely on
 a network of irradiance sensors.
 A network with sufficient density and time resolution did not exist in
 Tucson at the start of this dissertation work, so we set out to design
-inexpensive sensors and to deploy them.
+and deploy inexensive sensors.
 The design and deployment of the network is described in
 \cref{chap:sens_net}.
 For the period of April to July 2014, we collected data from about 50
 custom sensors and rooftop PV systems to use in subsequent studies.
+All data was detrended to clear-sky index using the expectation of the
+output of each sensor on a clear day.
 
-\begin{figure}[h]
+\begin{figure}[htb]
 \includegraphics[width=\textwidth]{figs/sensdeploy.jpg}
+\caption{Picture of a sensor deployment.}
 \end{figure}
-
 
 With this irradiance network data, the first forecasting methodology
 we implemented and analyzed relies only on data from the network as
 described in \cref{chap:network}.
 This forecast is labeled as network in \cref{fig:newshitplot}.
-On average this forecast shows a skill improvment of 20\% over a
-reference persistence forecast.
-The network forecast also nicely transitions from improving upon a
-clear-sky persistence forecast at very short forecast horizons and an
-area or time average persistence at longer horizons.
 
-\begin{figure}[h]
+\begin{figure}[htb]
 \includegraphics[width=\textwidth]{figs/leading_sens.pdf}
+\caption[One sensor predicting the output of another]{An example of
+  the output of sensor 19 predicting the output of sensor 31 with a
+  roughly 8 minute lead time. This type of correlation is the basis
+  for the network forecasts.}
+\label{fig:19leading31}
 \end{figure}
 
-\begin{figure}[h]
+The basic idea behind this type of forecast is depicted in
+\cref{fig:19leading31} where the output of sensor 19 can predict what
+the output of sensor 31 will be in 8 minutes.
+To generate forecast in practice, we first collect data from the
+sensors and interpolate between them to produce a kind of cloud map as
+shown in \cref{fig:clearmap}.
+Then, using a vector representing the cloud motion, we can move this
+map to produce a forecast at any point.
+The errors for this type of forecast were studied in depth and a
+sample of those errors is shown in \cref{table:network_errors}.
+While this method has many paths to improvement, forecasts produced in
+this way outperform a persistence forecast by 20\% on average.
+
+\begin{figure}[hbp]
 \centering
 \includegraphics[width=0.96\textwidth]{figs/clearmap.pdf}
-\caption{An example interpolated map of clear-sky index on 5/19/14 near noon is shown in a). Using the estimated cloud motion vectors this map is shifted according to desired forecast horizon as shown in b). Then, samples from this shifted map are taken to as the forecasted clear-sky index for a particular location. The white space at bottom and left of b) is filled in with the average clear-sky index of all sensors at the time the forecast is generated. The red star indicates the sensor that was used to evaluate forecasts.}
+\caption[Illustration of the network forecast methodology]{An example
+  interpolated map produced from the sensor network data is shown in
+  a). Using an estimated cloud motion vector, this map is shifted
+  according the the deed forecast horizon as shown in b).}
 \label{fig:clearmap}
-\end{figure}
-
-\begin{figure}[t]
-\includegraphics[width=\textwidth]{figs/taylor_diagram.pdf}
-\caption{Taylor diagram for clear-sky index persistence (red), spatially-averaged persistence (yellow), 5-min time-averaged persistence (green), and network (light blue) forecasts for 1 min (circle), 3 min (triangle), 7 min (diamond), 30 min (square), and 120 min (pentagon) forecast horizons. The black dashed line indicates the standard deviation of the data. Solid contours around the observations point are lines of constant CRMSE. Forecasts for clear-sky index were used so all quantities are dimensionless. At the 120 min forecast horizon, the spatially-averaged persistence and network points overlap. Network forecasts start with a standard deviation near that of the measurements, but this decreases at longer time horizons as the network forecast begins to resemble spatially-averaged persistence.}
-\label{fig:taylor}
-\end{figure}
-
-\begin{figure}[t]
- \centering
- \includegraphics[width=0.9\textwidth]{figs/missing.pdf}
- \caption{RMSE vs forecast horizon on May 19, 2014 for network forecasts made with all the sensors in the network (blue) and with one upwind sensor removed (red), along with a spatially-averaged persistence forecast (yellow). The dip at 7 min for the forecast using the full network illustrates that properly placed upstream sensors do improve forecasts over a simple spatial average.}
-\label{fig:circuitbreak}
 \end{figure}
 
 \begin{sidewaystable}[p]
@@ -252,22 +369,42 @@ FH &  rMAE (\%) &  MAE (W/m$^2$) &  MBE (W/m$^2$) &  rRMSE (\%) &  RMSE (W/m$^2$
 120 min &     17.02 &         106.51 &          -2.01 &      29.20 &          172.45 &           19.58 \\
 \bottomrule
 \end{tabular}
-\label{table:network_errors_cloudy}
+\label{table:network_errors}
 \end{sidewaystable}
 
-
-
+\begin{figure}[htb]
+ \centering
+ \includegraphics[width=0.9\textwidth]{figs/missing.pdf}
+ \caption[Example of a sensor's influence on network forecasts]{RMSE vs forecast horizon on May 19, 2014 for network forecasts made with all the sensors in the network (blue) and with one upwind sensor removed (red), along with a spatially-averaged persistence forecast (yellow). The dip at 7 min for the forecast using the full network illustrates that properly placed upstream sensors do improve forecasts over a simple spatial average.}
+\label{fig:circuitbreak}
+\end{figure}
 
 While analyzing this network forecast, we also carefully analyzed
 various types of persistence forecasts to understand how the network
 forecast works.
+\Cref{fig:circuitbreak} shows that network forecasts do incorporate
+data from the sensors to improve errors, but at some times the errors
+in the network forecast closely resembles the errors of persistence forecasts.
 We found that smoother forecasts, or those with lower variance as
 compared to the observations, may seem to perform better than
 forecasts with higher variance when error metrics are considered in
 isolation.
-Using a Taylor diagram, we show that network forecasts transition from
-matching the observation's variance to essentially becoming an area
-average persistence forecast after about 20 minutes.
+Using the Taylor diagram shown in \cref{fig:taylor}, we show that
+network forecasts transition from matching the observation's variance
+to essentially becoming an area average persistence forecast after
+about 20 minutes.
+More details on how to interpret this diagram are described in
+\cref{chap:network}.
+Thus, we claim that network forecasts are an improvement over spatial
+or time averaged persistence forecasts even if they may have similar
+RMSE values.
+
+\begin{figure}[htbp]
+\includegraphics[width=\textwidth]{figs/taylor_diagram.pdf}
+\caption[Taylor diagram for the network and various persistence forecasts]{Taylor diagram for clear-sky index persistence (red), spatially-averaged persistence (yellow), 5-min time-averaged persistence (green), and network (light blue) forecasts for 1 min (circle), 3 min (triangle), 7 min (diamond), 30 min (square), and 120 min (pentagon) forecast horizons. The black dashed line indicates the standard deviation of the data. Solid contours around the observations point are lines of constant CRMSE. Forecasts for clear-sky index were used so all quantities are dimensionless. At the 120 min forecast horizon, the spatially-averaged persistence and network points overlap. Network forecasts start with a standard deviation near that of the measurements, but this decreases at longer time horizons as the network forecast begins to resemble spatially-averaged persistence.}
+\label{fig:taylor}
+\end{figure}
+
 
 With short-term forecasts covered by the network forecasts, we began
 studying forecasts derived from satellite images.

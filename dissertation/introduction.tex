@@ -34,22 +34,50 @@ brief overview of forecasting methods will be discussed.
 \section{State of Solar Power in the Southwest}
 duck curve
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figs/duckcurves.png}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figs/sveri_heat.png}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figs/ua_heat.png}
+\end{figure}
+
 a bit of SVERI analysis
 
 how much solar total?
 percentage of load?
 
-nice heatmap
-
-DG and visibility of DG
+DG and visibility of DG, 1GW not precise because hard to know
 
 
 \section{Solar Irradiance Forecasting}
 nowcasting DG
 
+Why?
+
+Variable solar power plant fig
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{figs/avalon_ramps.pdf}
+\end{figure}
+
 other techniques
 
 little bit about WRF
+
+\begin{figure}[h]
+\subfloat{\includegraphics[width=0.5\textwidth]{figs/wrf_ghi.png}}
+\hspace{-.5em}
+\subfloat{\includegraphics[width=0.5\textwidth]{figs/wrf_wind.png}}
+\end{figure}
+
 
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{figs/fxhoriz.pdf}
@@ -70,6 +98,10 @@ their relative errors as a function of forecast horizon in order to
 produce the best forecasts for solar power in the Southwest.
 \Cref{fig:newshitplot} shows the culmination of this work.
 The dashed lines will beg studied in future work.
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{figs/bullshit.pdf}
+\end{figure}
 
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{figs/timehorizon.pdf}
@@ -98,6 +130,11 @@ The design and deployment of the network is described in
 For the period of April to July 2014, we collected data from about 50
 custom sensors and rooftop PV systems to use in subsequent studies.
 
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{figs/sensdeploy.jpg}
+\end{figure}
+
+
 With this irradiance network data, the first forecasting methodology
 we implemented and analyzed relies only on data from the network as
 described in \cref{chap:network}.
@@ -107,6 +144,53 @@ reference persistence forecast.
 The network forecast also nicely transitions from improving upon a
 clear-sky persistence forecast at very short forecast horizons and an
 area or time average persistence at longer horizons.
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{figs/leading_sens.pdf}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.96\textwidth]{figs/clearmap.pdf}
+\caption{An example interpolated map of clear-sky index on 5/19/14 near noon is shown in a). Using the estimated cloud motion vectors this map is shifted according to desired forecast horizon as shown in b). Then, samples from this shifted map are taken to as the forecasted clear-sky index for a particular location. The white space at bottom and left of b) is filled in with the average clear-sky index of all sensors at the time the forecast is generated. The red star indicates the sensor that was used to evaluate forecasts.}
+\label{fig:clearmap}
+\end{figure}
+
+\begin{figure}[t]
+\includegraphics[width=\textwidth]{figs/taylor_diagram.pdf}
+\caption{Taylor diagram for clear-sky index persistence (red), spatially-averaged persistence (yellow), 5-min time-averaged persistence (green), and network (light blue) forecasts for 1 min (circle), 3 min (triangle), 7 min (diamond), 30 min (square), and 120 min (pentagon) forecast horizons. The black dashed line indicates the standard deviation of the data. Solid contours around the observations point are lines of constant CRMSE. Forecasts for clear-sky index were used so all quantities are dimensionless. At the 120 min forecast horizon, the spatially-averaged persistence and network points overlap. Network forecasts start with a standard deviation near that of the measurements, but this decreases at longer time horizons as the network forecast begins to resemble spatially-averaged persistence.}
+\label{fig:taylor}
+\end{figure}
+
+\begin{figure}[t]
+ \centering
+ \includegraphics[width=0.9\textwidth]{figs/missing.pdf}
+ \caption{RMSE vs forecast horizon on May 19, 2014 for network forecasts made with all the sensors in the network (blue) and with one upwind sensor removed (red), along with a spatially-averaged persistence forecast (yellow). The dip at 7 min for the forecast using the full network illustrates that properly placed upstream sensors do improve forecasts over a simple spatial average.}
+\label{fig:circuitbreak}
+\end{figure}
+
+\begin{sidewaystable}[p]
+\centering
+\caption{Summary of error statistics for network forecasts for the 46 days with clouds. Error statistics were calculated for the entire dataset at once. Only forecasts and data with solar zenith angle less than $75^\circ$ were used. The mean irradiance was $\bar{y} = 662 \mbox{ W/m$^2$}$ and the mean clear-sky index was $\bar{k} = 0.92$.}
+\begin{tabular}{llllllll}
+\toprule
+FH &  rMAE (\%) &  MAE (W/m$^2$) &  MBE (W/m$^2$) &  rRMSE (\%) &  RMSE (W/m$^2$) &  Avg. skill (\%) \\
+\midrule
+ 1 min  &      4.96 &          30.97 &          -1.44 &      11.90 &           82.55 &           22.96 \\
+ 3 min  &      7.51 &          48.13 &          -1.39 &      15.89 &          110.46 &           23.09 \\
+ 5 min  &      9.29 &          59.59 &          -3.91 &      18.67 &          127.06 &           19.65 \\
+10 min  &     11.39 &          71.38 &          -8.59 &      22.11 &          141.44 &           18.63 \\
+20 min  &     13.23 &          82.39 &         -10.46 &      24.03 &          152.84 &           18.66 \\
+30 min  &     13.95 &          86.57 &          -7.52 &      24.49 &          154.15 &           21.21 \\
+60 min  &     15.45 &          95.59 &          -6.65 &      26.59 &          160.72 &           21.00 \\
+120 min &     17.02 &         106.51 &          -2.01 &      29.20 &          172.45 &           19.58 \\
+\bottomrule
+\end{tabular}
+\label{table:network_errors_cloudy}
+\end{sidewaystable}
+
+
+
 
 While analyzing this network forecast, we also carefully analyzed
 various types of persistence forecasts to understand how the network
@@ -126,7 +210,7 @@ from geostationary satellites to images of irradiance on the ground.
 Naturally, this conversion from cloud top brightness to the amount of
 radiation that passes through clouds is error prone.
 We found that these satellite derived irradiance estimates from a
-current image (pink square on left axis of \cref{fit:newshitplot}),
+current image (pink square on left axis of \cref{fig:newshitplot}),
 before any forecasting is involved, had errors nearly as large as
 always assuming a clear sky.
 It is unlikely that producing a forecast from such a nowcast would
@@ -135,6 +219,58 @@ worse than a clear-sky forecast, at least in terms of RMSE.
 Thus, in order to produce high quality forcasts from satellite derived
 irradiance images, we first improved the satellite derived irradiance
 nowcasts.
+
+\begin{figure}[h]
+\subfloat{\includegraphics[width=0.5435\textwidth]{figs/rawvis.png}}
+\subfloat{\includegraphics[width=0.4565\textwidth]{figs/satirr.png}}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{figs/pa.pdf}
+\caption{Visible albedo image derived from the visible channel of the
+  GOES-W satellite. Lighter colors indicate cloudier areas. The orange
+  dots represent the locations of the sensors used in this study which
+  includes both irradiance sensors and rooftop PV systems as described
+  in \cref{sec:data}. The yellow square in the center indicates the
+  location of a calibrated GHI sensor on the University of Arizona
+  campus. The image covers an area of roughly $75 \times 80$ km over
+  Tucson, AZ.}
+\label{fig:vis}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\captionsetup[subfigure]{labelformat=empty}
+\subfloat{\includegraphics[width=0.5\textwidth]{figs/uasibs_bck_ex.pdf}}
+\subfloat{\includegraphics[width=0.5\textwidth]{figs/suny_bck_ex.pdf}}
+\vspace{-1em}\\
+\subfloat{\includegraphics[width=0.5\textwidth]{figs/uasibs_anl_ex.pdf}}
+\subfloat{\includegraphics[width=0.5\textwidth]{figs/suny_anl_ex.pdf}}
+\caption{Example background (top row) and analysis (bottom row)
+  clear-sky index images using the UASIBS (left column) and SE (right
+  column) satellite image to ground irradiance models applied to the
+  visible satellite image shown in \cref{fig:vis}. Note that in this
+  case, UASIBS failed to produce many clouds. OI adds clouds to the
+  analysis and also makes the darker, clear areas even more clear.  In
+  this case, the SE model overproduces clouds. OI reduces the cloud
+  amount while keeping clouds in suitable locations.}
+\label{fig:oi_example}
+\end{figure}
+
+\begin{table}[htbp]
+  \caption{Error statistics for the NREL MIDC sensor on the University
+    of Arizona campus. The analysis was computed with only the MIDC
+    sensor withheld and averaged over the verification data set, and
+    cloudiness covariance was used. Both the
+    UASIBS and SE models show improvements and have a similar
+    analysis RMSE\@. Units are W/m$^2$.}
+\label{table:irr}
+\vspace{0.5em}
+\input{figs/ghi_err_table}
+\centering
+\end{table}
+
 
 Better satellite derived irradiance nowcasts were generated by again
 using data from the irradiance sensor network as described in
@@ -175,6 +311,7 @@ We currently run the Weather Research and Forecasting (WRF) model with
 a custom configuration for Arizona.
 Improvements in the WRF model may come from assimilating satellite
 data, data from the sensor network, or studying WRF ensembles.
+
 
 Finally, once high-quality forecasts are available for all forecast
 horizons, they can be intellgently fused to produce a single forecast

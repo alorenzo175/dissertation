@@ -1,0 +1,10 @@
+\begin{tabular}{lrrr}
+\toprule
+{} &   MBE &   MAE &  RMSE \\
+\midrule
+UASIBS Analysis   &   4.16 &  27.2 &  71.1 \\
+UASIBS Background &  20.7 &  38.8 &  98.8 \\
+SE Analysis       &  11.2 &  36.0 &  72.7 \\
+SE Background     & -86.1 & 107 & 140 \\
+\bottomrule
+\end{tabular}

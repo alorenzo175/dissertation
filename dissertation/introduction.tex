@@ -5,9 +5,10 @@ The installed capacity of solar power in the US continues to grow as a
 result of aging coal and natural gas power plants, lower costs,
 state renewable portfolio standards, and efforts to decarbonize the
 electrical grid.
-As shown in \Cref{fig:solarinstall}, this growth has been steady since 2010 and shows no signs of abating.
+As shown in \Cref{fig:solarinstall}, this growth has been steady since
+2010 and shows no signs of abating.
 
-\begin{figure}[ht]
+\begin{figure}[htb]
   \includegraphics[width=\textwidth]{figs/solar_installations.png}
   \caption[Annual installations of solar PV in the US]{Annual
     installations of solar photovoltaic (PV) systems in the
@@ -17,43 +18,102 @@ As shown in \Cref{fig:solarinstall}, this growth has been steady since 2010 and 
 
 Solar irradiance is the fuel that drives all solar power plants.
 Unlike sources of fuel for conventional power generators like coal or
-natural gas, the solar resource is highly variable due to the nature
-of the chaotic system that is weather.
+natural gas, the solar resource is highly variable due to chaotic
+nature fo the weather.
 This variability of the solar resource leads to uncertainty at the
 electric utility and increases management costs \citep{Joskow2011}.
 Forecasts help utilities manage the variability in a number of ways
 \citep{Kleissl2013,Inman2013}, including the optimal dispatch of
 battery storage \citep{Cormode2015}.
+Ultimately, better forecasts increase the amount of solar power that
+utilties add to the grid.
 
-This dissertation will explore solar irradiance forecasting at short
-time horizons (now to two hours in the future) made possible by an
-irradiance monitoring network.
+This dissertation will explore solar irradiance forecasting techniques
+that incorporate data from a ground sensor network.
 First, the current state of solar power in the Southwest US and a
-brief overview of forecasting methods will be discussed.
+brief overview of general irradiance forecasting methods will be
+discussed.
 
-\section{State of Solar Power in the Southwest}
-duck curve
+\section{State of Solar Power in the Southwest and Future Challenges}
+
+As of early 2017, members of the Southwest Variable Energy Resource
+Initiative (SVERI) have a total of 1100 MW of installed solar capacity,
+800 MW of installed wind capacity, and a peak load of 23 GW
+\citep{sveri_website}.
+Another roughly 1 GW of generation comes from distributed generation
+(DG) solar systems that are installed on residential or commercial
+rooftops.
+Heatmaps showing the time of day load, wind and solar generation, and
+wind and solar fraction of load for two years are shown in
+\cref{fig:sveri_heatmap}.
+Heatmaps for weather variables at the University of Arizona are shown
+in \cref{fig:ua_heatmap} to correlate weather to, for example, the
+abrupt decrease in load around 10/14 corresponding to the end of monsoon season.
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{figs/sveri_heat.png}
+\caption[Heatmaps of SVERI load, solar power, wind power, and
+renewable load fraction]{Time of day heatmaps of SVERI load, solar
+  power generation, wind power generation, and the fraction of load
+  served by solar and wind power. The heatmaps were generated with two
+  years of data and the white areas indicate missing data. The diurnal
+  cycle is clearly seen in the solar data, and can also be found in
+  the wind and load. A weekly cycle is also evident in the load. At
+  times in the spring when heating and cooling loads are low and their
+  is high solar generation, wind and solar power can serve up to 12\%
+  of the load.}
+\label{fig:sveri_heatmap}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{figs/ua_heat.png}
+\caption[Heatmaps of temperature, dewpoint, irradiance, and wind
+speed]{Time of day heatmaps for temperature, dewpoint, global
+  horizontal irradiance (GHI), and wind speed all measured the
+  University of Arizona in Tucson. Notable features include the many
+  clear days evident in the GHI heatmap and the beginning and end of the
+  monsoon season (when moisture from the Gulf of California moves into
+  Arizona) visible in the dewpoint heatmap.}
+\label{fig:ua_heatmap}
+\end{figure}
+
+
+Utilities in Arizona will be required to generate 15\% of their
+energy from renewable resources by 2025 \citep{rest}.
+Most of this requirement is being met with solar photovoltaic (PV)
+plants along with a few wind farms mostly installed in New Mexico.
+For the most part, utilities consider power from wind and solar power
+plants to be modifiers that reduce the total load they must serve
+instead of resources that can be controlled and dispatched.
+Utilities are then interested in what they call the net load or the
+total load minus the generation from solar and wind power plants.
+Based on projections from 2014 SVERI data, we project net load
+profiles will resemble those in \cref{fig:duckcurves}.
+Notice the large power ramps that occur in the so called duck curve in
+November.
+Dealing with these 3 GW ramps in only a few hours would cost a great
+deal if utilities rely only on the current grid technology.
+Using forecasts, utilties can better control solar and wind power
+plants and avoid some of these large ramps.
+DG systems play an important role in thise profile.
+Storage, time of use rates, in home control?/load shifting,
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{figs/duckcurves.png}
+\caption[Projected SVERI 2027 duck curves]{Net load (total load minus
+  wind and solar generation) projections for SVERI in 2027 if
+  utilities continue business as usual. The shape of the November net
+  load is referred to as a duck curve. Forecasts along with storage
+  and other policies will help utilities change how solar and wind
+  power are controlled to avoid these multi-GW ramps. Figure produced
+  as a part of the SVERI?? report?}
+\label{fig:duckcurves}
 \end{figure}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=\textwidth]{figs/sveri_heat.png}
-\end{figure}
 
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\textwidth]{figs/ua_heat.png}
-\end{figure}
-
-a bit of SVERI analysis
-
-how much solar total?
-percentage of load?
 
 DG and visibility of DG, 1GW not precise because hard to know
 

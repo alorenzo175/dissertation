@@ -25,8 +25,10 @@ electric utility and increases management costs \citep{Joskow2011}.
 Forecasts help utilities manage the variability in a number of ways
 \citep{Kleissl2013,Inman2013}, including the optimal dispatch of
 battery storage \citep{Cormode2015}.
+Improvements in forecasts further reduce costs
+\citep{BrancucciMartinez-Anido2016}.
 Ultimately, better forecasts increase the amount of solar power that
-utilties add to the grid.
+utilties can add to the grid.
 
 An example of the variability that a 28 MW power plant experiences due
 to clouds is shown in \cref{fig:variability_example}.
@@ -110,7 +112,7 @@ speed]{Time of day heatmaps for temperature, dewpoint, global
 
 Utilities in Arizona are well on their way to generate 15\% of their
 energy from renewable resources by 2025 as required by the Arizona
-Renewable Energy Standard and Tariff \citep{rest}.
+Renewable Energy Standard and Tariff \citep{azrest}.
 As mentioned above, DG solar systems provide a large fraction of the
 total renewable energy generation.
 One problem utilities encounter with DG systems is that real-time
@@ -129,8 +131,8 @@ will be required for the most accurate load forecasts.
   utilities continue business as usual. The shape of the November net
   load is referred to as a duck curve. Forecasts along with storage
   and other policies will help utilities change how solar and wind
-  power are controlled to avoid these multi-GW ramps. Figure produced
-  as a part of the SVERI?? report?}
+  power are controlled to avoid these multi-GW ramps. Figure
+  reproduced from \cite{sveri_report}}
 \label{fig:duckcurves}
 \end{figure}
 
@@ -194,9 +196,12 @@ collect both direct and diffuse radiation, thus we will focus on
 techniques that forecast GHI.
 Furthermore, we are interested in producing forecasts that will,
 after being converted to solar power forecasts, be used to maintain
-grid reliability and for power market trading.
+grid reliability and for power market trading similar to
+\cite{Kaur2016}.
 Thus, we will focus on forecasts that forecast the irradiance now out
 to the irradiance a week from now.
+Reviews of solar power and irradiance forecasting can be found in
+\citep{Inman2013,Antonanzas2016}.
 
 Forecasting techniques are often compared based on the range of
 forecast horizons where they outperform a reference forecast as shown
@@ -214,15 +219,26 @@ forecast based on climatology.
 \label{fig:fxhoriz}
 \end{figure}
 
+Cloud camera forecasts rely on a camera that is pointed at the sky and
+usually includes a wide-angle lens \citep{Urquhart2013}.
+Such forecasts use these images to attempt to detect and classify
+clouds \citep{Ghonima2012}.
 Cloud camera forecasts have been shown to outperform persistence
-forecasts at time horizons from 1? minute to 30 minutes \citep{}.
-These forecasts are produced using estimates of cloud location and
-thickness from a camera with a fisheye lens pointed at the sky.
-A number of active forecasts ....
+forecasts at time horizons from under 1 minute to 15 minutes
+\citep{Yang2014a}.
+These types of forecasts are useful for managing an individual power
+plant in near real-time.
 
-Statistical forecasts are those that rely on measured irradiance data.
-Many types of persistence forecasts fall into this category.
-Other techniques include ARIMA, ARMA, lasso, ANN, etc
+Statistical forecasts are those that rely on measured irradiance data,
+at least for our purposes.
+We include many techniques in this category include auto-regressive
+models \citep{Yang2014}, artificial neural networks
+\citep{Gutierrez-Corea2016} and other machine learning algorithms
+\citep{Pedro2012,Mellit2008}, and the lasso \citep{Yang2015a}.
+Persistence forecasts also fall into this category.
+These techniques also span a broad range of forecast horizons.
+Some provide forecasts for 20 seconds to 10 minutes while others may
+produce forecast for many days in advance.
 
 Network forecasts are a type of statistical forecast that will be
 studied in depth in this dissertation.
@@ -237,10 +253,10 @@ produced from images taken by geostationary satellites.
 These estimates can be categorized into semi-empirical and physical models.
 Semi-empirical models rely on historical data from the satellite and
 ground sensors to find the function that translates from satellite
-image pixel to observed irradiance.
+image pixel to observed irradiance \citep{Perez2013a}.
 Physical models try to use the satellite images to infer properties
 about the clouds which are then used in a radiative transfer model to
-predict the sunlight that reaches the surface.
+predict the sunlight that reaches the surface \citep{Miller2013}.
 Improvements to these irradiance estimates using groud data and data
 assimilation will be explored in \cref{chap:satoi}.
 
@@ -251,13 +267,13 @@ These are dynamic models of the atmosphere that must parameterize
 various processes.
 One benefit is that NWP forecasts cover a large area.
 We produce NWP forecasts using the Weather Research and Forecasting
-(WRF) \citep{wrf} at the University of Arizona with customized
-settings for the Southwest.
+(WRF) \citep{Skamarock2008} at the University of Arizona with customized
+settings for the Southwest \citep{Leuthold}.
 Example wind speed and GHI outputs from the UA-WRF model are shown in
 \cref{fig:wrf}.
 \Cref{chap:future_work} has discussion of possible improvements for
 UA-WRF forecasts.
-
+s
 \begin{figure}[h]
 \subfloat{\includegraphics[width=0.5\textwidth]{figs/wrf_wind.png}}
 \hspace{-.5em}
@@ -269,8 +285,9 @@ UA-WRF forecasts.
 \end{figure}
 
 There is also active research in hybrid forecasts that combine
-different forecasting techniques to improve forecasts across horizons.
-citations
+different forecasting techniques to improve forecasts across horizons
+\citep{Lu2015}.
+
 
 
 \section{This Dissertation in Brief}
@@ -283,7 +300,7 @@ their errors as a function of forecast horizon in order to
 produce the best forecasts of solar irradiance in the Southwest.
 \Cref{fig:newshitplot} shows the culmination of this work.
 
-\begin{figure}[tbp]
+\begin{figure}[htbp]
 \includegraphics[width=\textwidth]{figs/bullshit.pdf}
 \caption[Speculative errors for various forecasting
 techniques]{Speculative root mean squared errors (RMSE) for various
@@ -291,7 +308,7 @@ techniques]{Speculative root mean squared errors (RMSE) for various
 \label{fig:bullshitplot}
 \end{figure}
 
-\begin{figure}[tbp]
+\begin{figure}[htbp]
 \includegraphics[width=\textwidth]{figs/timehorizon.pdf}
 \caption[Irradiance forecast errors across forecast horizons]{A
   comparison of irradiance forecast root-mean squared errors (RMSE)
@@ -321,7 +338,7 @@ custom sensors and rooftop PV systems to use in subsequent studies.
 All data was detrended to clear-sky index using the expectation of the
 output of each sensor on a clear day.
 
-\begin{figure}[htb]
+\begin{figure}[htbp]
 \includegraphics[width=\textwidth]{figs/sensdeploy.jpg}
 \caption{Picture of a sensor deployment.}
 \end{figure}
@@ -331,7 +348,7 @@ we implemented and analyzed relies only on data from the network as
 described in \cref{chap:network}.
 This forecast is labeled as network in \cref{fig:newshitplot}.
 
-\begin{figure}[htb]
+\begin{figure}[htbp]
 \includegraphics[width=\textwidth]{figs/leading_sens.pdf}
 \caption[One sensor predicting the output of another]{An example of
   the output of sensor 19 predicting the output of sensor 31 with a
@@ -353,7 +370,7 @@ sample of those errors is shown in \cref{table:network_errors}.
 While this method has many paths to improvement, forecasts produced in
 this way outperform a persistence forecast by 20\% on average.
 
-\begin{figure}[hbp]
+\begin{figure}[hbtp]
 \centering
 \includegraphics[width=0.96\textwidth]{figs/clearmap.pdf}
 \caption[Illustration of the network forecast methodology]{An example
@@ -390,7 +407,7 @@ FH &  rMAE (\%) &  MAE (W/m$^2$) &  MBE (W/m$^2$) &  rRMSE (\%) &  RMSE (W/m$^2$
 \label{table:network_errors}
 \end{sidewaystable}
 
-\begin{figure}[htb]
+\begin{figure}[htbp]
  \centering
  \includegraphics[width=0.9\textwidth]{figs/missing.pdf}
  \caption[Example of a sensor's influence on network forecasts]{RMSE
@@ -425,7 +442,8 @@ or time averaged persistence forecasts even if they may have similar
 RMSE values.
 
 \begin{figure}[htbp]
-\includegraphics[width=\textwidth]{figs/taylor_diagram.pdf}
+\centering
+\includegraphics[width=.7\textwidth]{figs/taylor_diagram.pdf}
 \caption[Taylor diagram for the network and various persistence
 forecasts]{Taylor diagram for clear-sky index persistence (red),
   spatially-averaged persistence (yellow), 5-min time-averaged
@@ -448,7 +466,7 @@ With short-term forecasts covered by the network forecasts, we began
 studying forecasts derived from satellite images.
 A number of algorithms exist that convert images of the tops of clouds
 from geostationary satellites to images of irradiance on the ground.
-An example of on such conversion is shown in
+An example of one such conversion is shown in
 \cref{fig:satimage_example}.
 Naturally, this conversion from cloud top brightness to the amount of
 radiation that passes through clouds is error prone.
@@ -463,7 +481,7 @@ Thus, in order to produce high quality forcasts from satellite derived
 irradiance images, we first improved the satellite derived irradiance
 nowcasts.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
 \subfloat{\includegraphics[width=0.5435\textwidth]{figs/rawvis.png}}
 \subfloat{\includegraphics[width=0.4565\textwidth]{figs/satirr.png}}
 \caption[Satellite image and irradiance estimate]{A satellite image
@@ -485,7 +503,7 @@ sensor locations to other locations throughout the image.
 An example of improvements using OI is shown in \cref{fig:oi_example}.
 
 
-\begin{figure}[htb]
+\begin{figure}[htbp]
 \centering
 \captionsetup[subfigure]{labelformat=empty}
 \subfloat{\includegraphics[width=0.5\textwidth]{figs/uasibs_bck_ex.pdf}}
@@ -506,10 +524,13 @@ interpolation]{Example initial satellite estimate (known as the
 \label{fig:oi_example}
 \end{figure}
 
-\begin{table}[htb]
+\begin{table}[htbp]
   \caption[Optimal interpolation error metrics]{
     Error statistics for the NREL MIDC sensor on the University
-    of Arizona campus. The analysis was computed with only the MIDC
+    of Arizona campus. Background refers to the initial satellite
+    estimate and the analysis is the result of OI. UASIBS and SE are
+    two different satellite image to irradiance models.
+    The analysis was computed with only the MIDC
     sensor withheld and averaged over the verification data set, and
     cloudiness covariance was used. Both the
     UASIBS and SE models show improvements and have a similar

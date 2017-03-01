@@ -7,9 +7,7 @@ persistence forecasts \citep{Lonij2013}.
 The local electric utility, Tucson Electric Power (TEP), was interested in
 receiving these short-term forecasts in real-time.
 To generate real-time forecasts, data from sensors need to be gathered
-in real-time
-Thus we set out building the irradiance monitoring network described
-in this chapter that would report values in near real-time.
+in real-time.
 To accomplish this goal, we designed custom irradiance sensors that
 are deployed remotely and report data in real-time via cell model as
 described in \cref{sec:custom_sensors}.
@@ -98,7 +96,7 @@ The nominal 12V from the battery is routed to the circuit board with
 the OLinuXino and modem and converted to 5VDC with a circuit based on
 the LM2676 step-down regulator.
 
-The sensor is designed to accept input from either a calibrated
+The circuit board is designed to accept input from either a calibrated
 pyranometer (Apogee SP-212) or an inexpensive silicon photodiode
 (Osram BPW34) as discussed in \cref{sec:photodiode}.
 A trans-impedance amplifier (MCP602) with appropriate gain is used to
@@ -107,7 +105,7 @@ convert the current from the photodiode into a measurable voltage.
 The voltage from the sensor (or sensor + trans-impedance amplifier) is
 converted to a digital signal with the MCP3201 12-bit
 analog-to-digital converter (ADC).
-This digital signal is then read the OLinuXino at regular intervals
+This digital signal is then read by the OLinuXino at regular intervals
 from the GPIO pins.
 An additional 4 channel 12-bit ADC (MCP3204) is used to convert other
 values such as enclosure temperature (measured by an LM61) and battery
@@ -228,7 +226,8 @@ Sustainability, we are collecting 5 minute averaged power data from
 over 70 systems in the Tucson area in near real-time.
 Since many inverters connect to a home owners network, we also
 explored using cheap Linux devices (Raspberry Pi) to communicate with
-inverters on the network and upload the data to a central server.
+inverters on the network and upload the data to a central server, but
+found them unreliable for constant, unmonitored operation.
 
 The electric utilities also have access to inverter data, although it
 may be delayed by days or weeks and aggregated to daily or longer values.

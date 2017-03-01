@@ -556,8 +556,8 @@ forecasting method that relies on only cloud advection.
 With a forecasting model in place, optimal interpolation can be
 extended to the Kalman filter with constantly incorporates new data
 into a forecast while also retaining information about past data.
-It is common in numerical weather prediction to use an ensemble of
-states to propogate and Kalman filter.
+It is common in numerical weather prediction to propogate and Kalman
+filter  an ensemble of states.
 An ensemble in this case also allows for each forecast to have a
 different cloud motion field which may improve the final forecasts.
 
@@ -568,13 +568,14 @@ needed.
 We currently run the Weather Research and Forecasting (WRF) model with
 a custom configuration for Arizona.
 Improvements in the WRF model may come from assimilating satellite
-data, data from the sensor network, or studying WRF ensembles.
+data, assimilation of data from the sensor network, or studying WRF
+initialization or physics ensembles.
 
 Finally, once high-quality forecasts are available for all forecast
 horizons, they can be intellgently fused to produce a single forecast
 that incorporates the best properties of each forecast methodology.
-Utilities and other stakeholders often need these fused forecasts to
-make decisions.
+Utilities and other stakeholders often need a single forecast for
+horizons from five minutes to one week to make decisions.
 
 
 %%% Local Variables:ah

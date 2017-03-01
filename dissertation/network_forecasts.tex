@@ -19,7 +19,8 @@ An illustration of this type of prediction is shown in
 output of sensor 31 with an eight minute lead time.
 
 \begin{figure}[bht]
-\includegraphics[width=\textwidth]{figs/leading_sens.pdf}
+\centering
+\includegraphics[width=.8\textwidth]{figs/leading_sens.pdf}
 \caption[Example of data from one sensor predicting the output of
 another]{An example of the output of sensor 19 (red) predicting what
   the output of the upstream sensor 31 (blue) in roughly 8
@@ -33,8 +34,8 @@ another]{An example of the output of sensor 19 (red) predicting what
 While studying and evaluating the forecasts described in
 \cref{app:network}, we learned how important it is to understand
 forecast error metrics and their limitations.
-Here we present an examples of possibly misleading error metrics to
-warn those evaluating forecasts to be careful.
+Here we present an examples of possibly misleading error metrics as a
+warning to those evaluating forecasts to exercise care.
 
 We will evaluate each metric on forecasts of clear-sky index to remove
 the time of day weighting that is implicit when computing errors for
@@ -134,7 +135,7 @@ for a description of each metric.}
 \subfloat[Day 2\label{table:fx_errs_day2}]{\input{figs/Day_2_err_table}}
 \end{table}
 
-If given Forecast B or C on Day2, a user might consider it to be a
+If given Forecast B or C on Day 2, a user might consider it to be a
 forecast of a clear day, although with possibly more aerosols in the
 air reducing the irradiance slightly from the expected clear-sky
 profile.

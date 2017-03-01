@@ -26,8 +26,10 @@ should only rely on data present at the current time and take a
 reasonable amount of time to compute.
 
 \subsection{UASIBS Model}
+
 The University of Arizona Solar Irradiance Based on Satellite (UASIBS)
-model was developed at by Chang Ki Kim in 2015 \citep{Kim2016}.
+model was developed at the University of Arizona by Chang Ki Kim in
+2015 \citep{Kim2016}.
 This model relies on the infrared images of the GOES-W satellite to
 find completely overcast areas based on a comparison of the brightness
 temperature difference (difference between 10.7 and 3.9 $\mu$m
@@ -38,7 +40,7 @@ the 16 pixels in the 4km $\times$ 4km box have a cloud.
 Once pixels are classified as cloudy or clear, a look-up table is
 employed to find the atmospheric transmittance and GHI on the ground
 for each pixel.
-A number of look-up tables are generated from using Goddard Space
+A number of look-up tables are generated using the Goddard Space
 Flight Center Radiative Transfer Model: one for clear sky
 accounting for aerosols, one for high level clouds, one for mid level
 clouds, one for low clouds, and one for cumulus clouds.
@@ -47,16 +49,15 @@ The look-up table approach to calculate transmittance is limited.
 First, a number of climatological averages, specific to Tucson, are
 used in the calculations of the look-up tables including AOD and
 ozone.
-Instead, near real-time analysis and forecasts of AOD and ozone are
-available from Monitoring atmospheric composition and climate (MACC)
-project \citep{Morcrette2009} and a ground truth measurement of AOD is
-available from the Tucson AERONET site \citep{Holben1998}.
+Near real-time analysis and forecasts of AOD and ozone may improve
+estimates.
+The Monitoring Atmospheric Composition and Climate (MACC) project
+\citep{Morcrette2009} has such analysis and forecasts of AOD and ozone
+available, and a ground truth measurement of AOD is available from the
+Tucson AERONET site \citep{Holben1998}.
 Another limitation is that only ten values of the solar zenith angle
 are used which introduces artificial steps noticable in the output
 GHI.
-With newer, fast radiative transfer codes, perhaps the look-up table
-approach can be replaced with a direct call to a radiative transfer
-code to avoid this issue.
 
 \begin{figure}[h]
 \centering
@@ -70,16 +71,17 @@ and 0.8. OI helps correct this somewhat. (Reproduced from
 \label{fig:uasibs_scatter}
 \end{figure}
 
-The cloud detection methodology may also have issues when classfying
-clouds to use one of the look-up tables.
+The cloud detection methodology may also classify a cloud as the wrong
+type leading to the use of the wrong look-up table.
 This is illustrated in Fig.\@ 4 of \cref{app:satoi} reproduced in
 \cref{fig:uasibs_scatter}.
 There is a distinct lack of images with clear-sky index between 0.6
 and 0.8 for UASIBS (blue $\times$s) that requires further
 investigation to determine if it is a problem with the look-up tables
 themselves or using the wrong look-up table.
-Removing the classification of cloud type and calculating the
-radiative transfer directly will likely solve this issue.
+With newer, fast radiative transfer codes, perhaps the look-up table
+approach can be replaced with a direct call to a radiative transfer
+code to avoid many of these limitations.
 
 \subsection{Semi-Empirical Model}
 The semi-empirical model used and described in \cref{app:satoi} is
@@ -122,7 +124,7 @@ A good overview of semi-empirical and physical methods can be found in
 \cite{Perez2013a,Miller2013}.
 
 One publicly available dataset is the GOES Surface and Insolation
-Products (GSIP).
+Products (GSIP) \citep{Sengupta2010}.
 GSIP provides hourly irradiance estimates at a resolution of 1/8
 degree.
 OI is unlikely to perform well with this low spatial resolution
@@ -131,21 +133,20 @@ resolved and many sensors are contained in a single grid cell.
 
 The National Renewable Energy Laboratory (NREL) is developing a new
 algorithm called the Physical Solar Model (PSM) that has been used to update
-the National Solar Radiation Database (NSRDB).
+the National Solar Radiation Database (NSRDB) \citep{Sengupta2014}.
 NSRDB provides 30 minute 4km $\times$ 4km data covering the US (and
 some other countries) from 1998 to 2015.
 One could explore how OI performs for an NSRDB background, but the low
 spatial resolution may prove limiting.
-Furthermore, the PSM algorithm is currently unpublished so it cannot
-be used to make operational nowcasts which is the ultimate goal of OI.
+Furthermore, the PSM algorithm is still in development.
 
 \section{Correlation Parameterization}
 \label{sec:corr_param}
 Section 4 of \cref{app:satoi} describes various correlation
 parameterizations we studied.
-The semi-empirical model is essentially a relationship between the
-cloudiness as measured by the satellite and the clearness observed on
-the ground.
+The semi-empirical model is essentially a polynomial relationship
+between the cloudiness as measured by the satellite and the clearness
+observed on the ground.
 Therefore, one might expect that OI with the cloudiness correlation
 parameterization essentially modifies this cloudiness to clearness
 function.
@@ -157,7 +158,7 @@ shape.
 
 \begin{figure}[p]
 \centering
-\includegraphics[width=\textwidth]{figs/cld_to_clear_Semi-Empirical_2014-04-19.png}
+\includegraphics[width=.9\textwidth]{figs/cld_to_clear_Semi-Empirical_2014-04-19.png}
 \caption[Clearness versus Cloudiness for SE model on 4/19]{An example
   of the cloudiness (adjusted visible albedo) to clearness (clear-sky
   index) functions for the three correlation parameterizations for
@@ -168,7 +169,7 @@ shape.
 
 \begin{figure}[p]
 \centering
-\includegraphics[width=\textwidth]{figs/cld_to_clear_Semi-Empirical_2014-06-15.png}
+\includegraphics[width=.9\textwidth]{figs/cld_to_clear_Semi-Empirical_2014-06-15.png}
 \caption[Clearness versus Cloudiness for SE model on 6/15]{An example
   of the cloudiness (adjusted visible albedo) to clearness (clear-sky
   index) functions for the three correlation parameterizations for
@@ -177,17 +178,17 @@ shape.
 \label{fig:cldclr_se_615}
 \end{figure}
 
-An example of the same cloudiness to clearness graphs is shown in
-\cref{fig:cldclr_ua_615}.
+An example of the same cloudiness to clearness graphs but for the
+UASIBS model is shown in \cref{fig:cldclr_ua_615}.
 The UASIBS algorithm is more complex and not a simple function
-fo the adjusted visible albedo, but each correlation parameterization
+of the adjusted visible albedo, but each correlation parameterization
 changes this cloudiness to clearness mapping in a different way.
 Also note the undesirable ``bullseye'' like pattern in the spatial
 correlation analysis image that does not correspond with reality.
 
 \begin{figure}[p]
 \centering
-\includegraphics[width=\textwidth]{figs/cld_to_clear_UASIBS_2014-06-15.png}
+\includegraphics[width=.9\textwidth]{figs/cld_to_clear_UASIBS_2014-06-15.png}
 \caption[Clearness versus Cloudiness for UASIBS on 6/15]{An example
   of the cloudiness (adjusted visible albedo) to clearness (clear-sky
   index) functions for the three correlation parameterizations for
@@ -206,8 +207,8 @@ Section 6 of \cref{app:satoi} discusses the tuning of OI for a
 specific location including the estimation of the parameters $k,\:
 l,\: d$ by minimizing the mean-squared error (MSE) of the analysis
 over sensors withheld from OI.
-To perform this minimization a grid search over the parameters was
-performed and the resulting MSE for each set of parameters is shown in
+A minimization via a grid search over the parameters was performed and
+the resulting MSE for each set of parameters is shown in
 \cref{fig:paramopt}.
 
 \begin{figure}[p]
@@ -254,7 +255,7 @@ shown in \cref{fig:parallax_err}.
 
 \begin{figure}[p]
 \centering
-\includegraphics[width=\textwidth]{figs/cld_to_clear_Semi-Empirical_2014-06-11.png}
+\includegraphics[width=.9\textwidth]{figs/cld_to_clear_Semi-Empirical_2014-06-11.png}
 \caption[An example of a failure of the geolocation correction]{
   An example on 2014-06-11 at 15:00 where the geolocation correction
   for the cloudiness correlation parameterization and the
@@ -266,9 +267,9 @@ shown in \cref{fig:parallax_err}.
 
 The cloudiness to clearness plots discussed in \cref{sec:corr_param}
 may provide a method to detect when these location errors occur.
-The large positive slope in the cloudiness to clearness plot
-essentially indicates that a higher reflectivity as seen by the
-satellite indicates fewer clouds.
+The large positive slope in the cloudiness to clearness plot of
+\cref{fig:parallax_err} essentially indicates that a higher
+reflectivity as seen by the satellite indicates fewer clouds.
 This of course is highly unlikely and is an indication that the MSE
 location correction was insufficient.
 A better method to correct for position errors may take into account
@@ -286,9 +287,9 @@ a more complex wind field.
 One also could explore the valid range of OI, e.g.\@can information
 from sensors in Tucson be used to correct the background image over
 Phoenix 100 miles away?
-Perhaps other parameterizations will be necessary, such as a
-combination of cloudiness and spatial correlation, will be necessary
-for OI to perform well in this situation.
+Perhaps other parameterizations, such as a combination of cloudiness
+and spatial correlation, will be necessary for OI to perform well in
+this situation.
 
 Another topic one could explore is distinguishing between cloud layers
 when performing OI.
@@ -298,12 +299,13 @@ It might be helpful to separate these layers so that sensor 1 provides
 information to correct the low clouds while sensor 2 provides
 information about the high clouds.
 In addition to possibly improving the OI result, knowledge of the
-cloud layers will also help with forecasting since each layer can and
-do move independently.
+cloud layers will also help with forecasting since each layer can move
+independently.
 
 A natural extension of OI with a forecast is the Kalman filter.
 The Kalman filter would essentially perform OI, move the image
-according to some cloud advection scheme, and repeat with new data.
+according to some cloud advection scheme, and repeat with new
+observations using the shifted image as the background.
 Since the satellite takes a new image at least every 30 minutes, there
 are two sources of data that the update step should incorporate: the
 sensor data available every 5 minutes and the new satellite image

@@ -36,10 +36,12 @@ However, clouds begin moving over the plant in the afternoon causing
 large fluctuations in the power.
 Ramps (change in power per time) as large as 25 MW occur in a span of
 5 minutes.
-This means the utility needs to be have generation standing by to
-provide the power then a cloud passes over the plant and turn off
-quickly when the power returns in order to always match the
-electricity load and generation.
+Utility companies need to constantly match the electrical generation
+to the demand, which means the utility needs to be have generation
+standing by that can provide the power as a cloud passes over the
+plant and turn off quickly when the solar plant returns to normal
+operation.
+
 
 \begin{figure}[h]
 \centering
@@ -47,20 +49,21 @@ electricity load and generation.
 \caption[Variable power output of a 28 MW solar power plant]{
 Power output of a 28 MW power plant near Tucson, AZ on a variable
 day. Changes in power as large as 25 MW can occur in a span of only 5
-minutes. This variability stresses the grid, but can be handled with
+minutes. This variability stresses the grid, but can be managed with
 proper forecasting.}
 \label{fig:variability_example}
 \end{figure}
 
-This dissertation will explore solar forecasting techniques
-that incorporate data from a ground sensor network.
+This dissertation will explore solar forecasting techniques to
+mitigate this variability that incorporate data from a ground sensor
+network.
 First, the current state of solar power in the Southwest US and a
 brief overview of general solar forecasting methods will be
-discussed. Then, a brief overview of solar irradiance forecasting
-methods will be presented. Finally, a summary of the work in this
-dissertation will be proivded.
+discussed.
+Then, a summary of the work in this dissertation will be provided
+before diving into the details.
 
-\section{State of Solar Power in the Southwest and Future Challenges}
+\section{State of Solar Power in the Southwest}
 
 As of early 2017, members of the Southwest Variable Energy Resource
 Initiative (SVERI) have a total of 1100 MW of installed solar capacity,
@@ -69,7 +72,7 @@ Initiative (SVERI) have a total of 1100 MW of installed solar capacity,
 Another roughly 1 GW of generation comes from distributed generation
 (DG) solar systems that are installed on residential or commercial
 rooftops.
-Heatmaps showing the time of day load, wind and solar generation, and
+Heatmaps showing the time of day load, wind generation, solar generation, and
 wind and solar fraction of load for two years are shown in
 \cref{fig:sveri_heatmap}.
 Heatmaps for weather variables at the University of Arizona are shown
@@ -132,8 +135,8 @@ will be required for the most accurate load forecasts.
 \end{figure}
 
 Similar to DG, utilities may consider power generated at large solar
-and wind power plants to be modifiers of the load instead of plants
-that are controlled and dispatched.
+and wind power plants to be modifiers of the load instead of power
+that is controlled and dispatched.
 Utilities are then interested in what they call the net load or the
 total load minus the generation from solar and wind power plants.
 Based on projections from 2014 SVERI data, we project net load
@@ -145,8 +148,8 @@ deal if utilities rely only on the current grid technology.
 Using forecasts, utilties can better control large solar and wind
 power plants and avoid some of these large ramps.
 Other smart grid technologies such as energy storage and time of use
-rates will also play a critical role in maitaining the reliability of
-the future grid.
+rates will also play a critical role in avoiding these ramps to
+maintain the reliability of the grid.
 
 The remainder of this dissertation will focus on the primary input to
 solar power plants: sunlight.
@@ -164,6 +167,13 @@ Aerosol, dust particles, and water vapor in the atmosphere can also
 reduce sunlight, although they often only account for a small
 reduction unless there is a dust storm or dense smog.
 
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.5\textwidth]{figs/comp_of_irr.png}
+\caption{Illustration of direct, diffuse, and global irradiance}
+\label{fig:irradiance_components}
+\end{figure}
+
 There are three primary classification of the radiation that reaches
 the Earth's surface as shown in \cref{fig:irradiance_components}.
 The first is the radiation that comes in a straight path directly from
@@ -171,7 +181,8 @@ the sun called direct irradiance.
 The direct irradiance that strikes the earth at a normal angle is
 called the direct normal irradiance (DNI).
 Light can also reach the surface by being scattered in the atmosphere
-by clouds or aerosols and is referred to as diffuse irradiance.
+by clouds or aerosols or by features on the surface such as trees and
+is referred to as diffuse irradiance.
 The total diffuse irradiance that strikes a horizontal surface on the
 Earth is referred to as the diffuse horizontal irradiance (DHI).
 The sum of the direct and diffuse irradiance is referred to as the

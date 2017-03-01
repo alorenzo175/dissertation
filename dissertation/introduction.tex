@@ -354,7 +354,14 @@ this way outperform a persistence forecast by 20\% on average.
 
 \begin{sidewaystable}[p]
 \centering
-\caption{Summary of error statistics for network forecasts for the 46 days with clouds. Error statistics were calculated for the entire dataset at once. Only forecasts and data with solar zenith angle less than $75^\circ$ were used. The mean irradiance was $\bar{y} = 662 \mbox{ W/m$^2$}$ and the mean clear-sky index was $\bar{k} = 0.92$.}
+\caption[Error statistics for network forecasts]{
+  Summary of error statistics for network forecasts for the 46
+  days with clouds. Error statistics were calculated for the entire
+  dataset at once. Only forecasts and data with solar zenith angle
+  less than $75^\circ$ were used. The mean irradiance was $\bar{y} =
+  662 \mbox{ W/m$^2$}$ and the mean clear-sky index was $\bar{k} =
+  0.92$.
+}
 \begin{tabular}{llllllll}
 \toprule
 FH &  rMAE (\%) &  MAE (W/m$^2$) &  MBE (W/m$^2$) &  rRMSE (\%) &  RMSE (W/m$^2$) &  Avg. skill (\%) \\
@@ -375,7 +382,14 @@ FH &  rMAE (\%) &  MAE (W/m$^2$) &  MBE (W/m$^2$) &  rRMSE (\%) &  RMSE (W/m$^2$
 \begin{figure}[htb]
  \centering
  \includegraphics[width=0.9\textwidth]{figs/missing.pdf}
- \caption[Example of a sensor's influence on network forecasts]{RMSE vs forecast horizon on May 19, 2014 for network forecasts made with all the sensors in the network (blue) and with one upwind sensor removed (red), along with a spatially-averaged persistence forecast (yellow). The dip at 7 min for the forecast using the full network illustrates that properly placed upstream sensors do improve forecasts over a simple spatial average.}
+ \caption[Example of a sensor's influence on network forecasts]{RMSE
+   vs forecast horizon on May 19, 2014 for network forecasts made with
+   all the sensors in the network (blue) and with one upwind sensor
+   removed (red), along with a spatially-averaged persistence forecast
+   (yellow). The dip at 7 min for the forecast using the full network
+   illustrates that properly placed upstream sensors do improve
+   forecasts over a simple spatial average.
+}
 \label{fig:circuitbreak}
 \end{figure}
 
@@ -401,7 +415,21 @@ RMSE values.
 
 \begin{figure}[htbp]
 \includegraphics[width=\textwidth]{figs/taylor_diagram.pdf}
-\caption[Taylor diagram for the network and various persistence forecasts]{Taylor diagram for clear-sky index persistence (red), spatially-averaged persistence (yellow), 5-min time-averaged persistence (green), and network (light blue) forecasts for 1 min (circle), 3 min (triangle), 7 min (diamond), 30 min (square), and 120 min (pentagon) forecast horizons. The black dashed line indicates the standard deviation of the data. Solid contours around the observations point are lines of constant CRMSE. Forecasts for clear-sky index were used so all quantities are dimensionless. At the 120 min forecast horizon, the spatially-averaged persistence and network points overlap. Network forecasts start with a standard deviation near that of the measurements, but this decreases at longer time horizons as the network forecast begins to resemble spatially-averaged persistence.}
+\caption[Taylor diagram for the network and various persistence
+forecasts]{Taylor diagram for clear-sky index persistence (red),
+  spatially-averaged persistence (yellow), 5-min time-averaged
+  persistence (green), and network (light blue) forecasts for 1 min
+  (circle), 3 min (triangle), 7 min (diamond), 30 min (square), and
+  120 min (pentagon) forecast horizons. The black dashed line
+  indicates the standard deviation of the data. Solid contours around
+  the observations point are lines of constant CRMSE. Forecasts for
+  clear-sky index were used so all quantities are dimensionless. At
+  the 120 min forecast horizon, the spatially-averaged persistence and
+  network points overlap. Network forecasts start with a standard
+  deviation near that of the measurements, but this decreases at
+  longer time horizons as the network forecast begins to resemble
+  spatially-averaged persistence.
+}
 \label{fig:taylor}
 \end{figure}
 
@@ -468,7 +496,8 @@ interpolation]{Example initial satellite estimate (known as the
 \end{figure}
 
 \begin{table}[htb]
-  \caption{Error statistics for the NREL MIDC sensor on the University
+  \caption[Optimal interpolation error metrics]{
+    Error statistics for the NREL MIDC sensor on the University
     of Arizona campus. The analysis was computed with only the MIDC
     sensor withheld and averaged over the verification data set, and
     cloudiness covariance was used. Both the

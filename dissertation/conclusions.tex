@@ -1,15 +1,39 @@
-\chapter{CONCLUSIONS}
+\chapter{CONCLUSION}
 \label{chap:conc}
 
-\section{Future Work}
+This dissertation has described solar irradiance forecasting
+techniques that are used to produce operational solar power forecasts
+for utilities.
+The techniques rely on data from an irradiance sensor network.
+In order to obtain such data, we designed and deployed inexpensive,
+remote irradiance sensors throughout Tucson, AZ.
+Using data from these sensors, we produced forecasts that improve upon
+a reference by over 20\% for time horizons from one minute to two
+hours.
+We also carefully analyzed the errors of these forecasts and described
+how a smoother forecast may have smaller errors when insufficient care
+is taken when analyzing errors.
+For longer forecast horizons from 30 minutes to six hours, irradiance
+estimates derived from satellite images are used.
+Initial satellite estimates had large errors, but we used data
+assimilation and data from the sensor network to cut some errors in
+half.
+Along the way, we studied various methods to estimate the correlation
+between pixels in satellite irradiance estimates, including a novel
+method based on the difference in cloudiness between two pixels.
 
-- blending horizons
+Next steps include incorporating a cloud advection model into the data
+assimilation routine to produce forecasts and to continuously
+incorporate new data while retaining prior information.
+These WRF forecasts used for day-ahead and longer forecasts could
+benefit from incorporating the actual cloud field at the model
+intialization and from an ensemble of model runs.
+Eventually, a full physics large eddy simulation of the atmosphere may
+be required to properly model the dynamics of clouds and to produce
+good forecasts from five minutes to seven days in the future.
+Until then, we will need to study how to fuse forecasting techniques
+together perhaps via machine learning.
 
-- wrf ensemble
-
-- probabilistic stuff
-
-- full dynamics of wrf + data assimilation covering all time horizons
 
 %%% Local Variables:
 %%% mode: latex

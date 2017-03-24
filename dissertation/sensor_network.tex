@@ -9,7 +9,7 @@ receiving these short-term forecasts in real-time.
 To generate real-time forecasts, data from sensors need to be gathered
 in real-time.
 To accomplish this goal, we designed custom irradiance sensors that
-are deployed remotely and report data in real-time via cell model as
+are deployed remotely and report data in real-time via cell modem as
 described in \cref{sec:custom_sensors}.
 We also partnered with a local rooftop PV installer to gather power
 data from PV systems to act as proxies for irradiance, described in
@@ -81,7 +81,7 @@ Linux tools (SSH, Bash, logs).
 It is also relatively inexpensive to purchase complete boards, and the
 plans are open-source if one desires to build the board themselves.
 
-Data is communicated via GSM using a MULTITECH MTSMC-H5-U SocketModem.
+Data are communicated via GSM using a MULTITECH MTSMC-H5-U SocketModem.
 This modem accepts a standard SIM card that is registered with a
 cellular data provider.
 The modem is connected to the OLinuXino via USB.
@@ -90,7 +90,7 @@ allow internet access.
 
 Power to the system is provided by a 10W solar panel and a 6Ah
 lead-acid battery.
-A standard solar charge controller is used limit the current from the
+A standard solar charge controller is used to limit the current from the
 panel to the battery.
 The nominal 12V from the battery is routed to the circuit board with
 the OLinuXino and modem and converted to 5VDC with a circuit based on
@@ -144,10 +144,11 @@ An entire completed sensor undergoing testing is shown in
 \end{figure}
 
 \begin{figure}[p]
-  \includegraphics[width=\textwidth]{figs/sensor_outside.jpg}
+\centering
+  \includegraphics[width=.7\textwidth]{figs/sensor_outside.jpg}
 \caption[A complete custom sensor]{A photo of a complete custom
   irradiance sensor as it undergoes testing outside. The photodiode
-  sensor can be see mounted in the upper right of the image connected
+  sensor can be seen mounted in the upper right of the image connected
   via a coax cable to the circuitry inside the box.}
 \label{fig:sensor_outside}
 \end{figure}
@@ -165,10 +166,10 @@ register itself.
 
 Most scripts were written in Python which enabled fast prototyping.
 The main data collection script is started on boot and monitored via
-Supervisor to ensure it is restarted if it dies for some reason.
+Supervisor to ensure it is restarted if it crashes for some reason.
 This script pulls data from the connected ADCs at a configurable rate,
 time-stamps it, and stores it in files.
-This data is then uploaded to our central servers every minute where
+This data are then uploaded to our central servers every minute where
 it can be imported into a database.
 
 A separate script monitors the wireless connection to ensure the
@@ -191,7 +192,7 @@ knocked over by animals, the cable to the sensor could be destroyed by
 rodents, or they could be flooded during the monsoon season.
 To mitigate issues like this, we recommend that sensors be mounted on
 a stake.
-While this would complicate deployment somewhat, it would likely
+While this would complicate deployment, it would likely
 prevent sensor failure due to orientation issues (where the solar
 panel is not in the sun to power the device) and some water damage.
 
@@ -218,7 +219,7 @@ of sensor devices and more accurate time keeping.
 \section{Rooftop PV Systems as Sensors}
 \label{sec:pv_sensors}
 One major challenge with using rooftop PV systems as sensors is that
-the data is often difficult to collect.
+the data are often difficult to collect.
 One solution we employed is to use the built-in capabilities of some
 inverters to send data directly via FTP.
 With the help of a local PV system installer, Technicians for
@@ -276,7 +277,7 @@ where the majority of homes are located.
 We have no control over the placement of these sensors, but are
 grateful to Technicians for Sustainability for setting up the data
 transfer and to the homeowners that allow us to use the data.
-The time span that data is available depends on each individual
+The time span that data are available depends on each individual
 system due to factors such as when it was installed and if the data
 transfer stopped for some reason.
 
@@ -296,8 +297,8 @@ The custom sensors shown in \cref{fig:map} were deployed in late March
 Data from these sensors is available from April to July 2014, when the
 sensors started failing due to monsoon rains and other causes
 mentioned in \cref{sec:sensor_improvements}.
-A handful of sensors did survive for over two years before they died
-of unknown causes.
+A handful of sensors continued to operate for over two years before
+they failed from unknown causes.
 While these sensors provided useful information, the sensors, in their
 current form, are too time consuming to maintain beyond a proof of
 concept.
@@ -310,11 +311,9 @@ the NREL Solar Resource \& Meteorological Assessment Project (SOLRMAP)
 and is regularly maintained \citep{Wilcox_Andreas_2010}.
 Data from this suite of sensors is publicly available at
 \url{http://www.nrel.gov/midc/ua_oasis}.
-
 Data from select sensors in the network supporting
 \cite{Lorenzo2015c,Lorenzo2017} is available online
 \citep{Lorenzo2015b,Lorenzo2016b}.
-
 
 
 %%% Local Variables:

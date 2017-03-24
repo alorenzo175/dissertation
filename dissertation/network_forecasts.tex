@@ -34,7 +34,7 @@ another]{An example of the output of sensor 19 (red) predicting what
 While studying and evaluating the forecasts described in
 \cref{app:network}, we learned how important it is to understand
 forecast error metrics and their limitations.
-Here we present an examples of possibly misleading error metrics as a
+Here we present an example of possibly misleading error metrics as a
 warning to those evaluating forecasts to exercise care.
 
 We will evaluate each metric on forecasts of clear-sky index to remove
@@ -198,9 +198,9 @@ In this case, it depends on the use case to say whether Forecast A or
 Forecast B is best.
 
 \subsection{Suggestions}
-We have hopefully demonstrated why an understanding of the error
-metrics and careful application is important when evaluating
-forecasts.
+
+We have demonstrated why an understanding of the error metrics and
+careful application is important when evaluating forecasts.
 Evaluating forecasts on only a single or a couple of days may lead to
 conflicting results, so a longer time period with varied weather
 should be used when considering the overall performance of a forecast.
@@ -223,7 +223,7 @@ One limitation to the network forecast methodology that we studied is
 that only a single velocity vector was used to transport the predicted
 clear-sky index map.
 Future work could explore using a number of vectors based on clouds at
-different heights and a proper advection scheme.
+different heights and an advection scheme.
 One might also explore which domains this type of forecast performs
 best in order to switch between forecast methodolgies for different
 domains.

@@ -9,14 +9,16 @@ We describe the satellite image to ground irradiance algorithms we
 used for OI in more depth, show how the parameters for OI were chosen,
 and describe future work.
 
+TODO: SUMMARY OF SATOI!!!!
+
 \section{Satellite to Irradiance Algorithms for OI}
 In this section we will describe the satellite image to ground
 irradiance algorithms used in \cref{app:satoi} and discuss other
 algorithms.
-On factor that affects how well OI performs for a given background
+One factor that affects how well OI performs for a given background
 image generated from some satellite to irradiance algorithm is the
 spatial resolution.
-OI as presented in \cref{app:satoi} focuses on a relatively small,
+OI, as presented in \cref{app:satoi}, focuses on a relatively small,
 city scale area.
 This means that the background image must have sufficient density in
 this area for the deployed sensors to be of use in correcting the
@@ -55,19 +57,18 @@ The Monitoring Atmospheric Composition and Climate (MACC) project
 \citep{Morcrette2009} has such analysis and forecasts of AOD and ozone
 available, and a ground truth measurement of AOD is available from the
 Tucson AERONET site \citep{Holben1998}.
-Another limitation is that only ten values of the solar zenith angle
-are used which introduces artificial steps noticable in the output
-GHI.
+Another limitation of the look-up table approach is that Only ten
+values of the solar zenith angle are used which introduces artificial
+steps noticable in the output GHI.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.7\textwidth]{figs/uasibs_scatter.pdf}
 \caption[Scatterplot of predicted vs measured clear-sky index for
 UASIBS]{A scatterplot of the predicted vs measured clear-sky index for
-UASIBS before OI (blue) and after (orange). It is obvious there is
-some issue where UASIBS does not produce clear-sky indices between 0.6
-and 0.8. OI helps correct this somewhat. (Reproduced from
-\cite{Lorenzo2017})}
+UASIBS before OI (blue) and after (orange). The UASIBS algorithm does
+not produce clear-sky indices between 0.6 and 0.8. OI helps correct
+this somewhat. (Reproduced from \cite{Lorenzo2017})}
 \label{fig:uasibs_scatter}
 \end{figure}
 
@@ -76,9 +77,9 @@ type leading to the use of the wrong look-up table.
 This is illustrated in Fig.\@ 4 of \cref{app:satoi} reproduced in
 \cref{fig:uasibs_scatter}.
 There is a distinct lack of images with clear-sky index between 0.6
-and 0.8 for UASIBS (blue $\times$s) that requires further
-investigation to determine if it is a problem with the look-up tables
-themselves or using the wrong look-up table.
+and 0.8 for UASIBS that requires further investigation to determine if
+it is a problem with the look-up tables themselves or using the wrong
+look-up table.
 With newer, fast radiative transfer codes, perhaps the look-up table
 approach can be replaced with a direct call to a radiative transfer
 code to avoid many of these limitations.
@@ -142,6 +143,9 @@ Furthermore, the PSM algorithm is still in development.
 
 \section{Correlation Parameterization}
 \label{sec:corr_param}
+
+TODO better description of these figures1!!
+
 Section 4 of \cref{app:satoi} describes various correlation
 parameterizations we studied.
 The semi-empirical model is essentially a polynomial relationship
@@ -270,8 +274,8 @@ may provide a method to detect when these location errors occur.
 The large positive slope in the cloudiness to clearness plot of
 \cref{fig:parallax_err} essentially indicates that a higher
 reflectivity as seen by the satellite indicates fewer clouds.
-This of course is highly unlikely and is an indication that the MSE
-location correction was insufficient.
+This is highly unlikely and is an indication that the MSE location
+correction was insufficient.
 A better method to correct for position errors may take into account
 both the slope of the adjusted visible albedo to clear-sky index
 mapping and the MSE of the OI analysis.

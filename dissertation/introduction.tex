@@ -16,6 +16,8 @@ As shown in \Cref{fig:solarinstall}, this growth has been steady since
 \label{fig:solarinstall}
 \end{figure}
 
+TODO mention that clouds are primary reason power goes down
+
 Sunlight is the fuel that drives all solar power plants.
 Unlike sources of fuel for conventional power generators like coal or
 natural gas, the solar resource is highly variable due to the chaotic
@@ -32,17 +34,16 @@ utilties can add to the grid.
 
 An example of the variability that a 28 MW power plant experiences due
 to clouds is shown in \cref{fig:variability_example}.
-The power plant start producing power near sunrise, and reaches it's
+The power plant starts producing power near sunrise, and reaches it's
 peak power output of 28 MW in a few hours.
 However, clouds begin moving over the plant in the afternoon causing
 large fluctuations in the power.
 Ramps (change in power per time) as large as 25 MW occur in a span of
 5 minutes.
 Utility companies need to constantly match the electrical generation
-to the demand, which means the utility needs to be have generation
-standing by that can provide the power as a cloud passes over the
-plant and turn off quickly when the solar plant returns to normal
-operation.
+to the demand, which means the utility needs generation standing by
+that can provide the power as a cloud passes over the plant and turn
+off quickly when the solar plant returns to normal operation.
 
 
 \begin{figure}[h]
@@ -91,7 +92,7 @@ renewable load fraction]{Time of day heatmaps of SVERI load, solar
   years of data and the white areas indicate missing data. The diurnal
   cycle is clearly seen in the solar data, and can also be found in
   the wind and load. A weekly cycle is also evident in the load. At
-  times in the spring when heating and cooling loads are low and their
+  times in the spring when heating and cooling loads are low and there
   is high solar generation, wind and solar power can serve up to 12\%
   of the load.}
 \label{fig:sveri_heatmap}
@@ -145,8 +146,8 @@ Based on projections from 2014 SVERI data, we project net load
 profiles will resemble those in \cref{fig:duckcurves}.
 Notice the large power ramps that occur in the so called duck curve in
 November.
-Dealing with these 3 GW ramps in only a few hours would cost a great
-deal if utilities rely only on the current grid technology.
+Dealing with these 3 GW ramps in only a few hours is costly since
+utilities currently rely mostly on quick-start combustion turbines.
 Using forecasts, utilties can better control large solar and wind
 power plants and avoid some of these large ramps.
 Other smart grid technologies such as energy storage and time of use
@@ -198,7 +199,7 @@ Furthermore, we are interested in producing forecasts that will,
 after being converted to solar power forecasts, be used to maintain
 grid reliability and for power market trading similar to
 \cite{Kaur2016}.
-Thus, we will focus on forecasts that forecast the irradiance now out
+Thus, we will focus on forecasts that predict the irradiance now out
 to the irradiance a week from now.
 Reviews of solar power and irradiance forecasting can be found in
 \citep{Inman2013,Antonanzas2016}.
@@ -231,7 +232,7 @@ plant in near real-time.
 
 Statistical forecasts are those that rely on measured irradiance data,
 at least for our purposes.
-We include many techniques in this category include auto-regressive
+We group many techniques in this category including auto-regressive
 models \citep{Yang2014}, artificial neural networks
 \citep{Gutierrez-Corea2016} and other machine learning algorithms
 \citep{Pedro2012,Mellit2008}, and the lasso \citep{Yang2015a}.
@@ -248,8 +249,8 @@ persistence forecast for time horizons from 1 minute to 2 hours in the
 future.
 These forecasts are discussed further in \cref{chap:network}.
 
-Satellite forecasts are forecasts that rely on estimates of irradiance
-produced from images taken by geostationary satellites.
+Satellite forecasts rely on estimates of irradiance produced from
+images taken by geostationary satellites.
 These estimates can be categorized into semi-empirical and physical models.
 Semi-empirical models rely on historical data from the satellite and
 ground sensors to find the function that translates from satellite
@@ -257,7 +258,7 @@ image pixel to observed irradiance \citep{Perez2013a}.
 Physical models try to use the satellite images to infer properties
 about the clouds which are then used in a radiative transfer model to
 predict the sunlight that reaches the surface \citep{Miller2013}.
-Improvements to these irradiance estimates using groud data and data
+Improvements to these irradiance estimates using ground data and data
 assimilation will be explored in \cref{chap:satoi}.
 
 Forecasts that predict irradiance for time horizons greater than a few
@@ -271,9 +272,9 @@ We produce NWP forecasts using the Weather Research and Forecasting
 settings for the Southwest \citep{Leuthold}.
 Example wind speed and GHI outputs from the UA-WRF model are shown in
 \cref{fig:wrf}.
-\Cref{chap:future_work} has discussion of possible improvements for
+\Cref{chap:future_work} discusses possible improvements for
 UA-WRF forecasts.
-s
+
 \begin{figure}[h]
 \subfloat{\includegraphics[width=0.5\textwidth]{figs/wrf_wind.png}}
 \hspace{-.5em}
@@ -340,7 +341,8 @@ All data was detrended to clear-sky index using the expectation of the
 output of each sensor on a clear day.
 
 \begin{figure}[htbp]
-\includegraphics[width=\textwidth]{figs/sensdeploy.jpg}
+\centering
+\includegraphics[width=0.8\textwidth]{figs/sensdeploy.jpg}
 \caption{Picture of a sensor deployment.}
 \end{figure}
 
@@ -350,7 +352,8 @@ described in \cref{chap:network}.
 This forecast is labeled as network in \cref{fig:newshitplot}.
 
 \begin{figure}[htbp]
-\includegraphics[width=\textwidth]{figs/leading_sens.pdf}
+\centering
+\includegraphics[width=.85\textwidth]{figs/leading_sens.pdf}
 \caption[One sensor predicting the output of another]{An example of
   the output of sensor 19 predicting the output of sensor 31 with a
   roughly 8 minute lead time. This type of correlation is the basis
@@ -362,8 +365,8 @@ The basic idea behind this type of forecast is depicted in
 \cref{fig:19leading31} where the output of sensor 19 can predict what
 the output of sensor 31 will be in 8 minutes.
 To generate forecast in practice, we first collect data from the
-sensors and interpolate between them to produce a kind of cloud map as
-shown in \cref{fig:clearmap}.
+sensors and interpolate between them to produce a cloud map as shown
+in \cref{fig:clearmap}.
 Then, using a vector representing the cloud motion, we can move this
 map to produce a forecast at any point.
 The errors for this type of forecast were studied in depth and a
@@ -377,7 +380,7 @@ this way outperform a persistence forecast by 20\% on average.
 \caption[Illustration of the network forecast methodology]{An example
   interpolated map produced from the sensor network data is shown in
   a). Using an estimated cloud motion vector, this map is shifted
-  according the the deed forecast horizon as shown in b).}
+  according the deed forecast horizon as shown in b).}
 \label{fig:clearmap}
 \end{figure}
 
@@ -410,7 +413,7 @@ FH &  rMAE (\%) &  MAE (W/m$^2$) &  MBE (W/m$^2$) &  rRMSE (\%) &  RMSE (W/m$^2$
 
 \begin{figure}[htbp]
  \centering
- \includegraphics[width=0.9\textwidth]{figs/missing.pdf}
+ \includegraphics[width=0.8\textwidth]{figs/missing.pdf}
  \caption[Example of a sensor's influence on network forecasts]{RMSE
    vs forecast horizon on May 19, 2014 for network forecasts made with
    all the sensors in the network (blue) and with one upwind sensor
@@ -526,16 +529,15 @@ interpolation]{Example initial satellite estimate (known as the
 \end{figure}
 
 \begin{table}[htbp]
-  \caption[Optimal interpolation error metrics]{
-    Error statistics for the NREL MIDC sensor on the University
-    of Arizona campus. Background refers to the initial satellite
-    estimate and the analysis is the result of OI. UASIBS and SE are
-    two different satellite image to irradiance models.
-    The analysis was computed with only the MIDC
-    sensor withheld and averaged over the verification data set, and
-    cloudiness covariance was used. Both the
-    UASIBS and SE models show improvements and have a similar
-    analysis RMSE\@. Units are W/m$^2$.}
+  \caption[Optimal interpolation error metrics]{ Error statistics for
+the NREL MIDC sensor on the University of Arizona campus. Background
+refers to the initial satellite estimate and the analysis is the
+result of OI. UASIBS and SE are two different satellite image to
+irradiance models.The analysis was computed with only the MIDC sensor
+withheld and averaged over the verification data set, and cloudiness
+covariance was used; see \cref{chap:satoi} for more details. Both the
+UASIBS and SE models show improvements and have a similar analysis
+RMSE\@. Units are W/m$^2$.}
 \label{table:satoi}
 \vspace{0.5em}
 \input{figs/ghi_err_table}

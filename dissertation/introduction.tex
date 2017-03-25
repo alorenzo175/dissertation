@@ -7,6 +7,8 @@ state renewable portfolio standards, and efforts to decarbonize the
 electrical grid.
 As shown in \Cref{fig:solarinstall}, this growth has been steady since
 2010 and shows no signs of abating.
+Of the 4,000 TWh of energy generated in 2016 in the US, 60 TWh was
+produced by solar power plants \citep{EPM2017}.
 
 \begin{figure}[htb]
   \includegraphics[width=\textwidth]{figs/solar_installations.png}
@@ -16,25 +18,24 @@ As shown in \Cref{fig:solarinstall}, this growth has been steady since
 \label{fig:solarinstall}
 \end{figure}
 
-TODO mention that clouds are primary reason power goes down
-
 Sunlight is the fuel that drives all solar power plants.
 Unlike sources of fuel for conventional power generators like coal or
-natural gas, the solar resource is highly variable due to the chaotic
-nature of the weather.
+natural gas, the solar resource is highly variable due primarily to
+clouds.
 This variability of the solar resource leads to uncertainty at the
 electric utility and increases management costs \citep{Joskow2011}.
 Forecasts help utilities manage the variability in a number of ways
 \citep{Kleissl2013,Inman2013}, including the optimal dispatch of
-battery storage \citep{Cormode2015}.
-Improvements in forecasts further reduce costs
-\citep{BrancucciMartinez-Anido2016}.
+battery storage \citep{Cormode2015} and scheduling of reserve capacity
+\citep{Kaur2016}.
+Improvements in forecasts can further reduce costs based on refined
+scenario analyses \citep{BrancucciMartinez-Anido2016}.
 Ultimately, better forecasts increase the amount of solar power that
 utilties can add to the grid.
 
-An example of the variability that a 28 MW power plant experiences due
-to clouds is shown in \cref{fig:variability_example}.
-The power plant starts producing power near sunrise, and reaches it's
+An example of the variability from a 28 MW power plant due to clouds
+is shown in \cref{fig:variability_example}.
+The power plant started producing power near sunrise, and reaches it's
 peak power output of 28 MW in a few hours.
 However, clouds begin moving over the plant in the afternoon causing
 large fluctuations in the power.
@@ -42,11 +43,12 @@ Ramps (change in power per time) as large as 25 MW occur in a span of
 5 minutes.
 Utility companies need to constantly match the electrical generation
 to the demand, which means the utility needs generation standing by
-that can provide the power as a cloud passes over the plant and turn
-off quickly when the solar plant returns to normal operation.
+(spinning reserves) that can provide the power as a cloud passes over
+the plant and then turn off just as quickly when the solar plant
+returns to normal operation.
 
 
-\begin{figure}[h]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\textwidth]{figs/avalon_ramps.pdf}
 \caption[Variable power output of a 28 MW solar power plant]{
@@ -57,21 +59,62 @@ proper forecasting.}
 \label{fig:variability_example}
 \end{figure}
 
-This dissertation will explore solar forecasting techniques to
-mitigate this variability that incorporate data from a ground sensor
-network.
-First, the current state of solar power in the Southwest US and a
-brief overview of general solar forecasting methods will be
-discussed.
-Then, a summary of the work in this dissertation will be provided
-before diving into the details.
+This dissertation will explore solar forecasting techniques that we
+developed to help utilities mitigate this variability.
+A distinctive feature of this work is the incorporation of data from a
+ground sensor network.
+First in \cref{sec:background}, I provide context and motivation for
+this dissertation in terms of the solar generation in the Southwest
+US.
+Then in \cref{sec:genfx}, I discuss other forecasting research efforts
+and how this research compares.
+\Cref{sec:hypothesis} discusses the guiding hypotheses behind this
+dissertation before a summary of the work is provided in
+\cref{sec:dissummary}.
 
-\section{State of Solar Power in the Southwest}
+The remainder of the dissertation is organized as follows.
+\Cref{chap:sens_net} describes the design and deployment of a network
+of irradiance sensors that was critical to the forecasts we discuss.
+\Cref{app:pvsc40} and \cref{app:network} describe a forecasting
+technique that relies solely on data from the sensor network.
+\Cref{chap:network} expands on the careful error analysis necessary to
+understand these so called network forecasts.
+\Cref{app:pvsc43} and \cref{app:satoi} describe how the data from the
+sensor network was combined with satellite images to provide an
+improved starting point for forecasts with additional details in
+\cref{chap:satoi}.
+\Cref{chap:future_work} describes future work that will expand on
+these forecasting methods.
+Finally, we discuss producing forecasts operationally in
+\cref{chap:operations} and \cref{app:wfhpvsc} before offering
+concluding thoughts in \cref{chap:conc}.
 
-As of early 2017, members of the Southwest Variable Energy Resource
-Initiative (SVERI) have a total of 1100 MW of installed solar capacity,
-800 MW of installed wind capacity, and a peak load of 23 GW
-\citep{sveri_website}.
+
+\section{Solar Power in the Southwest}
+\label{sec:background}
+
+The Southwest Variable Energy Resource Initiative (SVERI)\footnote{The
+SVERI member utilities are Arizona's G\&T Cooperatives, Arizona Public
+Service, El Paso Electric, Imperial Irragation District, Public
+Service Company of New Mexico, Salt River Project, Tucson Electric
+Power, and the Western Area Power Administration's Desert Southwest
+Region.} was formed in the fall of 2012 to study the impact and
+characteristics of variable energy resources in the Southwest.
+The SVERI partnership grew out of the relationships between many of
+the utilities in the Southwest Reserve Sharing Group (SRSG).
+Utilities in the SRSG share contingency reserves to reduce the costs
+of control standards and increase the reliability of the Western
+Interconnection.
+Many of the SVERI member utilties are balancing authorities tasked
+with maitaining the reliability of the electrical grid in the Western
+US and Canada.
+
+Our group at the University of Arizona gathered and analyzed data from
+the SVERI utilties to help them understand the impact of the variable
+resources, mainly solar and wind power.
+The SVERI utilities have documented a total of 1100 MW of installed
+utility scale solar capacity, 800 MW of installed wind capacity, and a
+peak load of 23 GW \citep{sveri_website}.
 Another roughly 1 GW of generation comes from distributed generation
 (DG) solar systems that are installed on residential or commercial
 rooftops.
@@ -111,9 +154,9 @@ speed]{Time of day heatmaps for temperature, dewpoint, global
 \label{fig:ua_heatmap}
 \end{figure}
 
-Utilities in Arizona are well on their way to generate 15\% of their
+Utilities in Arizona are well on their way to generating 15\% of their
 energy from renewable resources by 2025 as required by the Arizona
-Renewable Energy Standard and Tariff \citep{azrest}.
+Renewable Energy Standard and Tariff (REST) \citep{azrest}.
 As mentioned above, DG solar systems provide a large fraction of the
 total renewable energy generation.
 One problem utilities encounter with DG systems is that real-time
@@ -124,7 +167,7 @@ variability in the load.
 Real-time estimates (or nowcasts) and forecasts of this DG variability
 will be required for the most accurate load forecasts.
 
-\begin{figure}[h]
+\begin{figure}[tbh]
 \centering
 \includegraphics[width=\textwidth]{figs/duckcurves.png}
 \caption[Projected SVERI 2027 duck curves]{Net load (total load minus
@@ -160,6 +203,8 @@ We will specifically refer to solar irradiance or the amount of
 sunlight in a given area that can perform useful work.
 
 \section{Solar Irradiance Forecasting}
+\label{sec:genfx}
+
 As mentioned above, the solar irradiance that reaches the Earth's
 surface is variable.
 The first obvious source of variability is the diurnal cycle due to
@@ -275,7 +320,7 @@ Example wind speed and GHI outputs from the UA-WRF model are shown in
 \Cref{chap:future_work} discusses possible improvements for
 UA-WRF forecasts.
 
-\begin{figure}[h]
+\begin{figure}[htb]
 \subfloat{\includegraphics[width=0.5\textwidth]{figs/wrf_wind.png}}
 \hspace{-.5em}
 \subfloat{\includegraphics[width=0.5\textwidth]{figs/wrf_ghi.png}}
@@ -290,7 +335,8 @@ different forecasting techniques to improve forecasts across horizons
 \citep{Lu2015}.
 
 
-\section{Guiding Hypothesis}
+\section{Guiding Hypotheses}
+\label{sec:hypothesis}
 
 \Cref{fig:bullshitplot} shows speculative estimates of
 forecast errors as a function of forecast horizon created near the
@@ -327,6 +373,7 @@ techniques]{Speculative root mean squared errors (RMSE) for various
 \end{figure}
 
 \section{Summary of Results}
+\label{sec:dissummary}
 
 The specific forecasting methods studied in this dissertation rely on
 a network of irradiance sensors.

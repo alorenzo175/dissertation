@@ -68,9 +68,8 @@ this dissertation in terms of the solar generation in the Southwest
 US.
 Then in \cref{sec:genfx}, I discuss other forecasting research efforts
 and how this research compares.
-\Cref{sec:hypothesis} discusses the guiding hypotheses behind this
-dissertation before a summary of the work is provided in
-\cref{sec:dissummary}.
+\Cref{sec:dissummary} discusses the guiding hypotheses behind this
+dissertation and provides a summary of the work.
 
 The remainder of the dissertation is organized as follows.
 \Cref{chap:sens_net} describes the design and deployment of a network
@@ -222,7 +221,7 @@ reduction unless there is a dust storm or dense smog.
 \label{fig:irradiance_components}
 \end{figure}
 
-There are three primary classification of the radiation that reaches
+There are three primary classifications of the radiation that reaches
 the Earth's surface as shown in \cref{fig:irradiance_components}.
 The first is the radiation that comes in a straight path directly from
 the sun called direct irradiance.
@@ -247,7 +246,7 @@ grid reliability and for power market trading similar to
 Thus, we will focus on forecasts that predict the irradiance now out
 to the irradiance a week from now.
 Reviews of solar power and irradiance forecasting can be found in
-\citep{Inman2013,Antonanzas2016}.
+\citep{Inman2013,Antonanzas2016,Kleissl2013}.
 
 Forecasting techniques are often compared based on the range of
 forecast horizons where they outperform a reference forecast as shown
@@ -335,22 +334,29 @@ different forecasting techniques to improve forecasts across horizons
 \citep{Lu2015}.
 
 
-\section{Guiding Hypotheses}
-\label{sec:hypothesis}
+\section{Summary of Results}
+\label{sec:dissummary}
 
-\Cref{fig:bullshitplot} shows speculative estimates of
-forecast errors as a function of forecast horizon created near the
-start of this dissertation work.
-This dissertation works to analyze forecasting methods and measure
-their errors as a function of forecast horizon in order to
-produce the best forecasts of solar irradiance in the Southwest.
+\Cref{fig:bullshitplot} shows speculative estimates of forecast errors
+as a function of forecast horizon created near the start of this
+dissertation work.
+This sketch serves as a hypothesis for the research performed in this
+dissertation.
+Specifically, we wish to understand the practical limits of
+persistence, network, and satellite forecasting techniques in the
+Southwest.
+We also want to understand what makes a ``good'' forecast which
+requires a deep understanding of various error metrics and an
+understanding of how the forecasts will be used.
 \Cref{fig:newshitplot} shows the culmination of this work.
 
 \begin{figure}[htbp]
 \includegraphics[width=\textwidth]{figs/bullshit.pdf}
 \caption[Speculative errors for various forecasting
 techniques]{Speculative root mean squared errors (RMSE) for various
-  types of forecasts.}
+  types of forecasts. This sketch serves as a hypothesis to be tested
+  in this dissertation. We wish to understand the practical limitations
+  of various forecasting techniques. }
 \label{fig:bullshitplot}
 \end{figure}
 
@@ -371,9 +377,6 @@ techniques]{Speculative root mean squared errors (RMSE) for various
   satellite image points will be discussed in \Cref{chap:satoi}.}
 \label{fig:newshitplot}
 \end{figure}
-
-\section{Summary of Results}
-\label{sec:dissummary}
 
 The specific forecasting methods studied in this dissertation rely on
 a network of irradiance sensors.

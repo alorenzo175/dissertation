@@ -1,15 +1,24 @@
 \chapter{OPTIMAL INTERPOLATION TO IMPROVE SATELLITE NOWCASTS WITH DATA}
 \label{chap:satoi}
 
-This chapter supplements the description of our work incorporating
-sensor network data with satellite irradiance estimates using optimal
-interpolation (OI) that is described in \cref{app:pvsc43} and
-\cref{app:satoi}.
+Optimal interpolation (OI) is a Bayesian technique that combines data
+from multiple sources based on their relative errors.
+We use OI to combine the irradiance estimates derived from satellite
+images (referred to as the background) and data from the sensor
+network described in \cref{chap:sens_net} with the goal of producing
+better satellite irradiance nowcasts (known as the analysis) to later
+be used as the basis for forecasts.
+This technique is described in \cref{app:pvsc43} and \cref{app:satoi}.
+We show that by using this technique we can nearly eliminate the bias
+present in these satellite derived irradiance estimates and reduce the
+root mean squared error by over 50\% for one satellite to irradiance
+model.
+
+This chapter supplements the descriptions of OI presented in
+\cref{app:pvsc43} and \cref{app:satoi}.
 We describe the satellite image to ground irradiance algorithms we
 used for OI in more depth, show how the parameters for OI were chosen,
 and describe future work.
-
-TODO: SUMMARY OF SATOI!!!!
 
 \section{Satellite to Irradiance Algorithms for OI}
 In this section we will describe the satellite image to ground
@@ -59,7 +68,7 @@ available, and a ground truth measurement of AOD is available from the
 Tucson AERONET site \citep{Holben1998}.
 Another limitation of the look-up table approach is that Only ten
 values of the solar zenith angle are used which introduces artificial
-steps noticable in the output GHI.
+steps noticeable in the output GHI.
 
 \begin{figure}[h]
 \centering
@@ -91,7 +100,7 @@ based on what is commonly know as the SUNY model developed by Perez
 This model was chosen because it is well known within the community
 and provides a good benchmark.
 The SUNY model was developed using ground truth sensors spread
-throught the US with few in arid climates and no sensor in Arizona.
+throughout the US with few in arid climates and no sensor in Arizona.
 Notably, Perez \etal recognized the deficiency in arid areas with high
 ground albedos and proposed a method to correct this issue
 \citep{Perez2004}.
@@ -144,8 +153,6 @@ Furthermore, the PSM algorithm is still in development.
 \section{Correlation Parameterization}
 \label{sec:corr_param}
 
-TODO better description of these figures1!!
-
 Section 4 of \cref{app:satoi} describes various correlation
 parameterizations we studied.
 The semi-empirical model is essentially a polynomial relationship
@@ -156,9 +163,13 @@ parameterization essentially modifies this cloudiness to clearness
 function.
 This is in fact the case as demonstrated in
 \cref{fig:cldclr_se_419,fig:cldclr_se_615}.
-These figures also show how the spatial and empirical correlation
-parameterizations tend to broaden the curve instead of changing it's
-shape.
+These figures show the analysis produced by OI for the three
+correlation methods along with a plot of the adjusted visible albedo
+from the satellite (cloudiness) versus the clear-sky index estimate of the
+background and analysis (clearness).
+Notice that cloudiness correlation tends to change the form of this
+cloudiness to clearness function, whereas the spatial and empirical
+correlation parameterizations tend to broaden the curve instead.
 
 \begin{figure}[p]
 \centering
@@ -188,7 +199,9 @@ The UASIBS algorithm is more complex and not a simple function
 of the adjusted visible albedo, but each correlation parameterization
 changes this cloudiness to clearness mapping in a different way.
 Also note the undesirable ``bullseye'' like pattern in the spatial
-correlation analysis image that does not correspond with reality.
+correlation analysis image\footnote{This may not be visible in the
+  printed form of this dissertation.} that does not correspond with
+reality.
 
 \begin{figure}[p]
 \centering
@@ -236,7 +249,7 @@ the resulting MSE for each set of parameters is shown in
 \end{figure}
 
 This figure clearly shows distinct minima in parameter space for the
-UASIBS satllite to irradiance model which indicates that  OI is
+UASIBS satellite to irradiance model which indicates that  OI is
 sensitive to the choice of parameters.
 On the other hand, the lack of distinct minima in parameter space for
 the semi-empirical model indicates that a wide range of parameters would

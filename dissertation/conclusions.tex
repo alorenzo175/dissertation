@@ -1,10 +1,11 @@
 \chapter{CONCLUSION}
 \label{chap:conc}
 
-This dissertation has described solar irradiance forecasting
-techniques that are used to produce operational solar power forecasts
-for utilities.
-The techniques rely on data from an irradiance sensor network.
+This dissertation has described the techniques and limitations of
+solar irradiance forecasts that are used to produce operational solar
+power forecasts for utilities.
+The forecasting techniques rely on data from an irradiance sensor
+network.
 In order to obtain such data, we designed and deployed inexpensive,
 remote irradiance sensors throughout Tucson, AZ.
 Using data from these sensors, we produced forecasts that improve upon
@@ -13,6 +14,8 @@ to two hours.
 We also carefully analyzed the errors of these forecasts and described
 how a smoother forecast may have smaller errors when insufficient care
 is taken when analyzing errors.
+This error analysis has improved our understanding of how to judge the
+quality of a forecast based on commonly used forecast metrics.
 For longer forecast horizons from 30 minutes to six hours, irradiance
 estimates derived from satellite images are used.
 Initial satellite estimates had large errors, but we used data
@@ -31,8 +34,7 @@ intialization and from an ensemble of model runs.
 Eventually, a full physics large eddy simulation of the atmosphere may
 be required to properly model the dynamics of clouds and to produce
 good forecasts from five minutes to seven days in the future.
-We will need to study how to fuse forecasting techniques together
-perhaps via machine learning.
+
 
 
 %%% Local Variables:

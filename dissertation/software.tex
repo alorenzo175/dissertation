@@ -16,6 +16,17 @@ utilties informs how we judge forecast quality, the types of
 forecasts we study, and it ensures the products of our research is
 used.
 
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.9\textwidth]{figs/fxmap.pdf}
+\caption[Map of utility scale renewable power plants]{A map showing
+the utility scale renewable power plants and the balancing areas of
+our utility partners (APS, TEP, and PNM). We forecast for each of the
+solar power plants shown as a sun, and for each wind plant represented
+as a wind turbine although not discussed in this dissertation.}
+\label{fig:utilitymap}
+\end{figure}
+
 In this chapter, we will discuss the operational systems that generate
 the forecasts.
 First, we will discuss the data collection procedures to acquire
@@ -88,6 +99,14 @@ Other parameters such as the microphysics scheme, land surface model,
 and planetary boundary layer scheme have been chosen specifically for
 this region after studying the model results.
 
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.9\textwidth]{figs/domains.pdf}
+\vspace{-1.5em}
+\caption{Outer and inner WRF domains}
+\label{fig:wrfdomains}
+\end{figure}
+
 Each day, we produce six forecasts with WRF using the forecasts from
 the North American Mesoscale Forecast System (NAM) and the Global
 Forecast System (GFS).
@@ -149,6 +168,13 @@ In the future, improved modeling of the system directly incorporating
 module and inverter parameters along with secondary variables such as
 temperature will be studied.
 
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.8\textwidth]{figs/web_example.pdf}
+\caption{Screenshot of the forecasting website}
+\label{fig:website}
+\end{figure}
+
 The software that extracts the data from the WRF files, generates the
 other forecasts, combines them together, converts the irradiance
 forecasts to power forecast, and generates CSV files and plots of the
@@ -180,6 +206,17 @@ It will be easier to incorporate new and developing
 forecasting techniques into the framework, and new forecasts should be
 generated in under a minute.
 An overview of the new framework is shown in \cref{fig:nabu}.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.9\textwidth]{figs/nabudiagram.pdf}
+\caption[Diagram of the future forecasting system]{A diagram of the
+future forecasting system. The WRF and measurement data is retrieved
+from the API. Then, Dask workers generate the forecasts and upload
+them to the API. The forecasts can then be retrieved from the API by
+utility partners or by plot generators.}
+\label{fig:nabu}
+\end{figure}
 
 The new framework relies on the Python library Dask.
 With Dask, we first define a computation based on the inputs,

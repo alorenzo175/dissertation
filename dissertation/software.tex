@@ -12,8 +12,8 @@ At the time of this writing, utilities are primarily concerned with
 day ahead and hour ahead solar power forecasts to help schedule or
 trade power.
 The production of operational solar power forecasts for electric
-utilties informs how we judge forecast quality, the types of
-forecasts we study, and it ensures the products of our research is
+utilities informs how we judge forecast quality, the types of
+forecasts we study, and it ensures the products of our research are
 used.
 
 \begin{figure}[htb]
@@ -52,12 +52,12 @@ power algorithms.
 
 Initially, APS and PNM sent their data to TEP, and TEP forwarded this
 data along to the UA via SFTP.
-We then desgined Python scripts that would read the data from the
+We then designed Python scripts that would read the data from the
 uploaded files and insert that data into a MySQL database.
 The MySQL database has one table with metadata about each power plant,
 and each plant is given a unique ID.
 The actual data is then stored in a MySQL table with this ID as the
-primary index and the UNIX timestamp of the datapoint as the secondary
+primary index and the UNIX timestamp of the data point as the secondary
 index.
 
 Now, APS sends their data directly to us via a file upload to an HTTP
@@ -65,7 +65,7 @@ API every minute.
 This data includes plant availability and expected future outages so
 that this information can be incorporated into the forecasts.
 
-We have also installed an OSISoft PI system in our datacenter.
+We have also installed an OSISoft PI system in our data center.
 The PI system is a data historian that many utilities use to record
 and store the operating data of their power plants.
 With this system in place at the UA, TEP can now transfer data
@@ -111,10 +111,10 @@ Each day, we produce six forecasts with WRF using the forecasts from
 the North American Mesoscale Forecast System (NAM) and the Global
 Forecast System (GFS).
 The forecasts from the NAM and GFS at 00Z, 06Z, and 12Z each day serve
-as the initalization and boundary conditions for the WRF forecasts for
+as the initialization and boundary conditions for the WRF forecasts for
 a time-lagged ensemble.
 Occasionally, extra WRF forecasts with initializations from the High
-Resolution Rapid Refresh (HRRR) model are created primarily for
+Resolution Rapid Refresh (HER'S) model are created primarily for
 intra-day forecasts of severe weather.
 
 With these six new WRF forecasts each day, along with some forecasts
@@ -225,7 +225,7 @@ Dask then generates a computation graph and the computation can be
 distributed to a number of worker processes that may reside on
 multiple machines.
 Dask also allows task to be distributed based on machine requirements
-such as having a GPU to perform the satellite optimal interpolation.
+such as the presence a GPU to perform the satellite optimal interpolation.
 The computation graph can be stored with each forecast along with
 package version information to provide provenance of how the forecast
 was generated for better reproducibility.

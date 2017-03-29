@@ -6,8 +6,8 @@ from multiple sources based on their relative errors.
 We use OI to combine the irradiance estimates derived from satellite
 images (referred to as the background) and data from the sensor
 network described in \cref{chap:sens_net} with the goal of producing
-better satellite irradiance nowcasts (known as the analysis) to later
-be used as the basis for forecasts.
+better satellite irradiance nowcasts (known as the analysis).
+These analyses will be used as the basis for forecasts in future work.
 This technique is described in \cref{app:pvsc43} and \cref{app:satoi}.
 We show that by using this technique we can nearly eliminate the bias
 present in these satellite derived irradiance estimates and reduce the
@@ -30,8 +30,8 @@ spatial resolution.
 OI, as presented in \cref{app:satoi}, focuses on a relatively small,
 city scale area.
 This means that the background image must have sufficient density in
-this area for the deployed sensors to be of use in correcting the
-image.
+this area to extract the maximum amount of information from the
+deployed sensors when correcting the image.
 Furthermore, since our goal is to produce nowcasts, the algorithm
 should only rely on data present at the current time and take a
 reasonable amount of time to compute.
@@ -66,11 +66,11 @@ The Monitoring Atmospheric Composition and Climate (MACC) project
 \citep{Morcrette2009} has such analysis and forecasts of AOD and ozone
 available, and a ground truth measurement of AOD is available from the
 Tucson AERONET site \citep{Holben1998}.
-Another limitation of the look-up table approach is that Only ten
+Another limitation of the look-up table approach is that only ten
 values of the solar zenith angle are used which introduces artificial
 steps noticeable in the output GHI.
 
-\begin{figure}[h]
+\begin{figure}[htb]
 \centering
 \includegraphics[width=0.7\textwidth]{figs/uasibs_scatter.pdf}
 \caption[Scatterplot of predicted vs measured clear-sky index for
@@ -104,11 +104,11 @@ throughout the US with few in arid climates and no sensor in Arizona.
 Notably, Perez \etal recognized the deficiency in arid areas with high
 ground albedos and proposed a method to correct this issue
 \citep{Perez2004}.
-The high ground albedo combined with the empirical coefficients
-developed for the US broadly likely lead to the overprediction of
-cloudy skies in \cref{fig:suny_scatter}.
+The high ground albedo in Tucson combined with the empirical
+coefficients developed for the entire US likely lead to the
+overprediction of cloudy skies in \cref{fig:suny_scatter}.
 
-\begin{figure}[h]
+\begin{figure}[tb]
 \centering
 \includegraphics[width=\textwidth]{figs/suny_scatter.pdf}
 \caption[Scatterplot of predicted vs measured clear-sky index for the
@@ -116,8 +116,9 @@ semi-empirical model]{A scatterplot of the predicted vs measured
   clear-sky index for semi-empirical model before OI (blue) and after
   (orange). The semi-empirical model tends to overpredict clouds as
   shown in the clear-sky index scatterplot on the left. The splitting
-  for the GHI in the right image is likely due to a time of day
-  effect.  (Reproduced from \cite{Lorenzo2017})}
+  for the background GHI in the right image is likely due to a time of day
+  effect.  OI removes this splitting (Reproduced from
+  \cite{Lorenzo2017})}
 \label{fig:suny_scatter}
 \end{figure}
 
@@ -125,7 +126,7 @@ A new, more strict test of OI in southern Arizona would be to
 recalculate the empirical coefficients used in the semi-empirical
 model for the area.
 This would likely improve the background errors of the semi-empirical
-errors and may also improve the final errors after performing OI.
+model and may also improve the final errors after performing OI.
 
 \subsection{Other Models}
 There are numerous algorithms to convert satellite measured radiances
@@ -168,8 +169,9 @@ correlation methods along with a plot of the adjusted visible albedo
 from the satellite (cloudiness) versus the clear-sky index estimate of the
 background and analysis (clearness).
 Notice that cloudiness correlation tends to change the form of this
-cloudiness to clearness function, whereas the spatial and empirical
-correlation parameterizations tend to broaden the curve instead.
+cloudiness to clearness function for the analysis, whereas the spatial
+and empirical correlation parameterizations tend to broaden the curve
+instead.
 
 \begin{figure}[p]
 \centering
@@ -178,7 +180,7 @@ correlation parameterizations tend to broaden the curve instead.
   of the cloudiness (adjusted visible albedo) to clearness (clear-sky
   index) functions for the three correlation parameterizations for
   2014-04-19 at 11:30 local time. Cloudiness correlation tends to
-  reshape the curve whereas the other parameterizations broaden it.}
+  reshape the analysis curve whereas the other parameterizations broaden it.}
 \label{fig:cldclr_se_419}
 \end{figure}
 
@@ -189,7 +191,7 @@ correlation parameterizations tend to broaden the curve instead.
   of the cloudiness (adjusted visible albedo) to clearness (clear-sky
   index) functions for the three correlation parameterizations for
   2014-06-15 at 13:00 local time. Cloudiness correlation tends to
-  reshape the curve whereas the other parameterizations broaden it.}
+  reshape the analysis curve whereas the other parameterizations broaden it.}
 \label{fig:cldclr_se_615}
 \end{figure}
 
@@ -198,7 +200,7 @@ UASIBS model is shown in \cref{fig:cldclr_ua_615}.
 The UASIBS algorithm is more complex and not a simple function
 of the adjusted visible albedo, but each correlation parameterization
 changes this cloudiness to clearness mapping in a different way.
-Also note the undesirable ``bullseye'' like pattern in the spatial
+Also note the undesirable ``bulls-eye'' like pattern in the spatial
 correlation analysis image\footnote{This may not be visible in the
   printed form of this dissertation.} that does not correspond with
 reality.
@@ -235,16 +237,16 @@ the resulting MSE for each set of parameters is shown in
 \vspace{-1em} \\
 \subfloat{\hspace{-1em} \includegraphics[width=1.05\textwidth]{figs/suny_optsurf.pdf}}
 \caption[Optimization surfaces for OI parameters]{Optimization
-  surfaces for the parameters $k,\: l,\: d$ of the optimal
-  interpolation routine. The columns represent different choices of
-  $k$, the rows distinguish between cloudiness and spatial
-  correlation, the y-axis is $l$ and the x-axis is $d^{1/2}$. The top
-  figure shows surfaces for the UASIBS model and the bottom is for the
-  semi-empirical model. Note, that for all choices of $k$ and the
-  correlation parameterization, the surfaces for the UASIBS model have
-  a clear minimum. The surfaces for the semi-empirical model have less
-  distinct minima indicating that optimal interpolation is not
-  particularly sensitive to parameter choice for this model.}
+surfaces for the parameters $k,\: l,\: d$ of the optimal interpolation
+routine. The columns represent different choices of $k$, the rows
+distinguish between cloudiness and spatial correlation, the y-axis is
+$l$ and the x-axis is $d^{1/2}$. The top figure shows surfaces for the
+UASIBS model and the bottom is for the semi-empirical model. Note,
+that for all choices of $k$ and the correlation parameterization, the
+surfaces for the UASIBS model have a clear minimum. The surfaces for
+the semi-empirical model have less distinct minima (even after
+rescaling for the spatial correlation set) indicating that optimal
+interpolation is not as sensitive to parameter choice for this model.}
 \label{fig:paramopt}
 \end{figure}
 
@@ -261,7 +263,7 @@ insensitive to these parameters is warranted.
 
 \section{Image Position Errors}
 Section 5 of \cref{app:satoi} describes how errors in the satellite
-image position relative to the ground sensors is corrected by
+image position relative to the ground sensors are corrected by
 minimizing the MSE of the OI analysis.
 These location errors primarily effect OI with the cloudiness
 correlation parameterization.
@@ -297,11 +299,11 @@ mapping and the MSE of the OI analysis.
 Much can be done to extend the work in \cref{app:satoi}.
 The first likely extension is to use these nowcasts of irradiance to
 produce a forecast as in \cref{app:network} where the OI analysis
-replaces the interpolated map and is advected by some cloud wind.
+replaces the interpolated map and is advected by a cloud wind.
 This can then be extended further with a better advection scheme and
 a more complex wind field.
 
-One also could explore the valid range of OI, e.g.\@can information
+One also could explore the valid range of OI, e.g.~can information
 from sensors in Tucson be used to correct the background image over
 Phoenix 100 miles away?
 Perhaps other parameterizations, such as a combination of cloudiness
@@ -316,12 +318,12 @@ It might be helpful to separate these layers so that sensor 1 provides
 information to correct the low clouds while sensor 2 provides
 information about the high clouds.
 In addition to possibly improving the OI result, knowledge of the
-cloud layers will also help with forecasting since each layer can move
-independently.
+cloud layers will also help with forecasting since each layer can be
+advected independently.
 
 A natural extension of OI with a forecast is the Kalman filter.
 The Kalman filter would essentially perform OI, move the image
-according to some cloud advection scheme, and repeat with new
+according to a cloud advection scheme, and repeat with new
 observations using the shifted image as the background.
 Since the satellite takes a new image at least every 30 minutes, there
 are two sources of data that the update step should incorporate: the

@@ -9,9 +9,9 @@
 \Cref{chap:satoi} and \cref{app:satoi} present a way in which a
 nowcast of irradiance can be improved using data assimilation
 techniques.
-Naturally, we want to extend this nowcast into a proper forecast
-initially using the technique of cloud motion vectors that produced
-forecasts in \cref{chap:network} and \cref{app:network}.
+Naturally, we want to extend this nowcast into a forecast using the
+technique of cloud motion vectors that produced forecasts in
+\cref{chap:network} and \cref{app:network}.
 More complicated dynamics other than advection such as cloud formation
 and dissipation may be incorporated.
 Eventually, a full numerical weather model may be required to capture
@@ -19,7 +19,7 @@ the dynamics of the system with the desired accuracy.
 
 
 With a forecast model, it is natural to extend optimal interpolation
-to the well known Kalman filter where a forecast of the state is
+to the well-known Kalman filter where a forecast of the state is
 produced and constantly updated with new information.
 This has the added benefit of retaining information from all previous
 steps.
@@ -118,7 +118,7 @@ etc.\ would be accounted for.
 An ensemble of WRF forecasts, similar to the ensemble of satellite
 forecasts discussed in \cref{sec:satellite_fx}, may produce better
 forecasts by spanning more of the solution space.
-This is regularly done at operation forecasting centers.
+This is regularly done at operational forecasting centers.
 Currently, UA-WRF is run about six times a day with different initial
 conditions based on the 0Z, 6Z, and 12Z GFS and NAM forecasts.
 This produces a multi-physics, time-lagged ensemble.
@@ -135,12 +135,9 @@ forecast.
 As mentioned in \cref{chap:intro}, one eventual goal is to combine
 different types of forecasts taking into account their relative
 accuracies at different time horizons into one unified forecast.
-This unified forecast would predict future vales from one minute in
+This unified forecast would predict future values from one minute in
 the future out to seven days combining persistence, network,
 satellite, and numerical weather forecasts.
-The main challenges to achieving this goal are deciding the time
-horizon where one forecast ends and another begins and ensuring the
-forecast is consistent over this transition.
 
 One technique to produce this fused forecast is to compute a weighted sum
 of all the forecasts where the weights are dependent on the forecast
@@ -153,9 +150,8 @@ but the errors will vary depending on the weather and season.
 One way to account for this may be to establish categories such as
 clear days, days with high thin clouds, etc.\ and compute errors for
 each category.
-Then, one just determines the category for the day and applies the
+Then, one determines the category for the day and applies the
 weights based on the category.
-In some sense, this is an analog method.
 Another option may be to use machine learning techniques to determine
 the weights between forecasts.
 

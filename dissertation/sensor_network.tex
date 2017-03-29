@@ -74,7 +74,7 @@ Design files for the circuit board can be found online~\cite{Lorenzo2017a}.
 
 The custom sensors are developed around the Olimex
 iMX223-OLinuXino-MICRO board.
-The OLinuXino was chosen because it consumes little power ($< 1$W) and it
+The OLinuXino was chosen because it consumes little power ($< 1$ W) and it
 runs a full Linux operating system which allows for development in any
 language that can be installed on Linux along with the usual suite of
 Linux tools (SSH, Bash, logs).
@@ -88,12 +88,12 @@ The modem is connected to the OLinuXino via USB.
 WvDial and PPPD are used to setup the connection to the modem and
 allow internet access.
 
-Power to the system is provided by a 10W solar panel and a 6Ah
+Power to the system is provided by a 10 W solar panel and a 6 Ah
 lead-acid battery.
 A standard solar charge controller is used to limit the current from the
 panel to the battery.
-The nominal 12V from the battery is routed to the circuit board with
-the OLinuXino and modem and converted to 5VDC with a circuit based on
+The nominal 12 V from the battery is routed to the circuit board with
+the OLinuXino and modem and converted to 5 VDC with a circuit based on
 the LM2676 step-down regulator.
 
 The circuit board is designed to accept input from either a calibrated
@@ -110,7 +110,7 @@ from the GPIO pins.
 An additional 4 channel 12-bit ADC (MCP3204) is used to convert other
 values such as enclosure temperature (measured by an LM61) and battery
 voltage to be read on the OLinuXino GPIO pins for monitoring.
-A 4.096V voltage reference (MCP1541) is used by both ADCs.
+A 4.096 V voltage reference (MCP1541) is used by both ADCs.
 
 \begin{figure}[t]
 \includegraphics[width=\textwidth]{figs/sensor_board.jpg}
@@ -169,7 +169,7 @@ The main data collection script is started on boot and monitored via
 Supervisor to ensure it is restarted if it crashes for some reason.
 This script pulls data from the connected ADCs at a configurable rate,
 time-stamps it, and stores it in files.
-This data are then uploaded to our central servers every minute where
+These data are then uploaded to our central servers every minute where
 it can be imported into a database.
 
 A separate script monitors the wireless connection to ensure the
@@ -221,12 +221,12 @@ of sensor devices and more accurate time keeping.
 One major challenge with using rooftop PV systems as sensors is that
 the data are often difficult to collect.
 One solution we employed is to use the built-in capabilities of some
-inverters to send data directly via FTP.
+inverters to upload data to a server via FTP.
 With the help of a local PV system installer, Technicians for
 Sustainability, we are collecting 5 minute averaged power data from
 over 70 systems in the Tucson area in near real-time.
 Since many inverters connect to a home owners network, we also
-explored using cheap Linux devices (Raspberry Pi) to communicate with
+explored using inexpensive Linux devices (Raspberry Pi) to communicate with
 inverters on the network and upload the data to a central server, but
 found them unreliable for constant, unmonitored operation.
 
@@ -254,8 +254,7 @@ This approach accounts for differences in systems such as orientation,
 peak power, and shading.
 Furthermore, it detrends the diurnal cycle in the data.
 The clear-sky expectation should account for temperature and aerosol
-effects on a given sensor in some way to produce an unbiased clear-sky
-index.
+effects on a given sensor to produce an unbiased clear-sky index.
 
 \section{Network Deployment}
 \begin{figure}[h]
@@ -290,8 +289,8 @@ configuration was to study forecasts for a number of PV power plants
 located around $32.1^\circ$ N and $110.8^\circ$ W.
 The sensors are arranged as they are based on the analysis done in
 \cite{Lonij2013}, the fact that the primary cloud direction in
-non-monsoon season is from the southwest, and the limited number of
-sensors available.
+non-monsoon season is from the west-southwest, and the limited
+number of sensors available.
 The custom sensors shown in \cref{fig:map} were deployed in late March
 2014.
 Data from these sensors is available from April to July 2014, when the

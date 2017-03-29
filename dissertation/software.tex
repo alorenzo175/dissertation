@@ -12,9 +12,11 @@ At the time of this writing, utilities are primarily concerned with
 day ahead and hour ahead solar power forecasts to help schedule or
 trade power.
 The production of operational solar power forecasts for electric
-utilities informs how we judge forecast quality, the types of
-forecasts we study, and it ensures the products of our research are
-used.
+utilities informs how we judge forecast quality and the types of
+forecasts we study.
+Furthermore, providing these operational forecasts to the utilities
+ensures that our research is funded and that the research products
+are used.
 
 \begin{figure}[htb]
 \centering
@@ -60,10 +62,11 @@ The actual data is then stored in a MySQL table with this ID as the
 primary index and the UNIX timestamp of the data point as the secondary
 index.
 
-Now, APS sends their data directly to us via a file upload to an HTTP
-API every minute.
-This data includes plant availability and expected future outages so
-that this information can be incorporated into the forecasts.
+Now, APS sends their power and weather data directly to us via a file
+upload to an HTTP API every minute.
+This data includes plant availability, expected future outages, and
+curtailment schedules so that this information can be incorporated
+into the forecasts.
 
 We have also installed an OSISoft PI system in our data center.
 The PI system is a data historian that many utilities use to record
@@ -71,7 +74,7 @@ and store the operating data of their power plants.
 With this system in place at the UA, TEP can now transfer data
 directly to our PI system through what is known as a PI-to-PI
 connection.
-This removes the SFTP upload and then MySQL import step of our data
+This removes the SFTP upload and MySQL import steps of our data
 collection pipeline.
 
 \section{Current Operational System}
@@ -85,7 +88,7 @@ discussed in \cref{chap:satoi} along with a simple cloud advection
 forecast model.
 Parts of this system are described in \cref{app:wfhpvsc}.
 
-Forecasts from WRF form the basis of forecasts with time horizons from
+Products from WRF form the basis of forecasts with time horizons from
 six hours to seven days ahead.
 We run WRF with a 5.4 km horizontal spacing outer domain that covers
 much of the western US and northern Mexico, and a 1.8 km inner one-way
@@ -113,16 +116,15 @@ Forecast System (GFS).
 The forecasts from the NAM and GFS at 00Z, 06Z, and 12Z each day serve
 as the initialization and boundary conditions for the WRF forecasts for
 a time-lagged ensemble.
-Occasionally, extra WRF forecasts with initializations from the High
-Resolution Rapid Refresh (HER'S) model are created primarily for
-intra-day forecasts of severe weather.
+Occasionally, extra WRF forecasts with initializations from the Rapid
+Refresh (RAP) model are created primarily for intra-day forecasts of
+severe weather.
 
 With these six new WRF forecasts each day, along with some forecasts
 from the previous day, we produce three irradiance forecasts.
 One of these forecasts is a best estimate of the irradiance that is a
 mean of the entire WRF ensemble.
-We also produce minimum and maximum irradiance forecasts to provide a
-confidence interval for the mean forecast.
+We also produce minimum and maximum irradiance forecasts.
 As discussed in \cref{chap:future_work}, improved blending and WRF
 ensemble techniques will be studied in the future.
 
@@ -149,10 +151,12 @@ This rechunking greatly reduced point forecast access times because of
 how the forecasts are stored on disk.
 When the forecasts files are written by WRF, all gridpoints at one
 forecast time are written in a single chunk.
+In this default scheme, the entire file must be read to obtain the
+time-series forecast for a single gridpoint.
 By rearranging the chunks within a file so that they are chunked with
 only a few gridpoints and all the forecast times, we
 only need to read a few chunks of data from disk in order to get the
-point forecasts we are interested in instead of the entire file.
+point forecasts we are interested.
 
 With irradiance forecasts generated, we then need to convert from
 irradiance to power.
@@ -181,7 +185,7 @@ forecasts to power forecast, and generates CSV files and plots of the
 forecasts is currently a monolith written in Python.
 The plots are then presented on a website that the utilities can
 access as in \cref{fig:website}.
-They can also download the CSV files with the forecast data from the site.
+Utilities can also download the CSV files with the forecast data from the site.
 We also operate a public website with primarily forecasts of weather
 variables (temperature, wind, etc) at
 https://forecasting.energy.arizona.edu/public.
@@ -198,7 +202,7 @@ forecast generation software.
 The current forecasting monolith has grown complex and difficult to
 debug and it lacks sufficient test coverage.
 Furthermore, the process consumes large amounts of memory and can take
-up to five minutes to generate a new forecast and all the associated
+up to an hour to generate a new forecast and all the associated
 figures.
 A new framework will be more distributed with unit tests for nearly
 every line of code.

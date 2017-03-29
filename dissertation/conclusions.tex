@@ -12,8 +12,7 @@ Using data from these sensors, we produced forecasts that improve upon
 a reference by reducing RMSE by 20\% for time horizons from one minute
 to two hours.
 We also carefully analyzed the errors of these forecasts and described
-how a smoother forecast may have smaller errors when insufficient care
-is taken when analyzing errors.
+how a smoother forecast may have smaller errors.
 This error analysis has improved our understanding of how to judge the
 quality of a forecast based on commonly used forecast metrics.
 For longer forecast horizons from 30 minutes to six hours, irradiance
@@ -21,19 +20,16 @@ estimates derived from satellite images are used.
 Initial satellite estimates had large errors, but we used data
 assimilation and data from the sensor network to cut some errors in
 half.
-Along the way, we studied various methods to estimate the correlation
-between pixels in satellite irradiance estimates, including a novel
-method based on the difference in cloudiness between two pixels.
+We studied various methods to estimate the correlation between pixels
+in satellite irradiance estimates, including a novel method based on
+the difference in cloudiness between two pixels.
 
 Next steps include incorporating a cloud advection model into the data
 assimilation routine to produce forecasts and to continuously
 incorporate new data while retaining prior information.
-These WRF forecasts used for day-ahead and longer forecasts could
+The WRF forecasts used for day-ahead and longer forecasts could
 benefit from incorporating the actual cloud field at the model
 intialization and from an ensemble of model runs.
-Eventually, a full physics large eddy simulation of the atmosphere may
-be required to properly model the dynamics of clouds and to produce
-good forecasts from five minutes to seven days in the future.
 
 
 

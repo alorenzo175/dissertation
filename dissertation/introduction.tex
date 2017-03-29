@@ -2,11 +2,13 @@
 \label{chap:intro}
 
 The installed capacity of solar power in the US continues to grow as a
-result of aging coal and natural gas power plants, lower costs,
+result of the decommission of aging coal power plants, lower costs,
 state renewable portfolio standards, and efforts to decarbonize the
 electrical grid.
-As shown in \Cref{fig:solarinstall}, this growth has been steady since
-2010 and shows no signs of abating.
+As shown in \Cref{fig:solarinstall}, this growth has accelerated since
+2010, and the US Energy Information Administration predicts that the
+installed utility-scale capacity of solar power will reach 31 GW by
+the end of 2018 \citep{STEO2017}.
 Of the 4,000 TWh of energy generated in 2016 in the US, 60 TWh was
 produced by solar power plants \citep{EPM2017}.
 
@@ -20,22 +22,23 @@ produced by solar power plants \citep{EPM2017}.
 
 Sunlight is the fuel that drives all solar power plants.
 Unlike sources of fuel for conventional power generators like coal or
-natural gas, the solar resource is highly variable due primarily to
-clouds.
+natural gas, the solar resource is variable due to clouds and the
+motion of the sun in the sky.
 This variability of the solar resource leads to uncertainty at the
 electric utility and increases management costs \citep{Joskow2011}.
 Forecasts help utilities manage the variability in a number of ways
-\citep{Kleissl2013,Inman2013}, including the optimal dispatch of
-battery storage \citep{Cormode2015} and scheduling of reserve capacity
+\citep{Kleissl2013,Inman2013}, including the dispatch of conventional
+generators, the optimal dispatch of battery storage
+\citep{Cormode2015}, and the scheduling of reserve capacity
 \citep{Kaur2016}.
-Improvements in forecasts can further reduce costs based on refined
-scenario analyses \citep{BrancucciMartinez-Anido2016}.
+Improvements in forecasts can further reduce costs
+\citep{BrancucciMartinez-Anido2016}.
 Ultimately, better forecasts increase the amount of solar power that
-utilties can add to the grid.
+utilities can add to the grid.
 
 An example of the variability from a 28 MW power plant due to clouds
 is shown in \cref{fig:variability_example}.
-The power plant started producing power near sunrise, and reaches it's
+The power plant started producing power near sunrise, and reaches its
 peak power output of 28 MW in a few hours.
 However, clouds begin moving over the plant in the afternoon causing
 large fluctuations in the power.
@@ -45,17 +48,16 @@ Utility companies need to constantly match the electrical generation
 to the demand, which means the utility needs generation standing by
 (spinning reserves) that can provide the power as a cloud passes over
 the plant and then turn off just as quickly when the solar plant
-returns to normal operation.
+returns to full output.
 
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\textwidth]{figs/avalon_ramps.pdf}
 \caption[Variable power output of a 28 MW solar power plant]{
-Power output of a 28 MW power plant near Tucson, AZ on a variable
-day. Changes in power as large as 25 MW can occur in a span of only 5
-minutes. This variability stresses the grid, but can be managed with
-proper forecasting.}
+Power output of a 28 MW power plant near Tucson, AZ on a day with
+variability. Changes in power as large as 25 MW can occur in a span of
+only 5 minutes. Forecasts help utilities respond to this variability.}
 \label{fig:variability_example}
 \end{figure}
 
@@ -73,11 +75,11 @@ dissertation and provides a summary of the work.
 
 The remainder of the dissertation is organized as follows.
 \Cref{chap:sens_net} describes the design and deployment of a network
-of irradiance sensors that was critical to the forecasts we discuss.
+of irradiance sensors to obtain data for the forecasts we discuss.
 \Cref{app:pvsc40} and \cref{app:network} describe a forecasting
 technique that relies solely on data from the sensor network.
 \Cref{chap:network} expands on the careful error analysis necessary to
-understand these so called network forecasts.
+understand these so-called network forecasts.
 \Cref{app:pvsc43} and \cref{app:satoi} describe how the data from the
 sensor network was combined with satellite images to provide an
 improved starting point for forecasts with additional details in
@@ -94,22 +96,22 @@ concluding thoughts in \cref{chap:conc}.
 
 The Southwest Variable Energy Resource Initiative (SVERI)\footnote{The
 SVERI member utilities are Arizona's G\&T Cooperatives, Arizona Public
-Service, El Paso Electric, Imperial Irragation District, Public
+Service, El Paso Electric, Imperial Irrigation District, Public
 Service Company of New Mexico, Salt River Project, Tucson Electric
 Power, and the Western Area Power Administration's Desert Southwest
 Region.} was formed in the fall of 2012 to study the impact and
 characteristics of variable energy resources in the Southwest.
-The SVERI partnership grew out of the relationships between many of
+The SVERI partnership grew out of the relationships among many of
 the utilities in the Southwest Reserve Sharing Group (SRSG).
 Utilities in the SRSG share contingency reserves to reduce the costs
 of control standards and increase the reliability of the Western
 Interconnection.
-Many of the SVERI member utilties are balancing authorities tasked
-with maitaining the reliability of the electrical grid in the Western
+Many of the SVERI member utilities are balancing authorities tasked
+with maintaining the reliability of the electrical grid in the Western
 US and Canada.
 
 Our group at the University of Arizona gathered and analyzed data from
-the SVERI utilties to help them understand the impact of the variable
+the SVERI utilities to help them understand the impact of the variable
 resources, mainly solar and wind power.
 The SVERI utilities have documented a total of 1100 MW of installed
 utility scale solar capacity, 800 MW of installed wind capacity, and a
@@ -117,9 +119,9 @@ peak load of 23 GW \citep{sveri_website}.
 Another roughly 1 GW of generation comes from distributed generation
 (DG) solar systems that are installed on residential or commercial
 rooftops.
-Heatmaps showing the time of day load, wind generation, solar generation, and
-wind and solar fraction of load for two years are shown in
-\cref{fig:sveri_heatmap}.
+Heatmaps showing the time of day load, wind generation, utility-scale
+solar generation, and wind and solar fraction of load for two years
+are shown in \cref{fig:sveri_heatmap}.
 Heatmaps for weather variables at the University of Arizona are shown
 in \cref{fig:ua_heatmap} to correlate weather to, for example, the
 abrupt decrease in load around 10/14 corresponding to the end of monsoon season.
@@ -153,9 +155,9 @@ speed]{Time of day heatmaps for temperature, dewpoint, global
 \label{fig:ua_heatmap}
 \end{figure}
 
-Utilities in Arizona are well on their way to generating 15\% of their
-energy from renewable resources by 2025 as required by the Arizona
-Renewable Energy Standard and Tariff (REST) \citep{azrest}.
+The Arizona Renewable Energy Standard and Tariff (REST) mandates that
+utilities in Arizona generate 15\% of their energy from renewable
+resources by 2025 \citep{azrest}.
 As mentioned above, DG solar systems provide a large fraction of the
 total renewable energy generation.
 One problem utilities encounter with DG systems is that real-time
@@ -170,27 +172,26 @@ will be required for the most accurate load forecasts.
 \centering
 \includegraphics[width=\textwidth]{figs/duckcurves.png}
 \caption[Projected SVERI 2027 duck curves]{Net load (total load minus
-  wind and solar generation) projections for SVERI in 2027 if
-  utilities continue business as usual. The shape of the November net
-  load is referred to as a duck curve. Forecasts along with storage
-  and other policies will help utilities change how solar and wind
-  power are controlled to avoid these multi-GW ramps. Figure
-  reproduced from \cite{sveri_report}}
+wind and solar generation) projections for SVERI in 2027. The shape of
+the November net load is referred to as a duck curve. Forecasts along
+with storage and other policies will help utilities change how solar
+and wind power are controlled to avoid these multi-GW ramps. Figure
+reproduced from \cite{sveri_report}}
 \label{fig:duckcurves}
 \end{figure}
 
 Similar to DG, utilities may consider power generated at large solar
 and wind power plants to be modifiers of the load instead of power
 that is controlled and dispatched.
-Utilities are then interested in what they call the net load or the
+Utilities are then interested in what they call the net load, or the
 total load minus the generation from solar and wind power plants.
-Based on projections from 2014 SVERI data, we project net load
-profiles will resemble those in \cref{fig:duckcurves}.
-Notice the large power ramps that occur in the so called duck curve in
+Based on projections from 2014 SVERI data, net load profiles in 2027
+may resemble those shown in \cref{fig:duckcurves}.
+Notice the large power ramps that occur in the so-called duck curve in
 November.
 Dealing with these 3 GW ramps in only a few hours is costly since
 utilities currently rely mostly on quick-start combustion turbines.
-Using forecasts, utilties can better control large solar and wind
+Using forecasts, utilities can better control large solar and wind
 power plants and avoid some of these large ramps.
 Other smart grid technologies such as energy storage and time of use
 rates will also play a critical role in avoiding these ramps to
@@ -211,8 +212,8 @@ the movement of the sun through the sky.
 The second major source of variability is due to clouds blocking light
 from the sun from reaching the surface of the Earth.
 Aerosol, dust particles, and water vapor in the atmosphere can also
-reduce sunlight, although they often only account for a small
-reduction unless there is a dust storm or dense smog.
+reduce sunlight, although they often only account for a small, constant
+reduction except in the case of a dust storm or dense smog.
 
 \begin{figure}[htb]
 \centering
@@ -224,7 +225,7 @@ reduction unless there is a dust storm or dense smog.
 There are three primary classifications of the radiation that reaches
 the Earth's surface as shown in \cref{fig:irradiance_components}.
 The first is the radiation that comes in a straight path directly from
-the sun called direct irradiance.
+the sun called {\em direct irradiance}.
 The direct irradiance that strikes the earth at a normal angle is
 called the direct normal irradiance (DNI).
 Light can also reach the surface by being scattered in the atmosphere
@@ -233,7 +234,7 @@ is referred to as diffuse irradiance.
 The total diffuse irradiance that strikes a horizontal surface on the
 Earth is referred to as the diffuse horizontal irradiance (DHI).
 The sum of the direct and diffuse irradiance is referred to as the
-global irradiance, and the total direct and diffused irradiance on a
+global irradiance, and the total direct and diffuse irradiance on a
 horizontal surface is called the global horizontal irradiance (GHI).
 
 The majority of solar power plants are non-concentrating systems that
@@ -243,24 +244,25 @@ Furthermore, we are interested in producing forecasts that will,
 after being converted to solar power forecasts, be used to maintain
 grid reliability and for power market trading similar to
 \cite{Kaur2016}.
-Thus, we will focus on forecasts that predict the irradiance now out
-to the irradiance a week from now.
+Thus, we will focus on forecasts that predict the irradiance now
+through a week from now.
 Reviews of solar power and irradiance forecasting can be found in
 \citep{Inman2013,Antonanzas2016,Kleissl2013}.
+\Cref{fig:fxhoriz} shows the typical forecast horizons for a number of
+forecasting techniques.
 
 Forecasting techniques are often compared based on the range of
-forecast horizons where they outperform a reference forecast as shown
-in \cref{fig:fxhoriz}.
+forecast horizons where they outperform a reference forecast.
 This reference can be a persistence forecast that assumes the
 irradiance in the future will be the same as it is currently or a
 forecast based on climatology.
 
 \begin{figure}[tbh]
 \includegraphics[width=\textwidth]{figs/fxhoriz.pdf}
-\caption[Forecast horizon for various forecast types]{The optimal
-  forecast horizons for various types of short-term forecasts. This
-  dissertation will focus on network and satellite forecasts. NWP
-  refers to numerical weather predictions.}
+\caption[Forecast horizon for various forecast types]{
+The optimal forecast horizons for various types of solar irradiance
+forecasts. This dissertation will focus on network and satellite
+forecasts.}
 \label{fig:fxhoriz}
 \end{figure}
 
@@ -274,8 +276,8 @@ forecasts at time horizons from under 1 minute to 15 minutes
 These types of forecasts are useful for managing an individual power
 plant in near real-time.
 
-Statistical forecasts are those that rely on measured irradiance data,
-at least for our purposes.
+Statistical forecasts, for our purposes, are those that rely on
+measured irradiance data.
 We group many techniques in this category including auto-regressive
 models \citep{Yang2014}, artificial neural networks
 \citep{Gutierrez-Corea2016} and other machine learning algorithms
@@ -283,7 +285,7 @@ models \citep{Yang2014}, artificial neural networks
 Persistence forecasts also fall into this category.
 These techniques also span a broad range of forecast horizons.
 Some provide forecasts for 20 seconds to 10 minutes while others may
-produce forecast for many days in advance.
+produce forecasts for many days in advance.
 
 Network forecasts are a type of statistical forecast that will be
 studied in depth in this dissertation.
@@ -299,18 +301,22 @@ These estimates can be categorized into semi-empirical and physical models.
 Semi-empirical models rely on historical data from the satellite and
 ground sensors to find the function that translates from satellite
 image pixel to observed irradiance \citep{Perez2013a}.
-Physical models try to use the satellite images to infer properties
-about the clouds which are then used in a radiative transfer model to
-predict the sunlight that reaches the surface \citep{Miller2013}.
+Physical models use the satellite images to infer properties about the
+clouds which are then used in a radiative transfer model to predict
+the sunlight that reaches the surface \citep{Miller2013}.
 Improvements to these irradiance estimates using ground data and data
 assimilation will be explored in \cref{chap:satoi}.
 
 Forecasts that predict irradiance for time horizons greater than a few
 hours and up to about a week rely on numerical weather predictions
 (NWP).
-These are dynamic models of the atmosphere that must parameterize
-various processes.
-One benefit is that NWP forecasts cover a large area.
+NWP are solutions to the partial differential equations that govern
+the atmosphere including the transport of mass and the thermodynamics
+of the system.
+A number of assumptions must be made and processes such as radiative
+transfer, surface characteristics, and the phase change of water must
+be parameterized in order to complete the calculations in a reasonable
+amount of time even on the most powerful supercomputers.
 We produce NWP forecasts using the Weather Research and Forecasting
 (WRF) \citep{Skamarock2008} at the University of Arizona with customized
 settings for the Southwest \citep{Leuthold}.
@@ -324,12 +330,12 @@ UA-WRF forecasts.
 \hspace{-.5em}
 \subfloat{\includegraphics[width=0.5\textwidth]{figs/wrf_ghi.png}}
 \caption[Wind speed and GHI output from UA-WRF]{Example wind speed
-  near the surface and GHI outputs from the WRF model run at the
+  near the surface and GHI outputs from a WRF model run at the
   University of Arizona.}
 \label{fig:wrf}
 \end{figure}
 
-There is also active research in hybrid forecasts that combine
+There is also active research in forecasts that combine
 different forecasting techniques to improve forecasts across horizons
 \citep{Lu2015}.
 
@@ -346,35 +352,34 @@ Specifically, we wish to understand the practical limits of
 persistence, network, and satellite forecasting techniques in the
 Southwest.
 We also want to understand what makes a ``good'' forecast which
-requires a deep understanding of various error metrics and an
+requires a thorough understanding of various error metrics and an
 understanding of how the forecasts will be used.
 \Cref{fig:newshitplot} shows the culmination of this work.
 
 \begin{figure}[htbp]
 \includegraphics[width=\textwidth]{figs/bullshit.pdf}
 \caption[Speculative errors for various forecasting
-techniques]{Speculative root mean squared errors (RMSE) for various
-  types of forecasts. This sketch serves as a hypothesis to be tested
-  in this dissertation. We wish to understand the practical limitations
-  of various forecasting techniques. }
+techniques]{Speculative normalized root mean squared errors (NRMSE)
+for various types of forecasts. This sketch serves as a hypothesis to
+be tested in this dissertation. We wish to understand the practical
+limitations of various forecasting techniques. }
 \label{fig:bullshitplot}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
 \includegraphics[width=\textwidth]{figs/timehorizon.pdf}
 \caption[Irradiance forecast errors across forecast horizons]{A
   comparison of irradiance forecast root-mean squared errors (RMSE)
   across many time horizons.  Pers.\ refers to persistence, and UA-WRF
   refers to the numerical weather models generated at the UA using the
   Weather Research and Forecasting (WRF) model. The intelligent fusion
-  is a theoretical combination of forecasts at diffferent time
+  is a theoretical combination of forecasts at different time
   horizons for the best forecast at all horizons.  The solid lines
-  (and points) indicate forecasts that will be studied in depth in
-  this dissertation. Dotted lines are based on prelimnary analysis,
-  but have not been studied in depth.  Dashed lines are forecasting
-  techniques that will be studied in future work.  The persistence and
-  network forecasts will be discussed in \Cref{chap:network} and the
-  satellite image points will be discussed in \Cref{chap:satoi}.}
+  (and points) indicate forecasts that will be studied in depth in this
+  dissertation. Dashed lines are forecasting techniques that will be
+  studied in future work.  The persistence and  network forecasts will
+  be discussed in \Cref{chap:network} and the satellite image points
+  will be discussed in \Cref{chap:satoi}.}
 \label{fig:newshitplot}
 \end{figure}
 
@@ -382,7 +387,7 @@ The specific forecasting methods studied in this dissertation rely on
 a network of irradiance sensors.
 A network with sufficient density and time resolution did not exist in
 Tucson at the start of this dissertation work, so we set out to design
-and deploy inexensive sensors.
+and deploy inexpensive sensors.
 The design and deployment of the network is described in
 \cref{chap:sens_net}.
 For the period of April to July 2014, we collected data from about 50
@@ -390,16 +395,11 @@ custom sensors and rooftop PV systems to use in subsequent studies.
 All data was detrended to clear-sky index using the expectation of the
 output of each sensor on a clear day.
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
 \centering
 \includegraphics[width=0.8\textwidth]{figs/sensdeploy.jpg}
 \caption{Picture of a sensor deployment.}
 \end{figure}
-
-With this irradiance network data, the first forecasting methodology
-we implemented and analyzed relies only on data from the network as
-described in \cref{chap:network}.
-This forecast is labeled as network in \cref{fig:newshitplot}.
 
 \begin{figure}[htbp]
 \centering
@@ -411,18 +411,22 @@ This forecast is labeled as network in \cref{fig:newshitplot}.
 \label{fig:19leading31}
 \end{figure}
 
-The basic idea behind this type of forecast is depicted in
+With this irradiance network data, the first forecasting methodology
+we implemented and analyzed relies only on data from the network as
+described in \cref{chap:network} and labeled as network in
+\cref{fig:newshitplot}.
+The basic idea behind the network forecast is depicted in
 \cref{fig:19leading31} where the output of sensor 19 can predict what
 the output of sensor 31 will be in 8 minutes.
-To generate forecast in practice, we first collect data from the
-sensors and interpolate between them to produce a cloud map as shown
-in \cref{fig:clearmap}.
+To generate forecasts, we first collect data from the sensors and
+interpolate between them to produce a clear-sky index map as shown in
+\cref{fig:clearmap}.
 Then, using a vector representing the cloud motion, we can move this
 map to produce a forecast at any point.
 The errors for this type of forecast were studied in depth and a
 sample of those errors is shown in \cref{table:network_errors}.
-While this method has many paths to improvement, forecasts produced in
-this way outperform a persistence forecast by 20\% on average.
+Forecasts produced in this way outperform a persistence forecast by
+20\% on average.
 
 \begin{figure}[hbtp]
 \centering
@@ -437,7 +441,7 @@ this way outperform a persistence forecast by 20\% on average.
 \begin{sidewaystable}[p]
 \centering
 \caption[Error statistics for network forecasts]{
-  Summary of error statistics for network forecasts for the 46
+  Summary of error statistics for network forecasts for 46
   days with clouds. Error statistics were calculated for the entire
   dataset at once. Only forecasts and data with solar zenith angle
   less than $75^\circ$ were used. The mean irradiance was $\bar{y} =
@@ -476,15 +480,14 @@ FH &  rMAE (\%) &  MAE (W/m$^2$) &  MBE (W/m$^2$) &  rRMSE (\%) &  RMSE (W/m$^2$
 \end{figure}
 
 While analyzing this network forecast, we also carefully analyzed
-various types of persistence forecasts to understand how the network
-forecast works.
+various types of persistence forecasts to understand the network
+forecast error metrics.
 \Cref{fig:circuitbreak} shows that network forecasts do incorporate
 data from the sensors to improve errors, but at some times the errors
-in the network forecast closely resembles the errors of persistence forecasts.
-We found that smoother forecasts, or those with lower variance as
-compared to the observations, may seem to perform better than
-forecasts with higher variance when error metrics are considered in
-isolation.
+in the network forecast closely resemble the errors of persistence forecasts.
+We found that smoother forecasts, or those with less variance than he
+observations, may seem to perform better than forecasts with higher
+variance when error metrics are considered in isolation.
 Using the Taylor diagram shown in \cref{fig:taylor}, we show that
 network forecasts transition from matching the observation's variance
 to essentially becoming an area average persistence forecast after
@@ -516,22 +519,21 @@ forecasts]{Taylor diagram for clear-sky index persistence (red),
 \label{fig:taylor}
 \end{figure}
 
-With short-term forecasts covered by the network forecasts, we began
-studying forecasts derived from satellite images.
+After studying network forecasts that perform well for forecast
+horizons under two hours, we began studying forecasts derived from
+satellite images to produce forecasts for horizons out to six hours.
 A number of algorithms exist that convert images of the tops of clouds
-from geostationary satellites to images of irradiance on the ground.
+from geostationary satellites to images of irradiance on the ground
+\citep{Kim2016,Perez2002,Rigollier2004,Gautier1980}.
 An example of one such conversion is shown in
 \cref{fig:satimage_example}.
-Naturally, this conversion from cloud top brightness to the amount of
-radiation that passes through clouds is error prone.
-We found that these satellite derived irradiance estimates from a
-current image (pink square on left axis of \cref{fig:newshitplot}),
-before any forecasting is involved, had errors nearly as large as
-always assuming the sky were clear.
-It is unlikely that producing a forecast from such a nowcast would
-reduce errors, so satellite derived forecasts would quickly become
-worse than a clear-sky forecast, at least in terms of RMSE.
-Thus, in order to produce high quality forcasts from satellite derived
+This conversion from cloud top brightness to the amount of radiation
+that passes through clouds is subject to errors.
+We found that these satellite derived irradiance estimates (pink
+square on left axis of \cref{fig:newshitplot}), before any forecasting
+is involved, had average errors nearly as large as always assuming the
+sky were clear.
+Thus, in order to produce useful forecasts from satellite derived
 irradiance images, we first improved the satellite derived irradiance
 nowcasts.
 
@@ -544,8 +546,8 @@ nowcasts.
 \label{fig:satimage_example}
 \end{figure}
 
-Better satellite derived irradiance nowcasts were generated by again
-using data from the irradiance sensor network as described in
+We used data from the irradiance sensor network to produce better
+satellite derived irradiance nowcasts as described in
 \cref{chap:satoi}.
 Using a data assimilation method known as optimal interpolation (OI),
 we combined the sensor data with the satellite derived irradiance
@@ -569,11 +571,11 @@ An example of improvements using OI is shown in \cref{fig:oi_example}.
 interpolation]{Example initial satellite estimate (known as the
   background) (top row) and analysis (bottom row) clear-sky index
   images using a physical (UASIBS, left column) and a semi-empirical
-  (SE, right column) satellite image to ground irradiance models Note
+  (SE, right column) satellite image to ground irradiance models. Note
   that in this case, UASIBS failed to produce many clouds. OI adds
   clouds to the analysis and also makes the darker, clear areas even
   more clear.  In this case, the SE model overproduces clouds. OI
-  reduces the cloud amount while keeping clouds in suitable
+  reduces the cloud amount while keeping clouds in the correct
   locations.}
 \label{fig:oi_example}
 \end{figure}
@@ -583,7 +585,7 @@ interpolation]{Example initial satellite estimate (known as the
 the NREL MIDC sensor on the University of Arizona campus. Background
 refers to the initial satellite estimate and the analysis is the
 result of OI. UASIBS and SE are two different satellite image to
-irradiance models.The analysis was computed with only the MIDC sensor
+irradiance models. The analysis was computed with only the MIDC sensor
 withheld and averaged over the verification data set, and cloudiness
 covariance was used; see \cref{chap:satoi} for more details. Both the
 UASIBS and SE models show improvements and have a similar analysis
@@ -598,18 +600,18 @@ RMSE\@. Units are W/m$^2$.}
 We found significant improvements using this method after various
 complicating factors such as misalignment in the satellite image
 relative to the ground sensors were corrected.
-The improved nowcasts RMSE is shown as the pink diamond in
+The improved nowcast's RMSE is shown as the pink diamond in
 \cref{fig:newshitplot} and in \cref{table:satoi}
 We also found that this method to improve satellite irradiance
 nowcasts is applicable to a number of satellite to irradiance
 algorithms.
 
-To produce forecasts of irradiance in future work, one might use a
-forecasting method that relies on only cloud advection.
+To produce forecasts of irradiance based on the OI analysis, one might
+use a forecasting method that relies on cloud advection.
 With a forecasting model in place, optimal interpolation can be
-extended to the Kalman filter with constantly incorporates new data
+extended to the Kalman filter which constantly incorporates new data
 into a forecast while also retaining information about past data.
-It is common in numerical weather prediction to propogate and Kalman
+It is common in numerical weather prediction to propagate and Kalman
 filter  an ensemble of states.
 An ensemble in this case also allows for each forecast to have a
 different cloud motion field which may improve the final forecasts.
@@ -618,14 +620,14 @@ Satellite forecasts have been shown to perform well for forecast
 horizons up to 6 hours.
 For longer forecast horizons, numerical weather models are likely
 needed.
-We currently run the Weather Research and Forecasting (WRF) model with
-a custom configuration for Arizona.
+We currently run the Weather Research and Forecasting (WRF) model
+configured for the Southwestern US.
 Improvements in the WRF model may come from assimilating satellite
 data, assimilation of data from the sensor network, or studying WRF
 initialization or physics ensembles.
 
 Finally, once high-quality forecasts are available for all forecast
-horizons, they can be intellgently fused to produce a single forecast
+horizons, they can be intelligently fused to produce a single forecast
 that incorporates the best properties of each forecast methodology.
 Utilities and other stakeholders often need a single forecast for
 horizons from five minutes to one week to make decisions.

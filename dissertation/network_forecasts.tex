@@ -43,15 +43,11 @@ GHI.
 First, we will define the error metrics to be discussed.
 The most common metrics are mean bias error (MBE), mean absolute error
 (MAE), and root mean squared error (RMSE) that are defined as
-\begin{equation}
-\mbox{MBE} = \frac{1}{N} \sum_{i=0}^N (f_i - o_i),
-\end{equation}
-\begin{equation}
-\mbox{MAE} = \frac{1}{N} \sum_{i=0}^N |f_i - o_i|,
-\end{equation}
-\begin{equation}
-\mbox{RMSE} = \sqrt{\frac{1}{N} \sum_{i=0}^N (f_i - o_i)^2},
-\end{equation}
+\begin{eqnarray}
+\mbox{MBE} &=& \frac{1}{N} \sum_{i=1}^N (f_i - o_i), \\
+\mbox{MAE} &=& \frac{1}{N} \sum_{i=1}^N |f_i - o_i|, \\
+\mbox{RMSE} &=& \sqrt{\frac{1}{N} \sum_{i=1}^N (f_i - o_i)^2},
+\end{eqnarray}
 where $f_i$ is the forecast at time $i$ and $o_i$ is the observation
 of a sensor.
 MBE indicates the average bias of a forecast, and if it is not nearly
@@ -69,7 +65,22 @@ A number of other possible useful metrics are defined
 in~\cite{Zhang2015}.
 We will also look at the ramp metrics defined in~\cite{Chu2015b}, the
 ramp detection index (RDI), false ramp index (FRI), and ramp
-magnitude forecast index (RMI).
+magnitude forecast index (RMI):
+\begin{eqnarray}
+\mbox{RDI} &=& \frac{N_{hit}}{N_{hit} + N_{miss}}\\
+\mbox{FRI} &=& \frac{N_{\text{\em FRP\/}}}{N_\text{\em FRP\/} +
+               N_\text{\em TNR\/}}\\
+\mbox{RMI} &=& 1 - \sqrt{\frac{\sum_{i=1}^{N_r} \left( I(t_i + \text{\em FH\/}) -
+               \hat{I}(t_i + \text{\em FH\/}) \right)^2}{\sum_{i=1}^{N_r}\left( I(t_i
+               + \text{\em FH\/}) - I(t_i) \right)^2}},
+\end{eqnarray}
+where $N_{hit}$ is the number of correctly detected ramps, $N_{miss}$
+is the number of ramp events not detected, $N_\text{\em FRP}$ is the
+number of ramps that were predicted but did not occur, $N_\text{\em
+TNR}$ is the number of times no ramp was predicted and no ramp
+occured, $N_r$ is the number of ramp events, $I$ is the observed
+irradiance, $\hat{I}$ is the predicted irradiance, and $\text{\em
+FH\/}$ is the forecast horizon.
 
 \subsection{Example Forecasts}
 Here we present forecasts for two days in Tucson, AZ, in 2014.
@@ -111,8 +122,8 @@ If one is concerned with quanities like average hourly production from
 a PV plant, perhaps the smoother Forecast B is best.
 If one is concerned with variability to, for example, schedule
 generation to back up solar power, Forecast A might be preferable.
-In most cases, Forecast A is considered the better forecast that
-better captures the nature of the observations.
+In most cases, Forecast A is considered the forecast that better
+captures the nature of the observations.
 
 \Cref{table:fx_errs} shows the values of some standard error metrics
 for forecasts on each day.
@@ -121,8 +132,9 @@ MAE and RMSE, and the highest correlation to the observations.
 It also performs better at detecting ramp events.
 On Day 2, MAE and RMSE would suggest that Forecast B is the best.
 Furthermore, Forecast C has the same RMSE as Forecast A.
+The ramp detection metrics for each forecast are comparable.
 
-\begin{table}[htbp]
+\begin{table}[tbp]
 \centering
 \caption[Error metrics for contrived test forecasts]{Error metrics (in units
 of clear-sky index) for the forecasts on Day 1 shown in
@@ -147,7 +159,7 @@ utilities.
 Thus, the metrics are somewhat misleading on Day 2.
 
 \subsection{Taylor Diagrams}
-The Taylor diagram is an execellent tool to summarize a number of
+The Taylor diagram is an excellent tool to summarize a number of
 metrics for many forecasts in a single figure \citep{Taylor2001}.
 \Cref{fig:taylor_day1,fig:taylor_day2} are the Taylor diagrams for the
 forecasts on Day 1 and Day 2, respectively.
@@ -155,7 +167,8 @@ For any forecast, the radius indicates the standard deviation of the
 forecast and the angle is the correlation of the forecast with the
 observations.
 The gray contours indicate lines of constant centered RMSE, or RMSE
-once any bias has been removed from the forecast.
+once any bias has been removed from the forecast (the forecasts in
+this case study are designed to have insignificant bias).
 A perfect forecast would lie on the x-axis (correlation = 1) and have
 the same standard deviation as the observations.
 
@@ -216,7 +229,7 @@ For example, the desert Southwest experiences fewer overcast days than
 locations in the Southeast.
 The Southwest also has a high number of clear days.
 A forecast with low errors in the Southeast may be better at
-forecasting overcast days with less skill on mostly clear days.
+forecasting overcast days but have less skill on mostly clear days.
 
 \section{Future Work}
 One limitation to the network forecast methodology that we studied is
@@ -224,12 +237,15 @@ that only a single velocity vector was used to transport the predicted
 clear-sky index map.
 Future work could explore using a number of vectors based on clouds at
 different heights and an advection scheme.
-One might also explore which domains this type of forecast performs
+A way to determine the heights of the cloud layers is also needed.
+One might also explore which weather domains (e.g.~stationary high
+pressure systems or monsoon convection) this type of forecast performs
 best in order to switch between forecast methodolgies for different
 domains.
-Future work that may overcome the issue of clear-sky index maps
-generated in \cref{app:network} not resembling reality by using
-satellite cloud estimates will be described in \cref{chap:satfx}.
+Future work that explores using cloud maps generated from satellite
+images as opposed to the clear-sky index maps generated from network
+data in \cref{app:network} to produce forecasts will be described in
+\cref{chap:satfx}.
 
 
 %%% Local Variables:

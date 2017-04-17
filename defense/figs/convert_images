@@ -1,0 +1,15 @@
+#!/bin/bash
+
+declare -a arr=("bullshit" "avalon_ramps" "comp_of_irr" "map" "rawvis" "satirr" "wrf_ghi" "wrf_wind" "spatial_vs_cld" "azmap" "clearmap" "goes_cal" "sensor_outside" "clr_and_obs" "csi" "parallax_correction" "missing" "leading_sens" "suny_ghi_scatter" "error_fx_Day_2" "taylor_Day_2" )
+
+for i in "${arr[@]}"; do
+    if [ -f ../../dissertation/figs/$i.pdf ]; then
+        convert -density 300 ../../dissertation/figs/$i.pdf -quality 90 $i.png
+    elif [ -f ../../dissertation/figs/$i.png ]; then
+        cp ../../dissertation/figs/$i.png .
+    elif [ -f ../../dissertation/figs/$i.jpg ]; then
+        cp ../../dissertation/figs/$i.jpg .
+    else
+        echo "ERROR for $i"
+    fi
+done

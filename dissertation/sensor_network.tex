@@ -250,9 +250,12 @@ k_n(t) = \frac{y_n(t)}{y_n^{clr}(t)}
 \end{equation}
 where $y_n(t)$ is the measured time-series and $y_n^{clr}(t)$ the
 expected time-series for sensor $n$ if the sky were clear.
+The clear-sky expectation, $y_n^{clr}(t)$, for each sensor was
+determined by analyzing the time-series of the sensor for a week
+preceding $t$ and stitching together the values at clear times.
 This approach accounts for differences in systems such as orientation,
 peak power, and shading.
-Furthermore, it detrends the diurnal cycle in the data.
+Furthermore, use of the clear-sky index detrends the diurnal cycle in the data.
 The clear-sky expectation should account for temperature and aerosol
 effects on a given sensor to produce an unbiased clear-sky index.
 

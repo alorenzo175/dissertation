@@ -2,7 +2,7 @@
 \label{chap:intro}
 
 The installed capacity of solar power in the US continues to grow as a
-result of the decommission of aging coal power plants, lower costs,
+result of the decommissioning of aging coal power plants, lower costs,
 state renewable portfolio standards, and efforts to decarbonize the
 electrical grid.
 As shown in \Cref{fig:solarinstall}, this growth has accelerated since
@@ -434,7 +434,7 @@ Forecasts produced in this way outperform a persistence forecast by
 \caption[Illustration of the network forecast methodology]{An example
   interpolated map produced from the sensor network data is shown in
   a). Using an estimated cloud motion vector, this map is shifted
-  according the deed forecast horizon as shown in b).}
+  to generate a forecast for the desired forecast horizon as shown in b).}
 \label{fig:clearmap}
 \end{figure}
 
@@ -479,25 +479,6 @@ FH &  rMAE (\%) &  MAE (W/m$^2$) &  MBE (W/m$^2$) &  rRMSE (\%) &  RMSE (W/m$^2$
 \label{fig:circuitbreak}
 \end{figure}
 
-While analyzing this network forecast, we also carefully analyzed
-various types of persistence forecasts to understand the network
-forecast error metrics.
-\Cref{fig:circuitbreak} shows that network forecasts do incorporate
-data from the sensors to improve errors, but at some times the errors
-in the network forecast closely resemble the errors of persistence forecasts.
-We found that smoother forecasts, or those with less variance than he
-observations, may seem to perform better than forecasts with higher
-variance when error metrics are considered in isolation.
-Using the Taylor diagram shown in \cref{fig:taylor}, we show that
-network forecasts transition from matching the observation's variance
-to essentially becoming an area average persistence forecast after
-about 20 minutes.
-More details on how to interpret this diagram are described in
-\cref{chap:network}.
-Thus, we claim that network forecasts are an improvement over spatial
-or time averaged persistence forecasts even if they may have similar
-RMSE values.
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.7\textwidth]{figs/taylor_diagram.pdf}
@@ -519,6 +500,34 @@ forecasts]{Taylor diagram for clear-sky index persistence (red),
 \label{fig:taylor}
 \end{figure}
 
+While analyzing this network forecast, we also carefully analyzed
+various types of persistence forecasts to understand the network
+forecast error metrics.
+\Cref{fig:circuitbreak} shows that network forecasts do incorporate
+data from the sensors to improve errors, but at some times the errors
+in the network forecast closely resemble the errors of persistence forecasts.
+We found that smoother forecasts, or those with less variance than he
+observations, may seem to perform better than forecasts with higher
+variance when error metrics are considered in isolation.
+Using the Taylor diagram shown in \cref{fig:taylor}, we show that
+network forecasts transition from matching the observation's variance
+to essentially becoming an area average persistence forecast after
+about 20 minutes.
+More details on how to interpret this diagram are described in
+\cref{chap:network}.
+Thus, we claim that network forecasts are an improvement over spatial
+or time averaged persistence forecasts even if they may have similar
+RMSE values.
+
+\begin{figure}[htbp]
+\subfloat{\includegraphics[width=0.5435\textwidth]{figs/rawvis.png}}
+\subfloat{\includegraphics[width=0.4565\textwidth]{figs/satirr.png}}
+\caption[Satellite image and irradiance estimate]{A satellite image
+  captured by a geostationary satellite (left) and the GHI produced
+  from this image (right).}
+\label{fig:satimage_example}
+\end{figure}
+
 After studying network forecasts that perform well for forecast
 horizons under two hours, we began studying forecasts derived from
 satellite images to produce forecasts for horizons out to six hours.
@@ -536,15 +545,6 @@ sky were clear.
 Thus, in order to produce useful forecasts from satellite derived
 irradiance images, we first improved the satellite derived irradiance
 nowcasts.
-
-\begin{figure}[htbp]
-\subfloat{\includegraphics[width=0.5435\textwidth]{figs/rawvis.png}}
-\subfloat{\includegraphics[width=0.4565\textwidth]{figs/satirr.png}}
-\caption[Satellite image and irradiance estimate]{A satellite image
-  captured by a geostationary satellite (left) and the GHI produced
-  from this image (right).}
-\label{fig:satimage_example}
-\end{figure}
 
 We used data from the irradiance sensor network to produce better
 satellite derived irradiance nowcasts as described in
@@ -580,7 +580,17 @@ interpolation]{Example initial satellite estimate (known as the
 \label{fig:oi_example}
 \end{figure}
 
-\begin{table}[htbp]
+
+We found significant improvements using this method after various
+complicating factors such as misalignment in the satellite image
+relative to the ground sensors were corrected.
+The improved nowcast's RMSE is shown as the pink diamond in
+\cref{fig:newshitplot} and in \cref{table:satoi}
+We also found that this method to improve satellite irradiance
+nowcasts is applicable to a number of satellite to irradiance
+algorithms.
+
+\begin{table}[bth]
   \caption[Optimal interpolation error metrics]{ Error statistics for
 the NREL MIDC sensor on the University of Arizona campus. Background
 refers to the initial satellite estimate and the analysis is the
@@ -595,16 +605,6 @@ RMSE\@. Units are W/m$^2$.}
 \input{figs/ghi_err_table}
 \centering
 \end{table}
-
-
-We found significant improvements using this method after various
-complicating factors such as misalignment in the satellite image
-relative to the ground sensors were corrected.
-The improved nowcast's RMSE is shown as the pink diamond in
-\cref{fig:newshitplot} and in \cref{table:satoi}
-We also found that this method to improve satellite irradiance
-nowcasts is applicable to a number of satellite to irradiance
-algorithms.
 
 To produce forecasts of irradiance based on the OI analysis, one might
 use a forecasting method that relies on cloud advection.
@@ -635,5 +635,6 @@ horizons from five minutes to one week to make decisions.
 
 %%% Local Variables:ah
 %%% mode: latex
+
 %%% TeX-master: "dissertation"
 %%% End:

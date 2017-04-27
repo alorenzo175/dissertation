@@ -500,7 +500,7 @@ by
 \vspace{1in}
 
 \rule{2in}{1pt}\\
-\ifthenelse{ \boolean{Copyright} }	% This puts in the Copyright statement
+\ifthenelse{ \boolean{true} }	% This puts in the Copyright statement
 {Copyright \copyright\ \FullName\ #2}{}
 % Creative Commons licenses
 \ifthenelse{\boolean{CCBY}}{\by}{}
